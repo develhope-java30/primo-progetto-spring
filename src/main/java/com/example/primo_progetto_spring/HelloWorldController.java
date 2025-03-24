@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -42,5 +39,25 @@ public class HelloWorldController {
     @PostMapping("/studente")
     public void addStudente(){
         studenti.add(new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z"));
+    }
+
+    @GetMapping("/getFirstStudente")
+    public Optional<Studente> firstStudente(){
+        if(studenti.isEmpty()){
+            return Optional.empty();
+        }else{
+            return Optional.ofNullable(studenti.get(0));
+        }
+    }
+
+    @GetMapping("/getLastStudente")
+    public Optional<Studente> LastStudente(){
+       Integer last = studenti.size() - 1;
+
+        if(studenti.isEmpty()){
+            return Optional.empty();
+        }else{
+            return Optional.ofNullable(studenti.get(last));
+        }
     }
 }
