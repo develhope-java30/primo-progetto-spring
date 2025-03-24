@@ -1,6 +1,7 @@
 package com.example.primo_progetto_spring;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,5 +37,10 @@ public class HelloWorldController {
 //
 //        return studente1.studentInfo();
         return studenti;
+    }
+
+    @PostMapping("/studente")
+    public void addStudente(){
+        studenti.add(new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z"));
     }
 }
