@@ -40,13 +40,24 @@ public class HelloWorldController {
     public void addStudente() {
         studenti.add(new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z"));
     }
-
+  
     @GetMapping("/getFirst")
     public Optional<Studente> firstStudent() {
         if (studenti.isEmpty()){
             return Optional.empty();
         } else {
             return Optional.ofNullable(studenti.get(0));
+        }
+    }
+  
+    @GetMapping("/getLastStudente")
+    public Optional<Studente> LastStudente(){
+       Integer last = studenti.size() - 1;
+
+        if(studenti.isEmpty()){
+            return Optional.empty();
+        }else{
+            return Optional.ofNullable(studenti.get(last));
         }
     }
 }
