@@ -86,4 +86,14 @@ public class HelloWorldController {
 
         return studente;
     }
+
+    @GetMapping("/studenti/{id}")
+    public Optional<Studente> idOfStudent(@PathVariable int id){
+        if(studenti.isEmpty() || (id >= studenti.size() || id < 0)){
+            return Optional.empty();
+        }
+
+        Studente result = studenti.get(id);
+        return Optional.ofNullable(result);
+    }
 }
