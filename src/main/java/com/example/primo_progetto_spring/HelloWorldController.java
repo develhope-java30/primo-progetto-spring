@@ -89,11 +89,12 @@ public class HelloWorldController {
 
     @GetMapping("/studenti/{id}")
     public Optional<Studente> idOfStudent(@PathVariable int id){
-        if(studenti.isEmpty() || (id >= studenti.size() || id < 0)){
+        try {
+            Studente result = studenti.get(id);
+            return Optional.ofNullable(result);
+        }
+        catch (IndexOutOfBoundsException e){
             return Optional.empty();
         }
-
-        Studente result = studenti.get(id);
-        return Optional.ofNullable(result);
     }
 }
