@@ -97,4 +97,10 @@ public class HelloWorldController {
             return Optional.empty();
         }
     }
+
+    @DeleteMapping("/studenti")
+    public String deleteAllStudent(){
+        studenti.clear();
+        return "Lista clearata";
+    }
 }
