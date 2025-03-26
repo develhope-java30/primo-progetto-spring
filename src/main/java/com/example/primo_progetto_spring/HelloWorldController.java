@@ -103,4 +103,15 @@ public class HelloWorldController {
         studenti.clear();
         return "Lista clearata";
     }
+
+    @DeleteMapping("/studenti/{id}")
+    public String removeByID(@PathVariable int id){
+        try {
+            studenti.remove(id);
+            return "ID: " + id + " rimosso";
+        }
+        catch (IndexOutOfBoundsException e){
+            return "ID non valido!";
+        }
+    }
 }
