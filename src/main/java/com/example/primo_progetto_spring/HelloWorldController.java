@@ -12,7 +12,7 @@ import java.util.*;
 public class HelloWorldController {
     private List<Studente> studenti;
 
-    public HelloWorldController(ArrayList<Studente> studenti){
+    public HelloWorldController(ArrayList<Studente> studenti) {
         this.studenti = studenti;
     }
 
@@ -21,26 +21,23 @@ public class HelloWorldController {
     }
 
     @GetMapping("/hello")
-    public String helloWorld(){
+    public String helloWorld() {
         return "Hello World!";
     }
 
     @GetMapping("/studente")
-    public List<Studente> studenti(){
-//        Studente studente1 = new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z");
-//
-//        return studente1.studentInfo();
+    public List<Studente> studenti() {
+
         return studenti;
     }
 
     @PostMapping("/studente")
-    public String addStudente() {
+    public void addStudente() {
         studenti.add(new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z"));
-        return "studente aggiunto";
     }
 
     @GetMapping("/getFirst")
-    public Optional<Studente> firstStudent () {
+    public Optional<Studente> firstStudent() {
         if (studenti.isEmpty()) {
             return Optional.empty();
         } else {
@@ -49,7 +46,7 @@ public class HelloWorldController {
     }
 
     @GetMapping("/getLastStudente")
-    public Optional<Studente> LastStudente () {
+    public Optional<Studente> LastStudente() {
         Integer last = studenti.size() - 1;
 
         if (studenti.isEmpty()) {
@@ -60,28 +57,27 @@ public class HelloWorldController {
     }
 
     @GetMapping("/saluta")
-    public String saluta (@RequestParam String nome){
+    public String saluta(@RequestParam String nome) {
         return "Ciao " + nome;
     }
 
     @GetMapping("/utenti/{id}")
-    public String dettaglioUtente (@PathVariable Long id){
+    public String dettaglioUtente(@PathVariable Long id) {
         return "Dettaglio utente: " + id;
     }
 
     @GetMapping("/calcola")
-    public Integer calcolaNumeri ( @RequestParam int a, @RequestParam int b){
+    public Integer calcolaNumeri(@RequestParam int a, @RequestParam int b) {
         return a + b;
     }
 
     @GetMapping("/addstudente")
-    public Studente creaStudente (
+    public Studente creaStudente(
             @RequestParam String nome,
             @RequestParam String cognome,
             @RequestParam String data,
             @RequestParam String codiceFiscale
-        )
-    {
+    ) {
         Studente studente = new Studente(nome, cognome, data, codiceFiscale);
 
         return studente;
@@ -97,4 +93,19 @@ public class HelloWorldController {
             return Optional.empty();
         }
     }
+
+    @GetMapping("/codiceFiscale")
+    public Optional<Studente> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale){
+        if (codiceFiscale == null || codiceFiscale.isEmpty()){
+            return Optional.empty();
+        }
+
+        for (Studente studente : studenti){
+            if (studente.getCodiceFiscale().equals(codiceFiscale)){
+                return Optional.of(studente);
+            }
+        }
+        return Optional.empty();
+    }
+    //trovare lo studente più giovane / più anziano
 }
