@@ -98,6 +98,21 @@ public class HelloWorldController {
         }
     }
 
+    @GetMapping("/codiceFiscale")
+    public Optional<Studente> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale){
+        if (codiceFiscale == null || codiceFiscale.isEmpty()){
+            return Optional.empty();
+        }
+
+        for (Studente studente : studenti){
+            if (studente.getCodiceFiscale().equals(codiceFiscale)){
+                return Optional.of(studente);
+            }
+        }
+        return Optional.empty();
+    }
+    //trovare lo studente più giovane / più anziano
+
     @DeleteMapping("/studenti")
     public String deleteAllStudent(){
         studenti.clear();
