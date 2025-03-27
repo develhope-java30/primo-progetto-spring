@@ -36,6 +36,10 @@ public class HelloWorldController {
 
     @PostMapping("/studente")
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
+        if(studente.getNome() == null || studente.getCognome() == null){
+           return ResponseEntity.badRequest().build();
+        }
+
         studenti.add(studente);
 
         return ResponseEntity.ok(studente);
