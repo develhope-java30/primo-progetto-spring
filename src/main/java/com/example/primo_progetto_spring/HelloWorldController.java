@@ -35,9 +35,10 @@ public class HelloWorldController {
     }
 
     @PostMapping("/studente")
-    public String addStudente() {
-        studenti.add(new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z"));
-        return "studente aggiunto";
+    public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
+        studenti.add(studente);
+
+        return ResponseEntity.ok(studente);
     }
 
     @GetMapping("/getFirst")
@@ -73,18 +74,6 @@ public class HelloWorldController {
     @GetMapping("/calcola")
     public Integer calcolaNumeri(@RequestParam int a, @RequestParam int b) {
         return a + b;
-    }
-
-    @GetMapping("/addstudente")
-    public Studente creaStudente(
-            @RequestParam String nome,
-            @RequestParam String cognome,
-            @RequestParam String data,
-            @RequestParam String codiceFiscale
-    ) {
-        Studente studente = new Studente(nome, cognome, data, codiceFiscale);
-
-        return studente;
     }
 
     @GetMapping("/studenti/{id}")
