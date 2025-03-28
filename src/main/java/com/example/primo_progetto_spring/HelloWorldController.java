@@ -29,20 +29,19 @@ public class HelloWorldController {
 
     @GetMapping("/studente")
     public List<Studente> studenti() {
-//        Studente studente1 = new Studente("Mario", "Rozzi", "2004-11-18", "RZZMRA04S18642Z");
-//
-//        return studente1.studentInfo();
         return studenti;
     }
 
+    //Modify
     @PostMapping("/studente")
-    public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
+    public ResponseEntity<String> addStudente(@RequestBody Studente studente) {
         if(studente.getNome() == null || studente.getCognome() == null){
-           return ResponseEntity.badRequest().build();
+           return ResponseEntity.badRequest().body("Nome e Cognome sono campi obbligatori");
         }
 
         studenti.add(studente);
         int savedObjectId = studenti.size() -1;
+
 
         return ResponseEntity
                 .created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedObjectId).toUri())
@@ -112,19 +111,21 @@ public class HelloWorldController {
         return Optional.empty();
     }
 
+    //Modify
     @DeleteMapping("/studenti")
-    public String deleteAllStudent() {
+    public ResponseEntity<String> deleteAllStudent() {
         studenti.clear();
-        return "Lista clearata";
+        return ResponseEntity.ok("Lista clearata");
     }
 
+    //Modify
     @DeleteMapping("/studenti/{id}")
-    public String removeByID(@PathVariable int id) {
+    public ResponseEntity<String> removeByID(@PathVariable int id) {
         try {
             studenti.remove(id);
-            return "ID: " + id + " rimosso";
+            return ResponseEntity.ok("ID: " + id + " rimosso");
         } catch (IndexOutOfBoundsException e) {
-            return "ID non valido!";
+            return ResponseEntity.badRequest().body("ID non valido!");
         }
     }
 }
