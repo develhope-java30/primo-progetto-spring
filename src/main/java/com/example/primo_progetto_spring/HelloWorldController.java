@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -39,8 +40,12 @@ public class HelloWorldController {
         }
 
         studenti.add(studente);
+        int savedObjectId = studenti.size() -1;
 
-        return ResponseEntity.ok("Studente aggiunto con successo");
+
+        return ResponseEntity
+                .created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedObjectId).toUri())
+                .body(studente);
     }
 
     @GetMapping("/getFirst")
