@@ -123,4 +123,19 @@ public class HelloWorldController {
             return "ID non valido!";
         }
     }
+
+    @PutMapping("/studenti/{id}")
+    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente){
+        if(id < 0){
+            return ResponseEntity.badRequest().build();
+        }
+
+        try{
+            Studente result = studenti.get(id);
+            studenti.set(id, updateStudente);
+            return ResponseEntity.ok(updateStudente);
+        } catch (NullPointerException e){
+           return ResponseEntity.notFound().build();
+        }
+    }
 }
