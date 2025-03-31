@@ -27,16 +27,16 @@ public class HelloWorldController {
         return "Hello World!";
     }
 
-    @GetMapping("/studente")
+    @GetMapping("/studenti")
     public List<Studente> studenti() {
         return studenti;
     }
 
     //Modify
-    @PostMapping("/studente")
-    public ResponseEntity<String> addStudente(@RequestBody Studente studente) {
+    @PostMapping("/studenti")
+    public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
         if(studente.getNome() == null || studente.getCognome() == null){
-           return ResponseEntity.badRequest().body("Nome e Cognome sono campi obbligatori");
+           return ResponseEntity.badRequest().build();
         }
 
         studenti.add(studente);
