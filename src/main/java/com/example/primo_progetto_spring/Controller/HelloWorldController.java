@@ -1,11 +1,10 @@
-package com.example.primo_progetto_spring;
+package com.example.primo_progetto_spring.Controller;
 
+import com.example.primo_progetto_spring.Entity.Studente;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.*;
 
 
@@ -16,15 +15,6 @@ public class HelloWorldController {
 
     public HelloWorldController(ArrayList<Studente> studenti) {
         this.studenti = studenti;
-    }
-
-    public List<Studente> getStudenti() {
-        return studenti;
-    }
-
-    @GetMapping("/hello")
-    public String helloWorld() {
-        return "Hello World!";
     }
 
     @GetMapping("/studenti")
@@ -66,21 +56,6 @@ public class HelloWorldController {
         } else {
             return Optional.ofNullable(studenti.get(last));
         }
-    }
-
-    @GetMapping("/saluta")
-    public String saluta(@RequestParam String nome) {
-        return "Ciao " + nome;
-    }
-
-    @GetMapping("/utenti/{id}")
-    public String dettaglioUtente(@PathVariable Long id) {
-        return "Dettaglio utente: " + id;
-    }
-
-    @GetMapping("/calcola")
-    public Integer calcolaNumeri(@RequestParam int a, @RequestParam int b) {
-        return a + b;
     }
 
     @GetMapping("/studenti/{id}")

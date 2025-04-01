@@ -1,6 +1,4 @@
-package com.example.primo_progetto_spring;
-
-import java.time.LocalDate;
+package com.example.primo_progetto_spring.Entity;
 
 public class Studente {
     private String nome;
