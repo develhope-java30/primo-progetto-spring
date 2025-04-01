@@ -36,20 +36,19 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
 
-
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(studente);
     }
-//
-//    @GetMapping("/getFirst")
-//    public Optional<Studente> firstStudent() {
-//        if (studenti.isEmpty()) {
-//            return Optional.empty();
-//        } else {
-//            return Optional.ofNullable(studenti.get(0));
-//        }
-//    }
+
+    @GetMapping("/studenti-first")
+    public ResponseEntity<Studente> firstStudent() {
+        if (studenteService.firstStudent().isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(studenteService.firstStudent().get());
+        }
+    }
 //
 //    @GetMapping("/getLastStudente")
 //    public Optional<Studente> LastStudente() {

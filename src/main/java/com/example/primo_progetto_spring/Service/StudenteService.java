@@ -22,8 +22,14 @@ public class StudenteService {
         }
 
         studenti.add(studente);
-//        int savedObjectId = studenti.size() -1;
-
         return Optional.of(studente);
+    }
+
+    public Optional<Studente> firstStudent() {
+        if (studenti.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(studenti.get(0));
+        }
     }
 }
