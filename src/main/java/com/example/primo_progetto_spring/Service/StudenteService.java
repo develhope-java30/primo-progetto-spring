@@ -32,4 +32,14 @@ public class StudenteService {
             return Optional.of(studenti.get(0));
         }
     }
+
+    public Optional<Studente> lastStudente() {
+        Integer last = studenti.size() - 1;
+
+        if (studenti.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.ofNullable(studenti.get(last));
+        }
+    }
 }
