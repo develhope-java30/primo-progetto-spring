@@ -2,7 +2,11 @@ package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.StudenteService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.*;
 
@@ -10,7 +14,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/test")
 public class StudentController {
-//    private List<Studente> studenti = new ArrayList<>();
+
     private final StudenteService studenteService;
 
     public StudentController(StudenteService studenteService){
@@ -22,21 +26,21 @@ public class StudentController {
         return studenteService.getStudenti();
     }
 
-//    //Modify
-//    @PostMapping("/studenti")
-//    public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
-//        if(studente.getNome() == null || studente.getCognome() == null){
-//           return ResponseEntity.badRequest().build();
-//        }
-//
-//        studenti.add(studente);
-//        int savedObjectId = studenti.size() -1;
-//
-//
-//        return ResponseEntity
-//                .created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedObjectId).toUri())
-//                .body(studente);
-//    }
+
+    @PostMapping("/studenti")
+    public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
+
+        Optional<Studente> newStudent = studenteService.addStudente(studente);
+
+        if (newStudent.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(studente);
+    }
 //
 //    @GetMapping("/getFirst")
 //    public Optional<Studente> firstStudent() {
