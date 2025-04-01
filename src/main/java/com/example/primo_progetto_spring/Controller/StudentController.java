@@ -3,10 +3,8 @@ package com.example.primo_progetto_spring.Controller;
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.StudenteService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.*;
 
@@ -50,16 +48,14 @@ public class StudentController {
         }
     }
 //
-//    @GetMapping("/getLastStudente")
-//    public Optional<Studente> LastStudente() {
-//        Integer last = studenti.size() - 1;
-//
-//        if (studenti.isEmpty()) {
-//            return Optional.empty();
-//        } else {
-//            return Optional.ofNullable(studenti.get(last));
-//        }
-//    }
+    @GetMapping("/last-studenti")
+    public ResponseEntity<Studente> lastStudente() {
+        if (studenteService.lastStudente().isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(studenteService.lastStudente().get());
+        }
+    }
 //
 //    @GetMapping("/studenti/{id}")
 //    public ResponseEntity<Studente> idOfStudent(@PathVariable int id) {
