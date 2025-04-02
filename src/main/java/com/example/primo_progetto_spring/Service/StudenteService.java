@@ -12,12 +12,12 @@ import java.util.Optional;
 public class StudenteService {
     private List<Studente> studenti = new ArrayList<>();
 
-    public List<Studente> getStudenti(){
+    public List<Studente> getStudenti() {
         return studenti;
     }
 
     public Optional<Studente> addStudente(@RequestBody Studente studente) {
-        if(studente.getNome() == null || studente.getCognome() == null){
+        if (studente.getNome() == null || studente.getCognome() == null) {
             return Optional.empty();
         }
 
@@ -41,5 +41,18 @@ public class StudenteService {
         } else {
             return Optional.ofNullable(studenti.get(last));
         }
+    }
+//    mi prendi un oggetto sutdenti se ce mi ritorni il cf se no
+
+    public Optional<Studente> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
+        for (Studente studente : studenti) {
+            String cFStudente = studente.getCodiceFiscale();
+            if (cFStudente.equals(codiceFiscaleDaRicercare)) {
+
+                return Optional.of(studente);
+            }
+        }
+        return Optional.empty();
+
     }
 }
