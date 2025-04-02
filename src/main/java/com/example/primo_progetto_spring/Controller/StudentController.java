@@ -15,7 +15,7 @@ public class StudentController {
 
     private final StudenteService studenteService;
 
-    public StudentController(StudenteService studenteService){
+    public StudentController(StudenteService studenteService) {
         this.studenteService = studenteService;
     }
 
@@ -30,7 +30,7 @@ public class StudentController {
 
         Optional<Studente> newStudent = studenteService.addStudente(studente);
 
-        if (newStudent.isEmpty()){
+        if (newStudent.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -47,14 +47,33 @@ public class StudentController {
             return ResponseEntity.ok(studenteService.firstStudent().get());
         }
     }
-//
+
+    //
     @GetMapping("/last-studenti")
     public ResponseEntity<Studente> lastStudente() {
-        if (studenteService.lastStudente().isEmpty()){
+        if (studenteService.lastStudente().isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(studenteService.lastStudente().get());
         }
+    }
+
+    //
+    @GetMapping("/codiceFiscale")
+    public ResponseEntity<Studente> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale) {
+        if (codiceFiscale == null || codiceFiscale.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        for (Studente studente : studenti) {
+            if (studente.getCodiceFiscale().equals(codiceFiscale)) {
+                return ResponseEntity.ok(studenteService.getStudentePerCodiceFiscale().get());
+            }
+
+
+
+        }
+        return ResponseEntity.notFound().build();
     }
 //
 //    @GetMapping("/studenti/{id}")
@@ -71,19 +90,7 @@ public class StudentController {
 //        }
 //    }
 //
-//    @GetMapping("/codiceFiscale")
-//    public Optional<Studente> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale) {
-//        if (codiceFiscale == null || codiceFiscale.isEmpty()) {
-//            return Optional.empty();
-//        }
-//
-//        for (Studente studente : studenti) {
-//            if (studente.getCodiceFiscale().equals(codiceFiscale)) {
-//                return Optional.of(studente);
-//            }
-//        }
-//        return Optional.empty();
-//    }
+
 //
 //    //Modify
 //    @DeleteMapping("/studenti")
