@@ -1,7 +1,10 @@
 package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Studente;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ public class StudenteService {
         return studenti;
     }
 
-    public Optional<Studente> addStudente(@RequestBody Studente studente) {
+    public Optional<Studente> addStudente(Studente studente) {
         if (studente.getNome() == null || studente.getCognome() == null) {
             return Optional.empty();
         }
@@ -54,5 +57,14 @@ public class StudenteService {
         }
         return Optional.empty();
 
+    }
+
+    public void removeByID(int id) {
+        try {
+            studenti.remove(id);
+            System.out.println("ID: " + id + " rimosso");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("ID non valido!");
+        }
     }
 }

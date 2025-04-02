@@ -94,16 +94,16 @@ public class StudentController {
 //        return ResponseEntity.ok("Lista clearata");
 //    }
 //
-//    //Modify
-//    @DeleteMapping("/studenti/{id}")
-//    public ResponseEntity<String> removeByID(@PathVariable int id) {
-//        try {
-//            studenti.remove(id);
-//            return ResponseEntity.ok("ID: " + id + " rimosso");
-//        } catch (IndexOutOfBoundsException e) {
-//            return ResponseEntity.badRequest().body("ID non valido!");
-//        }
-//    }
+    //Modify
+    @DeleteMapping("/studenti/{id}")
+    public ResponseEntity<Void> removeByID(@PathVariable int id) {
+        try {
+            studenteService.removeByID(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 //
 //    @PutMapping("/studenti/{id}")
 //    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente){
