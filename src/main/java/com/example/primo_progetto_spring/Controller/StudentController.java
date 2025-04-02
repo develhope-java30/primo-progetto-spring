@@ -64,16 +64,13 @@ public class StudentController {
         if (codiceFiscale == null || codiceFiscale.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-
-        for (Studente studente : studenti) {
-            if (studente.getCodiceFiscale().equals(codiceFiscale)) {
-                return ResponseEntity.ok(studenteService.getStudentePerCodiceFiscale().get());
-            }
-
-
+        Optional<Studente> studenteTrovato = studenteService.findStudenteByTaxCode(codiceFiscale);
+        if (studenteTrovato.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(studenteTrovato.get());
 
         }
-        return ResponseEntity.notFound().build();
     }
 //
 //    @GetMapping("/studenti/{id}")
