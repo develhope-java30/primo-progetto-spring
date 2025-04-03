@@ -72,20 +72,18 @@ public class StudentController {
         }
     }
 
-//    @GetMapping("/studenti/{id}")
-//    public ResponseEntity<Studente> idOfStudent(@PathVariable int id) {
-//        if (id < 0){
-//            return ResponseEntity.badRequest().build();
-//        }
-//
-//        try {
-//            Studente result = studenti.get(id);
-//            return ResponseEntity.ok(result);
-//        } catch (IndexOutOfBoundsException e) {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
+    @GetMapping("/studenti/{id}")
+    public ResponseEntity<Studente> idOfStudent(@PathVariable int id) {
+
+       Optional<Studente> result = studenteService.idOfStudent(id);
+
+       if (result.isPresent()){
+           return ResponseEntity.ok(result.get());
+       } else {
+           return ResponseEntity.notFound().build();
+       }
+    }
+
 
 //    //Modify
 //    @DeleteMapping("/studenti")
