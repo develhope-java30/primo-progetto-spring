@@ -30,8 +30,7 @@ public class StudenteService {
             return Optional.empty();
         }
 
-        studenti.add(studente);
-        return Optional.of(studente);
+        return Optional.of(studenteRepository.save(studente));
     }
 
 //    mi prendi un oggetto sutdenti se ce mi ritorni il cf se no
@@ -62,5 +61,12 @@ public class StudenteService {
         }
 
         return Optional.of(studenti.get(id));
+    }
+
+    public Optional<Studente> updateStudent(int id, Studente studente){
+      Studente existingStudente = studenti.get(id);
+
+      studenti.set(id, studente);
+      return Optional.of(studente);
     }
 }
