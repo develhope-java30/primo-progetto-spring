@@ -1,16 +1,33 @@
 package com.example.primo_progetto_spring.Entity;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Studente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String cognome;
     private String data;
     private String codiceFiscale;
 
-    public Studente(String nome, String cognome, String data, String codiceFiscale){
+    public Studente(){}
+
+    public Studente(Long id, String nome, String cognome, String data, String codiceFiscale){
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.data = data;
         this.codiceFiscale = codiceFiscale;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
