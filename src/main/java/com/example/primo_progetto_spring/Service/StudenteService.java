@@ -48,11 +48,10 @@ public class StudenteService {
 
     }
 
-    public void removeByID(int id) {
-        try {
-            studenti.remove(id);
-            System.out.println("ID: " + id + " rimosso");
-        } catch (IndexOutOfBoundsException e) {
+    public void removeByID(Long id) {
+        try{
+            studenteRepository.deleteById(id);
+        }catch (IllegalArgumentException e){
             throw new IllegalArgumentException("ID non valido!");
         }
     }

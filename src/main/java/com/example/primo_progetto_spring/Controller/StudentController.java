@@ -76,7 +76,7 @@ public class StudentController {
 //
     //Modify
     @DeleteMapping("/studenti/{id}")
-    public ResponseEntity<Void> removeByID(@PathVariable int id) {
+    public ResponseEntity<Void> removeByID(@PathVariable Long id) {
         try {
             studenteService.removeByID(id);
             return ResponseEntity.noContent().build();
