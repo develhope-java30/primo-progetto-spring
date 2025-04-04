@@ -27,16 +27,14 @@ public class StudentController {
 
     @PostMapping("/studenti")
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
+        Optional<Studente> studentSaved = studenteService.addStudente(studente);
 
-        Optional<Studente> newStudent = studenteService.addStudente(studente);
-
-        if (newStudent.isEmpty()) {
+        if (studentSaved.isPresent()){
+            return ResponseEntity.ok(studentSaved.get());
+        } else {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(studente);
     }
 
     @GetMapping("/studenti-first")
@@ -102,19 +100,18 @@ public class StudentController {
             return ResponseEntity.badRequest().build();
         }
     }
-//
-//    @PutMapping("/studenti/{id}")
-//    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente){
-//        if(id < 0){
-//            return ResponseEntity.badRequest().build();
-//        }
-//
-//        try{
-//            Studente result = studenti.get(id);
-//            studenti.set(id, updateStudente);
-//            return ResponseEntity.ok(updateStudente);
-//        } catch (NullPointerException e){
-//           return ResponseEntity.notFound().build();
-//        }
-//    }
+
+    @PutMapping("/studenti/{id}")
+    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente){
+        if(id < 0){
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Studente> studentUpdate = studenteService.updateStudent(id, updateStudente);
+        if (studentUpdate.isPresent()){
+            return ResponseEntity.ok(studentUpdate.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
