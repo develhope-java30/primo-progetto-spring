@@ -2,7 +2,6 @@ package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.StudenteService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,15 +63,6 @@ public class StudentController {
        }
     }
 
-
-//    //Modify
-//    @DeleteMapping("/studenti")
-//    public ResponseEntity<String> deleteAllStudent() {
-//        studenti.clear();
-//        return ResponseEntity.ok("Lista clearata");
-//    }
-//
-    //Modify
     @DeleteMapping("/studenti/{id}")
     public ResponseEntity<Void> removeByID(@PathVariable Long id) {
         try {

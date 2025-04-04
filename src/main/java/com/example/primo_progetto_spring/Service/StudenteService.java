@@ -3,11 +3,7 @@ package com.example.primo_progetto_spring.Service;
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +28,6 @@ public class StudenteService {
 
         return Optional.of(studenteRepository.save(studente));
     }
-
-//    mi prendi un oggetto sutdenti se ce mi ritorni il cf se no
 
     public Optional<Studente> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
         for (Studente studente : studenti) {
