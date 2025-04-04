@@ -73,4 +73,12 @@ public class StudenteService {
             throw new IllegalArgumentException("ID non valido!");
         }
     }
+
+    public Optional<Studente> idOfStudent(int id) {
+        if (id < 0 || id >= studenti.size()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(studenti.get(id));
+    }
 }
