@@ -34,23 +34,6 @@ public class StudenteService {
         return Optional.of(studente);
     }
 
-    public Optional<Studente> firstStudent() {
-        if (studenti.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(studenti.get(0));
-        }
-    }
-
-    public Optional<Studente> lastStudente() {
-        Integer last = studenti.size() - 1;
-
-        if (studenti.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.ofNullable(studenti.get(last));
-        }
-    }
 //    mi prendi un oggetto sutdenti se ce mi ritorni il cf se no
 
     public Optional<Studente> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
