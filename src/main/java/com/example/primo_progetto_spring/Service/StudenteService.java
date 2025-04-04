@@ -33,23 +33,6 @@ public class StudenteService {
         return Optional.of(studenteRepository.save(studente));
     }
 
-    public Optional<Studente> firstStudent() {
-        if (studenti.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(studenti.get(0));
-        }
-    }
-
-    public Optional<Studente> lastStudente() {
-        Integer last = studenti.size() - 1;
-
-        if (studenti.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.ofNullable(studenti.get(last));
-        }
-    }
 //    mi prendi un oggetto sutdenti se ce mi ritorni il cf se no
 
     public Optional<Studente> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
@@ -64,11 +47,10 @@ public class StudenteService {
 
     }
 
-    public void removeByID(int id) {
-        try {
-            studenti.remove(id);
-            System.out.println("ID: " + id + " rimosso");
-        } catch (IndexOutOfBoundsException e) {
+    public void removeByID(Long id) {
+        try{
+            studenteRepository.deleteById(id);
+        }catch (IllegalArgumentException e){
             throw new IllegalArgumentException("ID non valido!");
         }
     }

@@ -37,24 +37,6 @@ public class StudentController {
 
     }
 
-    @GetMapping("/studenti-first")
-    public ResponseEntity<Studente> firstStudent() {
-        if (studenteService.firstStudent().isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(studenteService.firstStudent().get());
-        }
-    }
-
-    @GetMapping("/last-studenti")
-    public ResponseEntity<Studente> lastStudente() {
-        if (studenteService.lastStudente().isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(studenteService.lastStudente().get());
-        }
-    }
-
     @GetMapping("/codiceFiscale")
     public ResponseEntity<Studente> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale) {
         if (codiceFiscale == null || codiceFiscale.isEmpty()) {
@@ -92,7 +74,7 @@ public class StudentController {
 //
     //Modify
     @DeleteMapping("/studenti/{id}")
-    public ResponseEntity<Void> removeByID(@PathVariable int id) {
+    public ResponseEntity<Void> removeByID(@PathVariable Long id) {
         try {
             studenteService.removeByID(id);
             return ResponseEntity.noContent().build();
