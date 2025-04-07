@@ -57,10 +57,12 @@ public class StudenteService {
         return studenteRepository.findById(id);
     }
 
-    public Optional<Studente> updateStudent(int id, Studente studente) {
-        Studente existingStudente = studenti.get(id);
+    public Optional<Studente> updateStudent(Long id, Studente studente){
+      if(!studenteRepository.existsById(id)){
+          return Optional.empty();
+      }
 
-        studenti.set(id, studente);
-        return Optional.of(studente);
+      studente.setId(id);
+      return Optional.of(studenteRepository.save(studente));
     }
 }

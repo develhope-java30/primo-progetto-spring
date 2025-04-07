@@ -70,8 +70,8 @@ public class StudentController {
     }
 
     @PutMapping("/studenti/{id}")
-    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente) {
-        if (id < 0) {
+    public ResponseEntity<Studente> updateStudente(@PathVariable Long id, @RequestBody Studente updateStudente){
+        if(id < 0){
             return ResponseEntity.badRequest().build();
         }
 
