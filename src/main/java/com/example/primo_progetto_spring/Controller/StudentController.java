@@ -28,7 +28,7 @@ public class StudentController {
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
         Optional<Studente> studentSaved = studenteService.addStudente(studente);
 
-        if (studentSaved.isPresent()){
+        if (studentSaved.isPresent()) {
             return ResponseEntity.ok(studentSaved.get());
         } else {
             return ResponseEntity.notFound().build();
@@ -52,15 +52,11 @@ public class StudentController {
     }
 
     @GetMapping("/studenti/{id}")
-    public ResponseEntity<Studente> idOfStudent(@PathVariable int id) {
+    public ResponseEntity<Studente> findById(@PathVariable Long id) {
 
-       Optional<Studente> result = studenteService.idOfStudent(id);
-
-       if (result.isPresent()){
-           return ResponseEntity.ok(result.get());
-       } else {
-           return ResponseEntity.notFound().build();
-       }
+        return studenteService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/studenti/{id}")
@@ -74,13 +70,13 @@ public class StudentController {
     }
 
     @PutMapping("/studenti/{id}")
-    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente){
-        if(id < 0){
+    public ResponseEntity<Studente> updateStudente(@PathVariable int id, @RequestBody Studente updateStudente) {
+        if (id < 0) {
             return ResponseEntity.badRequest().build();
         }
 
         Optional<Studente> studentUpdate = studenteService.updateStudent(id, updateStudente);
-        if (studentUpdate.isPresent()){
+        if (studentUpdate.isPresent()) {
             return ResponseEntity.ok(studentUpdate.get());
         } else {
             return ResponseEntity.notFound().build();
