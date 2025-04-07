@@ -42,19 +42,19 @@ public class StudenteService {
     }
 
     public void removeByID(Long id) {
-        try{
+        try {
             studenteRepository.deleteById(id);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("ID non valido!");
         }
     }
 
-    public Optional<Studente> idOfStudent(int id) {
-        if (id < 0 || id >= studenti.size()) {
+    public Optional<Studente> findById(Long id) {
+        if (id < 0) {
             return Optional.empty();
         }
 
-        return Optional.of(studenti.get(id));
+        return studenteRepository.findById(id);
     }
 
     public Optional<Studente> updateStudent(Long id, Studente studente){
