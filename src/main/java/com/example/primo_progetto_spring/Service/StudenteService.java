@@ -5,7 +5,10 @@ import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -75,8 +78,9 @@ public class StudenteService {
 
         for(Studente studente : studenteRepository.findAll()){
             dateOfStudent = LocalDate.parse(studente.getData());
+            Period period = Period.between(dateOfStudent, localDate);
 
-            if(localDate.getYear() - dateOfStudent.getYear() < 30){
+            if(period.getYears() < 30){
                 age.add(studente);
             }
         }
