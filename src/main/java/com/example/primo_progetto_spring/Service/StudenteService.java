@@ -138,8 +138,24 @@ public class StudenteService {
         if(age.isEmpty()){
             return Optional.empty();
         }
-
         return Optional.of(age);
+    }
+
+    // Implementare un endpoint che ritorni gli studenti che hanno X anni, dove X è un parametro passato alla richiesta
+    public List<Studente> studentiConXEta (int age){
+        List<Studente> students = new ArrayList<>();
+        LocalDate localDate = LocalDate.now();
+        LocalDate ageOfstudent = null;
+
+        for (Studente studente : studenteRepository.findAll()){
+            ageOfstudent = LocalDate.parse(studente.getData());
+            Period period = Period.between(ageOfstudent, localDate);
+
+            if (period.getYears() == age){
+                students.add(studente);
+            }
+        }
+        return students;
     }
 
     //Implementare un endpoint che ritorni gli studenti il cui cognome è prefisso del nome di un altro studente
