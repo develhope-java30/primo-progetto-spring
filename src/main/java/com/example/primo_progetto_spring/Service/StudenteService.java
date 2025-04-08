@@ -5,6 +5,8 @@ import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -116,5 +118,27 @@ public class StudenteService {
             }
         }
         return studentiTrovati;
+    }
+
+    //Implementare un endpoint che ritorni gli studenti la cui età è minore di 30
+    public Optional<List<Studente>> ageLess30(){
+        List<Studente> age = new ArrayList<>();
+        LocalDate localDate = LocalDate.now();
+        LocalDate dateOfStudent = null;
+
+        for(Studente studente : studenteRepository.findAll()){
+            dateOfStudent = LocalDate.parse(studente.getData());
+            Period period = Period.between(dateOfStudent, localDate);
+
+            if(period.getYears() < 30){
+                age.add(studente);
+            }
+        }
+
+        if(age.isEmpty()){
+            return Optional.empty();
+        }
+
+        return Optional.of(age);
     }
 }
