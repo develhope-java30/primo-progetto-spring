@@ -113,7 +113,6 @@ public class StudentController {
         List<Studente> ageOfStudent = studenteService.studentiConXEta(age);
         return ResponseEntity.ok(ageOfStudent);
     }
-}
 
     @GetMapping("/studenti/suffisso-nome")
     public ResponseEntity<List<Studente>> suffissoNome(){
