@@ -114,3 +114,10 @@ public class StudentController {
         return ResponseEntity.ok(ageOfStudent);
     }
 }
+
+    @GetMapping("/studenti/suffisso-nome")
+    public ResponseEntity<List<Studente>> suffissoNome(){
+        return ResponseEntity.ok(studenteService.prefissoNome());
+    }
+
+}

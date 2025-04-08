@@ -157,4 +157,31 @@ public class StudenteService {
         }
         return students;
     }
+
+    //Implementare un endpoint che ritorni gli studenti il cui cognome è prefisso del nome di un altro studente
+    public List<Studente> prefissoNome(){
+        List<Studente> prefissoList = studenteRepository.findAll();
+        List<Studente> studentiAll = new ArrayList<>();
+
+        for(int i = 0; i < prefissoList.size(); i++){
+            Studente studente1 = prefissoList.get(i);
+            String cognome1 = studente1.getCognome().toLowerCase();
+
+            for(int y = 0; y < prefissoList.size(); y++){
+                Studente studente2 = prefissoList.get(y);
+                String nome2 = studente2.getNome().toLowerCase();
+
+                if(i == y){
+                    continue;
+                }
+
+                if(nome2.startsWith(cognome1)){
+                    studentiAll.add(studente1);
+                    studentiAll.add(studente2);
+                }
+            }
+        }
+        return studentiAll;
+    }
+
 }
