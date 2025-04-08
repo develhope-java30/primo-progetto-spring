@@ -82,4 +82,19 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/studenti/con-prefisso")
+    public ResponseEntity<Studente> trovaStudenteConPrefisso() {
+
+        return studenteService.trovaStudenteConPrefisso()
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("studenti/con-suffisso")
+    public ResponseEntity<Studente> trovaStudenteConSuffisso(){
+        return studenteService.trovaStudenteConSuffisso()
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

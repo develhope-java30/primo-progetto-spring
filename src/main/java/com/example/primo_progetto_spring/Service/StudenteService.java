@@ -65,4 +65,56 @@ public class StudenteService {
       studente.setId(id);
       return Optional.of(studenteRepository.save(studente));
     }
+
+    public Optional<Studente> trovaStudenteConPrefisso(){
+        List<Studente> allStudents = studenteRepository.findAll();
+
+        //confronta gli studenti
+        for (int i = 0; i < allStudents.size(); i++) {
+            Studente studente1 = allStudents.get(i);
+            String nome1 = studente1.getNome();
+
+            for (int j = 0; j < allStudents.size(); j++) {
+
+                Studente studente2 = allStudents.get(j);
+                if (i == j) {
+                    continue;
+                }
+
+                String nome2 = allStudents.get(j).getNome();
+
+                //nome 2 è prefisso di nome1
+                if (nome2.startsWith(nome1)){
+                    return Optional.of(studente2);
+                }
+
+            }
+        }
+        return Optional.empty();
+    }
+
+    // Implementare un endpoint che ritorni gli studenti il cui nome è suffisso del cognome di un altro studente
+    public Optional<Studente> trovaStudenteConSuffisso(){
+        List<Studente> allStudent = studenteRepository.findAll();
+
+
+        for (int i = 0; i < allStudent.size() ; i++) {
+            Studente studente1 = allStudent.get(i);
+            String nome1 = studente1.getNome().toLowerCase();
+
+            for (int j = 0; j < allStudent.size() ; j++) {
+                Studente studente2 = allStudent.get(j);
+                String cognome2 = studente2.getCognome().toLowerCase();
+
+                if (i == j){
+                    continue;
+                }
+
+                if (cognome2.endsWith(nome1)){
+                    return Optional.of(studente2);
+                }
+            }
+        }
+        return Optional.empty();
+    }
 }
