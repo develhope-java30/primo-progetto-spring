@@ -107,4 +107,10 @@ public class StudentController {
 
         return ResponseEntity.ok(age.get());
     }
+
+    @GetMapping("/studenti/by-age")
+    public ResponseEntity<List<Studente>> studentiConXEta(@RequestParam int age){
+        List<Studente> ageOfStudent = studenteService.studentiConXEta(age);
+        return ResponseEntity.ok(ageOfStudent);
+    }
 }
