@@ -83,6 +83,20 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/studenti/con-prefisso")
+    public ResponseEntity<Studente> trovaStudenteConPrefisso() {
+
+        return studenteService.trovaStudenteConPrefisso()
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("studenti/con-suffisso")
+    public ResponseEntity<List<Studente>> trovaStudenteConSuffisso(){
+        List<Studente> studenti = studenteService.trovaStudenteConSuffisso();
+        return ResponseEntity.ok(studenti);
+    }
+
     @GetMapping("/studenti/age")
     public ResponseEntity<List<Studente>> ageLess30(){
         Optional<List<Studente>> age = studenteService.ageLess30();
