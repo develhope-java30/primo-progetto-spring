@@ -82,4 +82,15 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/studenti/age")
+    public ResponseEntity<List<Studente>> ageLess30(){
+        Optional<List<Studente>> age = studenteService.ageLess30();
+
+        if(age.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(age.get());
+    }
 }
