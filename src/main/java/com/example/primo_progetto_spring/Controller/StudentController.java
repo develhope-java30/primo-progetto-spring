@@ -92,9 +92,8 @@ public class StudentController {
     }
 
     @GetMapping("studenti/con-suffisso")
-    public ResponseEntity<Studente> trovaStudenteConSuffisso(){
-        return studenteService.trovaStudenteConSuffisso()
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<List<Studente>> trovaStudenteConSuffisso(){
+        List<Studente> studenti = studenteService.trovaStudenteConSuffisso();
+        return ResponseEntity.ok(studenti);
     }
 }

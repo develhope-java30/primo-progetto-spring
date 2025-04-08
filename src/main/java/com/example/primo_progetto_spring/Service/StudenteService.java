@@ -94,9 +94,9 @@ public class StudenteService {
     }
 
     // Implementare un endpoint che ritorni gli studenti il cui nome è suffisso del cognome di un altro studente
-    public Optional<Studente> trovaStudenteConSuffisso(){
+    public List<Studente> trovaStudenteConSuffisso(){
         List<Studente> allStudent = studenteRepository.findAll();
-
+        List<Studente> studentiTrovati = new ArrayList<>();
 
         for (int i = 0; i < allStudent.size() ; i++) {
             Studente studente1 = allStudent.get(i);
@@ -111,10 +111,10 @@ public class StudenteService {
                 }
 
                 if (cognome2.endsWith(nome1)){
-                    return Optional.of(studente2);
+                    studentiTrovati.add(studente2);
                 }
             }
         }
-        return Optional.empty();
+        return studentiTrovati;
     }
 }
