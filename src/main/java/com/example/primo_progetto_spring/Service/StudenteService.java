@@ -177,7 +177,6 @@ public class StudenteService {
 
                 if(nome2.startsWith(cognome1)){
                     studentiAll.add(studente1);
-                    studentiAll.add(studente2);
                 }
             }
         }
