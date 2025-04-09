@@ -11,15 +11,15 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long student_id;
+    private Long studentId;
     private String consegna;
     private Integer voto;
 
     public Exercise(){}
 
-    public Exercise(Long id, Long student_id, String consegna, Integer voto){
+    public Exercise(Long id, Long studentId, String consegna, Integer voto){
         this.id = id;
-        this.student_id = student_id;
+        this.studentId = studentId;
         this.consegna = consegna;
         this.voto = voto;
     }
@@ -32,12 +32,12 @@ public class Exercise {
         this.id = id;
     }
 
-    public Long getStudent_id() {
-        return student_id;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public void setStudentId(Long student_id) {
+        this.studentId = student_id;
     }
 
     public String getConsegna() {

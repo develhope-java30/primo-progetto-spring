@@ -14,12 +14,12 @@ import java.util.Optional;
 public class ExerciseController {
     @Autowired private ExerciseService exerciseService;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Exercise>> allExercise(){
        return ResponseEntity.ok(exerciseService.allExercise());
     }
 
-    @PutMapping("/new")
+    @PostMapping
     public ResponseEntity<Exercise> addExercise(@RequestBody Exercise newExercise){
         Optional<Exercise> exerciseSaved = exerciseService.addExercise(newExercise);
 
