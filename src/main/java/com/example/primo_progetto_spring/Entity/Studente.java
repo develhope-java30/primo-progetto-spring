@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,12 @@ public class Studente {
     private String data;
     private String codiceFiscale;
 
+    //relazione Many to one
+    @ManyToOne
+    @JoinColumn(name = "classroom_Id")
+    @JsonIgnore
+    private Classroom classroom;
+
     public Studente(){}
 
     public Studente(Long id, String nome, String cognome, String data, String codiceFiscale){
@@ -20,6 +27,15 @@ public class Studente {
         this.cognome = cognome;
         this.data = data;
         this.codiceFiscale = codiceFiscale;
+    }
+
+    //getter e setter classroom
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 
     public Long getId() {
