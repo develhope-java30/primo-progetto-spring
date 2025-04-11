@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
 import com.example.primo_progetto_spring.repository.ExerciseRepository;
+import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ import java.util.Optional;
 @Service
 public class ExerciseService {
     @Autowired private ExerciseRepository exerciseRepository;
+
+    @Autowired
+    private StudenteRepository studenteRepository;
 
     public List<Exercise> allExercise(){
         return exerciseRepository.findAll();
