@@ -3,6 +3,8 @@ package com.example.primo_progetto_spring.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Coordinator {
     @Id
@@ -11,20 +13,20 @@ public class Coordinator {
     private String name;
 
     //OneToOne stabilisce che ogni istanza di Classroom è associata ad un'altra entità
-    @OneToOne
+    @OneToMany
     //JoinColumn specifica che c'è una relazione nel DB tramite una colonna, presente nella colonna ID di Classroom
     @JoinColumn(name = "classroom_id")
     //JsonIgnore blocca la serializzazione quando un oggetto viene convertito in JSON
     //@JsonIgnore
     //questo campo rappresenta il riferimento all'istanza Classroom
-    private Classroom classroom;
+    private List<Classroom> classrooms;
 
     private Coordinator(){}
 
-    public Coordinator(Long id, String name, Classroom classroom){
+    public Coordinator(Long id, String name, List<Classroom> classrooms){
         this.id = id;
         this.name = name;
-        this.classroom = classroom;
+        this.classrooms = classrooms;
     }
 
     public Long getId() {
@@ -43,12 +45,12 @@ public class Coordinator {
         this.name = name;
     }
 
-    public Classroom getClassroom() {
-        return classroom;
+    public List<Classroom> getClassroom() {
+        return classrooms;
     }
 
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
+    public void setClassroom(List<Classroom> classrooms) {
+        this.classrooms = classrooms;
     }
 
 }

@@ -15,12 +15,16 @@ public class Classroom {
     //MappedBy indica chi è il proprietario della relazione
     //CascadeType fa in modo che tutte le operazioni vengono propagate all'interno dell'entità associata
     //FetchType fa in modo che Classroom non venga recuperata finché l'altra entità non la recuperi
-    @OneToOne(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Coordinator coordinator;
 
     //Relazione One to many
-    @OneToMany (mappedBy = "classroom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Studente> students = new ArrayList<>();
+
+    public Coordinator getCoordinator() {
+        return coordinator;
+    }
 
     public Long getId() {
         return id;
