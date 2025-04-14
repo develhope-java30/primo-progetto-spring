@@ -14,7 +14,7 @@ public class Coordinator {
     @OneToOne
     //JoinColumn specifica che c'è una relazione nel DB tramite una colonna, presente nella colonna ID di Classroom
     @JoinColumn(name = "classroom_id")
-    //JsonIgnore ci permette
+    //JsonIgnore blocca la serializzazione quando un oggetto viene convertito in JSON
     //@JsonIgnore
     //questo campo rappresenta il riferimento all'istanza Classroom
     private Classroom classroom;
