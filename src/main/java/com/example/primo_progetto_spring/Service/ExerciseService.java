@@ -1,6 +1,7 @@
 package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
+import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.repository.ExerciseRepository;
 import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,20 @@ public class ExerciseService {
     public Optional<Exercise> addExercise(Exercise newExercise){
         newExercise.setVoto(0);
         return Optional.of(exerciseRepository.save(newExercise));
+    }
+
+    public Optional<Exercise> addExerciseToStudent(Long exerciseId, Long studentId){
+        Optional<Exercise> exerciseOptional = exerciseRepository.findById(exerciseId);
+        Optional<Studente> studenteOptional = studenteRepository.findById(studentId);
+
+        if (exerciseOptional.isPresent() && studenteOptional.isPresent()) {
+            Studente studente = studenteOptional.get();
+            Exercise exercise = exerciseOptional.get();
+
+            exercise.setStudente(studente);
+
+            return Optional.of(exerciseRepository.save(exercise));
+        }
+        return Optional.empty();
     }
 }
