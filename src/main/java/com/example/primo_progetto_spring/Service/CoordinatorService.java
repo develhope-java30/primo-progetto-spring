@@ -29,16 +29,16 @@ public class CoordinatorService {
     }
 
     public Optional<Coordinator> assignCoordinatorToClass(Long coordinatorId, Long classroomId){
-        Optional<Coordinator> coordinatorFounded = coordinatorRepository.findById(coordinatorId);
-        Optional<Classroom> classroomFounded = classroomRepository.findById(classroomId);
+        Optional<Coordinator> coordinatorFound = coordinatorRepository.findById(coordinatorId);
+        Optional<Classroom> classroomFound = classroomRepository.findById(classroomId);
 
-        if(coordinatorFounded.isPresent() && classroomFounded.isPresent()){
-            coordinatorFounded.get().setClassroom(classroomFounded.get());
+        if(coordinatorFound.isPresent() && classroomFound.isPresent()){
+            classroomFound.get().setId(classroomId);
+            classroomFound.get().setCoordinator(coordinatorFound.get());
 
-            coordinatorRepository.save(coordinatorFounded.get());
-            return coordinatorFounded;
-        }else{
-            return Optional.empty();
+            classroomRepository.save(classroomFound.get());
+            return Optional.of(classroomFound.get().getCoordinator());
         }
+        return Optional.empty();
     }
 }

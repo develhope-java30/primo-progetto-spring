@@ -12,7 +12,6 @@ public class Coordinator {
     private Long id;
     private String name;
 
-    //OneToOne stabilisce che ogni istanza di Classroom è associata ad un'altra entità
     @OneToMany
     //JoinColumn specifica che c'è una relazione nel DB tramite una colonna, presente nella colonna ID di Classroom
     @JoinColumn(name = "classroom_id")
@@ -43,14 +42,6 @@ public class Coordinator {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Classroom> getClassroom() {
-        return classrooms;
-    }
-
-    public void setClassroom(List<Classroom> classrooms) {
-        this.classrooms = classrooms;
     }
 
 }
