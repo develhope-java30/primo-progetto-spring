@@ -28,11 +28,8 @@ public class StudentController {
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
         Optional<Studente> studentSaved = studenteService.addStudente(studente);
 
-        if (studentSaved.isPresent()) {
-            return ResponseEntity.ok(studentSaved.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return studentSaved.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
 
     }
 

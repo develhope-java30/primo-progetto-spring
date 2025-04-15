@@ -1,9 +1,7 @@
 package com.example.primo_progetto_spring.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 //Aggiungere una nuova entità "Exercise", definita da id, id dello studente, consegna (stringa) e voto (intero).
 @Entity
@@ -11,15 +9,22 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long studentId;
+
+    //relazione molti a uno, uno studente può avere più esercizi assegnati
+    @ManyToOne
+    //Join sull'Id dello studente
+    @JoinColumn(name = "student_Id")
+    private Studente studente;
+
     private String consegna;
     private Integer voto;
 
-    public Exercise(){}
+    public Exercise() {
+    }
 
-    public Exercise(Long id, Long studentId, String consegna, Integer voto){
+    public Exercise(Long id, Studente studente, String consegna, Integer voto) {
         this.id = id;
-        this.studentId = studentId;
+        this.studente = studente;
         this.consegna = consegna;
         this.voto = voto;
     }
@@ -32,12 +37,12 @@ public class Exercise {
         this.id = id;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Studente getStudente() {
+        return studente;
     }
 
-    public void setStudentId(Long student_id) {
-        this.studentId = student_id;
+    public void setStudente(Studente studente) {
+        this.studente = studente;
     }
 
     public String getConsegna() {
