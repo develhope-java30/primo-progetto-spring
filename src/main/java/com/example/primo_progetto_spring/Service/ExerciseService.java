@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 //Implementare inserimento di un elemento e lettura di tutti gli elementi presenti
@@ -57,16 +58,14 @@ public class ExerciseService {
     }
 
     //Esercizi consegnati da un determinato studente
-    public List<Exercise> findByStudente(String nome){
-        List<Studente> studenteList = studenteRepository.findAll();
-        Studente nameFound = null;
+    public Optional<List<Exercise>> findByStudente(Long id){
+       Optional<Studente> idFound = studenteRepository.findById(id);
 
-        for(Studente x : studenteList){
-            if(x.getNome().equals(nome)){
-                nameFound = x;
-            }
-        }
+       if(idFound.isEmpty()){
+           return Optional.empty();
+       }
 
-        return exerciseRepository.findByStudente(nameFound);
+        return Optional.of(exerciseRepository.findByStudente(idFound.get()));
     }
+
 }
