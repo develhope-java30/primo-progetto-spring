@@ -50,4 +50,10 @@ public class ExerciseService {
         }
         return Optional.empty();
     }
+
+    //Esercizi con un determinato voto
+    public List<Exercise> findByVoto(Integer voto){
+       return exerciseRepository.findByVoto(voto);
+    }
+
 }

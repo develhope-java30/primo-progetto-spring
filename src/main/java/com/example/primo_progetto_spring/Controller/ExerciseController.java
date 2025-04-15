@@ -38,4 +38,9 @@ public class ExerciseController {
                 .map(ResponseEntity::ok)
                 .orElseGet(()-> ResponseEntity.badRequest().build());
     }
+
+    @GetMapping("/voto")
+    public List<Exercise> findByVoto(@RequestParam Integer voto){
+        return exerciseService.findByVoto(voto);
+    }
 }
