@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/classrooms")
 public class ClassroomController {
@@ -14,8 +16,8 @@ public class ClassroomController {
     private ClassroomService classroomService;
 
     @PostMapping
-    public Classroom createClassroom (){
-        return classroomService.createClassroom();
+    public Classroom createClassroom (@RequestBody Classroom classroom){
+        return classroomService.createClassroom(classroom);
     }
 
     @PutMapping("/{classroomId}/add-student/{studentId}")
@@ -30,5 +32,10 @@ public class ClassroomController {
         return classroomService.getClassroomById(classroomId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public List<Classroom> allClasses(){
+        return classroomService.allClasses();
     }
 }

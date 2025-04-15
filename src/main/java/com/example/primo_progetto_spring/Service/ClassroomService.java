@@ -7,6 +7,7 @@ import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,8 +20,7 @@ public class ClassroomService {
     @Autowired
     private StudenteRepository studenteRepository;
 
-    public Classroom createClassroom() {
-        Classroom classroom = new Classroom();
+    public Classroom createClassroom(Classroom classroom) {
         return classroomRepository.save(classroom);
     }
 
@@ -40,5 +40,9 @@ public class ClassroomService {
 
     public Optional<Classroom> getClassroomById(Long classroomId) {
         return classroomRepository.findById(classroomId);
+    }
+
+    public List<Classroom> allClasses(){
+        return classroomRepository.findAll();
     }
 }
