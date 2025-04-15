@@ -18,9 +18,8 @@ public class StudenteService {
 
     private List<Studente> studenti = new ArrayList<>();
 
-    public List<Studente> getStudenti() {
-        List<Studente> allStudents = studenteRepository.findAll();
-        return allStudents;
+    public List<Studente> getStudenti(String nome) {
+        return studenteRepository.findByNome(nome);
     }
 
     public Optional<Studente> addStudente(Studente studente) {

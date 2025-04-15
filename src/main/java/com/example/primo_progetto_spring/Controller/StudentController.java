@@ -2,6 +2,9 @@ package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.StudenteService;
+import com.example.primo_progetto_spring.repository.StudenteRepository;
+import jakarta.annotation.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,9 @@ import java.util.*;
 @RequestMapping("/studenti")
 public class StudentController {
 
+    @Autowired
+    StudenteRepository studenteRepository;
+
     private final StudenteService studenteService;
 
     public StudentController(StudenteService studenteService) {
@@ -19,8 +25,11 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Studente> getStudenti() {
-        return studenteService.getStudenti();
+    public List<Studente> getStudenti(@Nullable @RequestParam String nome) {
+
+
+            return studenteRepository.findByNome(nome);
+
     }
 
 
