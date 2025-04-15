@@ -54,4 +54,10 @@ public class ExerciseController {
 
         return ResponseEntity.ok(exerciseList.get());
     }
+
+    @GetMapping("/voti-maggiori")
+    public List<Exercise> votoAboveAverage(){
+        return exerciseService.votoAboveAverage();
+    }
+
 }

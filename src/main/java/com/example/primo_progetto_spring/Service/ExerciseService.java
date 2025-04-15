@@ -6,7 +6,9 @@ import com.example.primo_progetto_spring.repository.ExerciseRepository;
 import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -66,6 +68,26 @@ public class ExerciseService {
        }
 
         return Optional.of(exerciseRepository.findByStudente(idFound.get()));
+    }
+
+    //Esercizi il cui voto è superiore a quello preso in media dallo studente.
+    public List<Exercise> votoAboveAverage(){
+        Long totalExercise = exerciseRepository.count();
+        Long sumOfVoti = 0L;
+
+       for(Exercise exercise : exerciseRepository.findAll()){
+           sumOfVoti += exercise.getVoto();
+       }
+
+       Long average = sumOfVoti / totalExercise;
+
+       List<Exercise> exercisesOverAverage = new ArrayList<>();
+       for(Exercise exercise : exerciseRepository.findAll()){
+           if(exercise.getVoto() > average){
+                exercisesOverAverage.add(exercise);
+           }
+       }
+       return exercisesOverAverage;
     }
 
 }
