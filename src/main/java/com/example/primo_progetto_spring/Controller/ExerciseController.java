@@ -55,9 +55,20 @@ public class ExerciseController {
         return ResponseEntity.ok(exerciseList.get());
     }
 
-    @GetMapping("/voti-maggiori")
-    public List<Exercise> votoAboveAverage(){
-        return exerciseService.votoAboveAverage();
+    @GetMapping("/voti-maggiori/{id}")
+    public ResponseEntity<List<Exercise>> votoAboveAverage(@PathVariable Long id){
+        List<Exercise> votoAbove = exerciseService.votoAboveAverage(id);
+
+        if(votoAbove.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(votoAbove);
+    }
+
+    @GetMapping("/voti-minori")
+    public List<Exercise> votoMinorAverage(){
+        return exerciseService.votoMinorAverage();
     }
 
 }

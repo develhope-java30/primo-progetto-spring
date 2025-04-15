@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 //Implementare inserimento di un elemento e lettura di tutti gli elementi presenti
 @Service
@@ -70,8 +67,41 @@ public class ExerciseService {
         return Optional.of(exerciseRepository.findByStudente(idFound.get()));
     }
 
+    public List<Exercise> votoAboveAverage(Long id){
+        //cerco lo studente con quell'id e lo associo ad idFound
+        Optional<Studente> idFound = studenteRepository.findById(id);
+        //nel caso non dovessi trovare lo studente ritorno una lista vuota
+        if(idFound.isEmpty()){
+            return Collections.emptyList();
+        }
+
+        //assegno tutti gli esercizi dello studente con ID ad una lista
+        List<Exercise> listOfExerciseByStudentID = exerciseRepository.findByStudente(idFound.get());
+        //conto quanti esercizi ha effettuato lo studente
+        Long totalExercise = exerciseRepository.countByStudente_Id(id);
+        Long sumOfVoti = 0L;
+
+        //ciclo tutti gli esercizi in modo da prendere tutti i voti e sommarli per fare la media
+        for(Exercise exercise : listOfExerciseByStudentID){
+            sumOfVoti += exercise.getVoto();
+        }
+
+        //faccio la media
+        Long average = sumOfVoti / totalExercise;
+
+        //creo una lista dove aggiungere tutti gli esercizi che superano la media
+        List<Exercise> exercisesOverAverage = new ArrayList<>();
+        //ri-ciclo la lista di tutti gli esercizi in modo da confrontarli con la media per in fine aggiungerli alla lista
+        for(Exercise exercise : listOfExerciseByStudentID){
+            if(exercise.getVoto() > average){
+                exercisesOverAverage.add(exercise);
+            }
+        }
+        return exercisesOverAverage;
+    }
+
     //Esercizi il cui voto è superiore a quello preso in media dallo studente.
-    public List<Exercise> votoAboveAverage(){
+    public List<Exercise> votoMinorAverage(){
         Long totalExercise = exerciseRepository.count();
         Long sumOfVoti = 0L;
 
