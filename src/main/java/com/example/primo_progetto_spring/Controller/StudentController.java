@@ -9,7 +9,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/studenti")
 public class StudentController {
 
     private final StudenteService studenteService;
@@ -18,13 +18,13 @@ public class StudentController {
         this.studenteService = studenteService;
     }
 
-    @GetMapping("/studenti")
+    @GetMapping
     public List<Studente> getStudenti() {
         return studenteService.getStudenti();
     }
 
 
-    @PostMapping("/studenti")
+    @PostMapping
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
         Optional<Studente> studentSaved = studenteService.addStudente(studente);
 
@@ -48,7 +48,7 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/studenti/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Studente> findById(@PathVariable Long id) {
 
         return studenteService.findById(id)
@@ -56,7 +56,7 @@ public class StudentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/studenti/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeByID(@PathVariable Long id) {
         try {
             studenteService.removeByID(id);
@@ -66,7 +66,7 @@ public class StudentController {
         }
     }
 
-    @PutMapping("/studenti/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Studente> updateStudente(@PathVariable Long id, @RequestBody Studente updateStudente){
         if(id < 0){
             return ResponseEntity.badRequest().build();
@@ -80,7 +80,7 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/studenti/con-prefisso")
+    @GetMapping("/con-prefisso")
     public ResponseEntity<Studente> trovaStudenteConPrefisso() {
 
         return studenteService.trovaStudenteConPrefisso()
@@ -88,13 +88,13 @@ public class StudentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("studenti/con-suffisso")
+    @GetMapping("/con-suffisso")
     public ResponseEntity<List<Studente>> trovaStudenteConSuffisso(){
         List<Studente> studenti = studenteService.trovaStudenteConSuffisso();
         return ResponseEntity.ok(studenti);
     }
 
-    @GetMapping("/studenti/age")
+    @GetMapping("/age-less-30")
     public ResponseEntity<List<Studente>> ageLess30(){
         Optional<List<Studente>> age = studenteService.ageLess30();
 
@@ -105,13 +105,13 @@ public class StudentController {
         return ResponseEntity.ok(age.get());
     }
 
-    @GetMapping("/studenti/by-age")
+    @GetMapping("/by-age")
     public ResponseEntity<List<Studente>> studentiConXEta(@RequestParam int age){
         List<Studente> ageOfStudent = studenteService.studentiConXEta(age);
         return ResponseEntity.ok(ageOfStudent);
     }
 
-    @GetMapping("/studenti/suffisso-nome")
+    @GetMapping("/suffisso-nome")
     public ResponseEntity<List<Studente>> suffissoNome(){
         return ResponseEntity.ok(studenteService.prefissoNome());
     }
