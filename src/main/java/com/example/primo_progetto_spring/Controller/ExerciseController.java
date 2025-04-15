@@ -1,6 +1,7 @@
 package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
+import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,10 @@ public class ExerciseController {
     @GetMapping("/voto/{voto}")
     public List<Exercise> findByVoto(@PathVariable Integer voto){
         return exerciseService.findByVoto(voto);
+    }
+
+    @GetMapping("/studente")
+    public List<Exercise> findByStudente(@RequestParam String nome){
+        return exerciseService.findByStudente(nome);
     }
 }

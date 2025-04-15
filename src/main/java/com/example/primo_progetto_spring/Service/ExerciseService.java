@@ -56,4 +56,17 @@ public class ExerciseService {
        return exerciseRepository.findByVoto(voto);
     }
 
+    //Esercizi consegnati da un determinato studente
+    public List<Exercise> findByStudente(String nome){
+        List<Studente> studenteList = studenteRepository.findAll();
+        Studente nameFound = null;
+
+        for(Studente x : studenteList){
+            if(x.getNome().equals(nome)){
+                nameFound = x;
+            }
+        }
+
+        return exerciseRepository.findByStudente(nameFound);
+    }
 }
