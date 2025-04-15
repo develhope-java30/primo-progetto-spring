@@ -10,4 +10,6 @@ import java.util.List;
 public interface StudenteRepository extends JpaRepository<Studente, Long>{
 
     List<Studente> findByNome (String nome);
+
+    List<Studente> findByNomeStartingWith (String prefisso);
 }

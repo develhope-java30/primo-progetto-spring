@@ -22,6 +22,11 @@ public class StudenteService {
         return studenteRepository.findByNome(nome);
     }
 
+    public List<Studente> getNomeStartingWith (String prefisso) {
+
+        return studenteRepository.findByNomeStartingWith(prefisso);
+    }
+
     public Optional<Studente> addStudente(Studente studente) {
         if (studente.getNome() == null || studente.getCognome() == null) {
             return Optional.empty();

@@ -26,10 +26,12 @@ public class StudentController {
 
     @GetMapping
     public List<Studente> getStudenti(@Nullable @RequestParam String nome) {
-
-
             return studenteRepository.findByNome(nome);
+    }
 
+    @GetMapping("/prefisso")
+    public List<Studente> getNomeStartingWith (@Nullable @RequestParam String prefisso) {
+        return studenteRepository.findByNomeStartingWith(prefisso);
     }
 
 
