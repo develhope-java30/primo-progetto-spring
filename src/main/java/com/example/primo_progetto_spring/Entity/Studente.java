@@ -1,8 +1,9 @@
 package com.example.primo_progetto_spring.Entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Studente {
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL)
     // evita cicli infiniti
     @JsonIgnore
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<Exercise> exercises;
 
     public Studente() {
     }
@@ -41,7 +42,7 @@ public class Studente {
     }
 
     //getter e setter Exercise
-    public List<Exercise> getExercise() {
+    public List<Exercise> getExercises() {
         return exercises;
     }
 

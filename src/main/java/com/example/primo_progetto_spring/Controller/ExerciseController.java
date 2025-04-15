@@ -29,4 +29,13 @@ public class ExerciseController {
 
         return ResponseEntity.ok(exerciseSaved.get());
     }
+
+    @PutMapping("/{studentId}/add-exercise/{exerciseId}")
+    public ResponseEntity<Exercise> addExerciseToStudent(@PathVariable Long exerciseId,
+                                                         @PathVariable Long studentId,
+                                                         @RequestParam (required = false) Integer voto){
+        return exerciseService.addExerciseToStudent(exerciseId, studentId, voto)
+                .map(ResponseEntity::ok)
+                .orElseGet(()-> ResponseEntity.badRequest().build());
+    }
 }

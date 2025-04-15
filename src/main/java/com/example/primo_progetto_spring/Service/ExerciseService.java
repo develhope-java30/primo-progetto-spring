@@ -28,7 +28,7 @@ public class ExerciseService {
         return Optional.of(exerciseRepository.save(newExercise));
     }
 
-    public Optional<Exercise> addExerciseToStudent(Long exerciseId, Long studentId){
+    public Optional<Exercise> addExerciseToStudent(Long exerciseId, Long studentId, Integer voto){
         Optional<Exercise> exerciseOptional = exerciseRepository.findById(exerciseId);
         Optional<Studente> studenteOptional = studenteRepository.findById(studentId);
 
@@ -37,6 +37,14 @@ public class ExerciseService {
             Exercise exercise = exerciseOptional.get();
 
             exercise.setStudente(studente);
+
+            // imposta il voto
+            if (voto != null) {
+                exercise.setVoto(voto);
+            }
+
+            studente.getExercises().add(exerciseRepository.save(exercise));
+            studenteRepository.save(studente);
 
             return Optional.of(exerciseRepository.save(exercise));
         }
