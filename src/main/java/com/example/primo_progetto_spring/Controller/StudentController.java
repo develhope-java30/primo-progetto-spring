@@ -31,9 +31,13 @@ public class StudentController {
 
     @GetMapping("/prefisso")
     public List<Studente> getNomeStartingWith (@Nullable @RequestParam String prefisso) {
-        return studenteRepository.findByNomeStartingWith(prefisso);
+        return studenteService.getNomeStartingWith(prefisso);
     }
 
+    @GetMapping("/filter")
+    public List<Studente> getEtaLessThanEqual (@Nullable @RequestParam Integer etaMinima) {
+        return studenteService.getEtaGreaterThanEqual(etaMinima);
+    }
 
     @PostMapping
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
@@ -103,23 +107,6 @@ public class StudentController {
     public ResponseEntity<List<Studente>> trovaStudenteConSuffisso(){
         List<Studente> studenti = studenteService.trovaStudenteConSuffisso();
         return ResponseEntity.ok(studenti);
-    }
-
-    @GetMapping("/age-less-30")
-    public ResponseEntity<List<Studente>> ageLess30(){
-        Optional<List<Studente>> age = studenteService.ageLess30();
-
-        if(age.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(age.get());
-    }
-
-    @GetMapping("/by-age")
-    public ResponseEntity<List<Studente>> studentiConXEta(@RequestParam int age){
-        List<Studente> ageOfStudent = studenteService.studentiConXEta(age);
-        return ResponseEntity.ok(ageOfStudent);
     }
 
     @GetMapping("/suffisso-nome")

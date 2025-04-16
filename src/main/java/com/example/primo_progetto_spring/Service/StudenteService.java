@@ -27,6 +27,14 @@ public class StudenteService {
         return studenteRepository.findByNomeStartingWith(prefisso);
     }
 
+    public List<Studente> getEtaGreaterThanEqual (Integer etaMinima) {
+        LocalDate now = LocalDate.now();
+        LocalDate dataMax = now.minusYears(etaMinima);
+
+        return studenteRepository.findByDataLessThanEqual(dataMax);
+
+    }
+
     public Optional<Studente> addStudente(Studente studente) {
         if (studente.getNome() == null || studente.getCognome() == null) {
             return Optional.empty();
@@ -56,9 +64,6 @@ public class StudenteService {
     }
 
     public Optional<Studente> findById(Long id) {
-        if (id < 0) {
-            return Optional.empty();
-        }
 
         return studenteRepository.findById(id);
     }
@@ -124,44 +129,6 @@ public class StudenteService {
         return studentiTrovati;
     }
 
-    //Implementare un endpoint che ritorni gli studenti la cui età è minore di 30
-    public Optional<List<Studente>> ageLess30(){
-        List<Studente> age = new ArrayList<>();
-        LocalDate localDate = LocalDate.now();
-        LocalDate dateOfStudent = null;
-
-        for(Studente studente : studenteRepository.findAll()){
-            dateOfStudent = LocalDate.parse(studente.getData());
-            Period period = Period.between(dateOfStudent, localDate);
-
-            if(period.getYears() < 30){
-                age.add(studente);
-            }
-        }
-
-        if(age.isEmpty()){
-            return Optional.empty();
-        }
-        return Optional.of(age);
-    }
-
-    // Implementare un endpoint che ritorni gli studenti che hanno X anni, dove X è un parametro passato alla richiesta
-    public List<Studente> studentiConXEta (int age){
-        List<Studente> students = new ArrayList<>();
-        LocalDate localDate = LocalDate.now();
-        LocalDate ageOfstudent = null;
-
-        for (Studente studente : studenteRepository.findAll()){
-            ageOfstudent = LocalDate.parse(studente.getData());
-            Period period = Period.between(ageOfstudent, localDate);
-
-            if (period.getYears() == age){
-                students.add(studente);
-            }
-        }
-        return students;
-    }
-
     //Implementare un endpoint che ritorni gli studenti il cui cognome è prefisso del nome di un altro studente
     public List<Studente> prefissoNome(){
         List<Studente> prefissoList = studenteRepository.findAll();
@@ -186,6 +153,4 @@ public class StudenteService {
         }
         return studentiAll;
     }
-
-
 }

@@ -4,6 +4,7 @@ package com.example.primo_progetto_spring.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Studente {
     private Long id;
     private String nome;
     private String cognome;
-    private String data;
+    private LocalDate data;
     private String codiceFiscale;
 
     //relazione Many to one
@@ -33,7 +34,7 @@ public class Studente {
     public Studente() {
     }
 
-    public Studente(Long id, String nome, String cognome, String data, String codiceFiscale) {
+    public Studente(Long id, String nome, String cognome, LocalDate data, String codiceFiscale) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
@@ -83,11 +84,11 @@ public class Studente {
         this.cognome = cognome;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
