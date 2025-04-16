@@ -38,4 +38,37 @@ public class ExerciseController {
                 .map(ResponseEntity::ok)
                 .orElseGet(()-> ResponseEntity.badRequest().build());
     }
+
+    @GetMapping("/voto/{voto}")
+    public List<Exercise> findByVoto(@PathVariable Integer voto){
+        return exerciseService.findByVoto(voto);
+    }
+
+    @GetMapping("/studente/{id}")
+    public ResponseEntity<List<Exercise>> findByStudente(@PathVariable Long id){
+        Optional<List<Exercise>> exerciseList = exerciseService.findByStudente(id);
+
+        if(exerciseList.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(exerciseList.get());
+    }
+
+    @GetMapping("/voti-maggiori/{id}")
+    public ResponseEntity<List<Exercise>> votoAboveAverage(@PathVariable Long id){
+        List<Exercise> votoAbove = exerciseService.votoAboveAverage(id);
+
+        if(votoAbove.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(votoAbove);
+    }
+
+    @GetMapping("/voti-minori")
+    public List<Exercise> votoMinorAverage(){
+        return exerciseService.votoMinorAverage();
+    }
+
 }
