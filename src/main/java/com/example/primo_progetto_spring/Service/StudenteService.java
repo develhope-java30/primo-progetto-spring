@@ -19,7 +19,7 @@ public class StudenteService {
     private List<Studente> studenti = new ArrayList<>();
 
     public List<Studente> findAll () {
-        studenteRepository.findAll();
+       return studenteRepository.findAll();
     }
 
     public List<Studente> getStudenti(String nome) {
