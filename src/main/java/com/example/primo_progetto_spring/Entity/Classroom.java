@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,10 @@ public class Classroom {
     //Relazione One to many
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Studente> students = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "classrooms")
+    @JsonIgnore
+    private List<Tutor> tutors = new ArrayList<>();
 
     private Classroom(){}
 
@@ -61,4 +66,11 @@ public class Classroom {
         return students;
     }
 
+    public List<Tutor> getTutors() {
+        return tutors;
+    }
+
+    public void setTutors(List<Tutor> tutors) {
+        this.tutors = tutors;
+    }
 }
