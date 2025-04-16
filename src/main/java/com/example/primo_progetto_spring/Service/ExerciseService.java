@@ -67,6 +67,7 @@ public class ExerciseService {
         return Optional.of(exerciseRepository.findByStudente(idFound.get()));
     }
 
+    //Esercizi il cui voto è superiore a quello preso in media dallo studente.
     public List<Exercise> votoAboveAverage(Long id){
         //cerco lo studente con quell'id e lo associo ad idFound
         Optional<Studente> idFound = studenteRepository.findById(id);
@@ -100,7 +101,7 @@ public class ExerciseService {
         return exercisesOverAverage;
     }
 
-    //Esercizi il cui voto è superiore a quello preso in media dallo studente.
+    //Esercizi il cui voto è inferiore a quello preso in media da tutti gli studenti.
     public List<Exercise> votoMinorAverage(){
         Long totalExercise = exerciseRepository.count();
         Long sumOfVoti = 0L;
@@ -113,7 +114,7 @@ public class ExerciseService {
 
        List<Exercise> exercisesOverAverage = new ArrayList<>();
        for(Exercise exercise : exerciseRepository.findAll()){
-           if(exercise.getVoto() > average){
+           if(exercise.getVoto() < average){
                 exercisesOverAverage.add(exercise);
            }
        }
