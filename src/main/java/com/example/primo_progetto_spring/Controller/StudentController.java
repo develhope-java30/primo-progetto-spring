@@ -16,17 +16,20 @@ import java.util.*;
 public class StudentController {
 
     @Autowired
-    StudenteRepository studenteRepository;
-
-    private final StudenteService studenteService;
+    StudenteService studenteService;
 
     public StudentController(StudenteService studenteService) {
         this.studenteService = studenteService;
     }
 
+    @GetMapping("/all")
+    public List<Studente> findAll () {
+       return studenteService.findAll();
+    }
+
     @GetMapping
     public List<Studente> getStudenti(@Nullable @RequestParam String nome) {
-            return studenteRepository.findByNome(nome);
+            return studenteService.getStudenti(nome);
     }
 
     @GetMapping("/prefisso")
