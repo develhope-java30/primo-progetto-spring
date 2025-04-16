@@ -2,6 +2,9 @@ package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.StudenteService;
+import com.example.primo_progetto_spring.repository.StudenteRepository;
+import jakarta.annotation.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,17 +15,32 @@ import java.util.*;
 @RequestMapping("/studenti")
 public class StudentController {
 
-    private final StudenteService studenteService;
+    @Autowired
+    StudenteService studenteService;
 
     public StudentController(StudenteService studenteService) {
         this.studenteService = studenteService;
     }
 
-    @GetMapping
-    public List<Studente> getStudenti() {
-        return studenteService.getStudenti();
+    @GetMapping("/all")
+    public List<Studente> findAll () {
+       return studenteService.findAll();
     }
 
+    @GetMapping
+    public List<Studente> getStudenti(@Nullable @RequestParam String nome) {
+            return studenteService.getStudenti(nome);
+    }
+
+    @GetMapping("/prefisso")
+    public List<Studente> getNomeStartingWith (@Nullable @RequestParam String prefisso) {
+        return studenteService.getNomeStartingWith(prefisso);
+    }
+
+    @GetMapping("/filter")
+    public List<Studente> getEtaLessThanEqual (@Nullable @RequestParam Integer etaMinima) {
+        return studenteService.getEtaGreaterThanEqual(etaMinima);
+    }
 
     @PostMapping
     public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
@@ -92,23 +110,6 @@ public class StudentController {
     public ResponseEntity<List<Studente>> trovaStudenteConSuffisso(){
         List<Studente> studenti = studenteService.trovaStudenteConSuffisso();
         return ResponseEntity.ok(studenti);
-    }
-
-    @GetMapping("/age-less-30")
-    public ResponseEntity<List<Studente>> ageLess30(){
-        Optional<List<Studente>> age = studenteService.ageLess30();
-
-        if(age.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(age.get());
-    }
-
-    @GetMapping("/by-age")
-    public ResponseEntity<List<Studente>> studentiConXEta(@RequestParam int age){
-        List<Studente> ageOfStudent = studenteService.studentiConXEta(age);
-        return ResponseEntity.ok(ageOfStudent);
     }
 
     @GetMapping("/suffisso-nome")
