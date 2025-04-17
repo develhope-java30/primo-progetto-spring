@@ -24,8 +24,10 @@ public class Classroom {
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Studente> students = new ArrayList<>();
 
+    // relazione inversa, proprietà di classrooms definisce la relazione principale
     @ManyToMany(mappedBy = "classrooms")
     @JsonIgnore
+    // lista vuota per i tutor associati ad una classroom
     private List<Tutor> tutors = new ArrayList<>();
 
     private Classroom(){}

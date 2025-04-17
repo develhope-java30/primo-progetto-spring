@@ -22,15 +22,20 @@ public class TutorService {
     @Autowired
     StudenteRepository studenteRepository;
 
-    public List<Tutor> getAllTutors(){
-      return  tutorRepository.findAll();
+    public List<Tutor> getAllTutors() {
+        return tutorRepository.findAll();
     }
 
-    public Optional<Tutor> getTutorById (Long id) {
+    public Optional<Tutor> getTutorById(Long id) {
         return tutorRepository.findById(id);
     }
 
-    public Tutor addTutor (Tutor tutor) {
-        return tutorRepository.save(tutor);
+    public Optional<Tutor> addTutor(Tutor tutor) {
+        if (tutor.getName() == null ||
+                tutor.getSurname() == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(tutorRepository.save(tutor));
     }
 }
