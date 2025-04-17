@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.Service;
 
+import com.example.primo_progetto_spring.Entity.Classroom;
 import com.example.primo_progetto_spring.Entity.Tutor;
 import com.example.primo_progetto_spring.repository.ClassroomRepository;
 import com.example.primo_progetto_spring.repository.StudenteRepository;
@@ -37,5 +38,22 @@ public class TutorService {
         }
 
         return Optional.of(tutorRepository.save(tutor));
+    }
+
+    // Assegnare un tutor ad una classe
+    public Optional<Tutor> getTutorToClassroom (Long tutorId, Long classroomId) {
+        Optional<Tutor> tutorOptional = tutorRepository.findById(tutorId);
+        Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
+
+        if (tutorOptional.isPresent() && classroomOptional.isPresent()) {
+            Tutor tutor = tutorOptional.get();
+            Classroom classroom = classroomOptional.get();
+
+            tutor.getClassrooms().add(classroom);
+
+            return Optional.of(tutorRepository.save(tutor));
+        }
+
+        return Optional.empty();
     }
 }

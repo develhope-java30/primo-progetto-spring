@@ -3,9 +3,8 @@ package com.example.primo_progetto_spring.Entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Tutor {
@@ -18,14 +17,14 @@ public class Tutor {
     private String email;
 
     @ManyToMany
-    @JoinTable(
-            //nome della tabella di appoggio per la relazione
-            name = "tutor_classroom",
-            // Join sulla colonna classroom_id
-            joinColumns = @JoinColumn(name = "classroom_id"),
-            // riferimento alla chiave primaria di Tutor nel join
-            inverseJoinColumns = @JoinColumn(name = "tutor_id")
-    )
+//    @JoinTable(
+//            //nome della tabella di appoggio per la relazione
+//            name = "tutor_classroom",
+//            // Join sulla colonna classroom_id
+//            joinColumns = @JoinColumn(name = "classroom_id"),
+//            // riferimento alla chiave primaria di Tutor nel join
+//            inverseJoinColumns = @JoinColumn(name = "tutor_id")
+//    )
     // lista vuota per le aule associate ad un tutor
     private List<Classroom> classrooms = new ArrayList<>();
 
