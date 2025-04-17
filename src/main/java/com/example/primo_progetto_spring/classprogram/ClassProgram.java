@@ -1,6 +1,7 @@
 package com.example.primo_progetto_spring.classprogram;
 
 import com.example.primo_progetto_spring.Entity.Classroom;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,7 +21,11 @@ public class ClassProgram {
     private LocalDate duration;
 
     @OneToMany(mappedBy = "classProgram", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Classroom> classrooms;
+
+    @OneToMany(mappedBy = "classProgram", cascade = CascadeType.ALL)
+    private List<TopicEntity> topicEntities;
 
     private ClassProgram(){}
 
@@ -68,6 +73,14 @@ public class ClassProgram {
 
     public void setClassrooms(List<Classroom> classrooms) {
         this.classrooms = classrooms;
+    }
+
+    public List<TopicEntity> getTopicEntities() {
+        return topicEntities;
+    }
+
+    public void setTopicEntities(List<TopicEntity> topicEntities) {
+        this.topicEntities = topicEntities;
     }
 
 }

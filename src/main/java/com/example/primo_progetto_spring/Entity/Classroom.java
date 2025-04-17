@@ -3,7 +3,6 @@ package com.example.primo_progetto_spring.Entity;
 import com.example.primo_progetto_spring.classprogram.ClassProgram;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +24,7 @@ public class Classroom {
 
     //Relazione One to many
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    private List<Studente> students = new ArrayList<>();
+    private List<Studente> students;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private ClassProgram classProgram;
