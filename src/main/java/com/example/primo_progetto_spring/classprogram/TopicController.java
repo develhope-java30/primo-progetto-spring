@@ -24,6 +24,17 @@ public class TopicController {
         return ResponseEntity.ok(addedTopic.get());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TopicEntity> updateTopic(@PathVariable Long id, @RequestBody TopicEntity topicToUpdate){
+        Optional<TopicEntity> updatedTopic = topicService.updateTopic(id, topicToUpdate);
+
+        if(updatedTopic.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(updatedTopic.get());
+    }
+
     @DeleteMapping
     public ResponseEntity<Void> deleteTopic(Long id){
         topicService.deleteTopicById(id);
