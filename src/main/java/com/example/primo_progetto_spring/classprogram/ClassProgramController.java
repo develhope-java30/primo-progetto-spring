@@ -1,7 +1,5 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.classprogram;
 
-import com.example.primo_progetto_spring.Entity.ClassProgram;
-import com.example.primo_progetto_spring.Service.ClassProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +29,7 @@ public class ClassProgramController {
         Optional<ClassProgram> updatedProgramSaved = classProgramService.updateProgram(id, programToUpdate);
 
         if(updatedProgramSaved.isEmpty()){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(updatedProgramSaved.get());
@@ -42,5 +40,16 @@ public class ClassProgramController {
         classProgramService.deleteProgramById(id);
         return ResponseEntity.noContent().build();
     }
-    
+
+    @PostMapping("/{programId}/classroom/{classId}")
+    public ResponseEntity<ClassProgram> assignProgramToClass(@PathVariable Long programId, @PathVariable Long classId){
+        Optional<ClassProgram> assignedProgram = classProgramService.assignProgramToClassroom(programId, classId);
+
+        if(assignedProgram.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(assignedProgram.get());
+    }
+
 }

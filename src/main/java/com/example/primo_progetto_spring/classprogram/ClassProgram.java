@@ -1,11 +1,10 @@
-package com.example.primo_progetto_spring.Entity;
+package com.example.primo_progetto_spring.classprogram;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.primo_progetto_spring.Entity.Classroom;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 //Implementare una nuova entity ClassProgram, che rappresenta il programma di un corso, strutturato in varie sezioni ed argomenti.
 //È possibile (e consigliato) utilizzare varie classi Entity per implementare la struttura delle tabelle.
@@ -19,6 +18,9 @@ public class ClassProgram {
     private String name;
     private String type;
     private LocalDate duration;
+
+    @OneToMany
+    private List<Classroom> classrooms;
 
     private ClassProgram(){}
 
@@ -40,6 +42,10 @@ public class ClassProgram {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getType() {
         return type;
     }
@@ -54,6 +60,14 @@ public class ClassProgram {
 
     public void setDuration(LocalDate duration) {
         this.duration = duration;
+    }
+
+    public List<Classroom> getClassrooms() {
+        return classrooms;
+    }
+
+    public void setClassrooms(List<Classroom> classrooms) {
+        this.classrooms = classrooms;
     }
 
 }

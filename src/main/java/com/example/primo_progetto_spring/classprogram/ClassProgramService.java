@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.Service;
+package com.example.primo_progetto_spring.classprogram;
 
-import com.example.primo_progetto_spring.Entity.ClassProgram;
-import com.example.primo_progetto_spring.repository.ClassProgramRepository;
+import com.example.primo_progetto_spring.Entity.Classroom;
+import com.example.primo_progetto_spring.repository.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class ClassProgramService {
     @Autowired ClassProgramRepository classProgramRepository;
+    @Autowired ClassroomRepository classroomRepository;
 
     public List<ClassProgram> allPrograms(){
        return classProgramRepository.findAll();
@@ -23,7 +24,7 @@ public class ClassProgramService {
 
     //Modificare un programma esistente
     public Optional<ClassProgram> updateProgram(Long id, ClassProgram programToUpdate){
-        if(classProgramRepository.existsById(id)){
+        if(!classProgramRepository.existsById(id)){
             return Optional.empty();
         }
 
@@ -38,5 +39,19 @@ public class ClassProgramService {
     //Assegnare un programma ad una classe
     //      Quest'operazione si può effettuare solo se alla classe non è ancora stato aggiunto alcuno studente.
     //      Modificare l'endpoint che aggiunge uno studente ad una classe verificando che alla classe sia già stato assegnato un corso, ritornando altrimenti un errore.
+    public Optional<ClassProgram> assignProgramToClassroom(Long programId, Long classroomId){
+        Optional<ClassProgram> classProgram = classProgramRepository.findById(programId);
+        Optional<Classroom> classroom = classroomRepository.findById(classroomId);
+
+        if(classProgram.isPresent() && classroom.isPresent() && classroom.get().getStudente().isEmpty()){
+                classroom.get().setId(classroomId);
+                classroom.get().setClassProgram(classProgram.get());
+
+                classroomRepository.save(classroom.get());
+                return Optional.of(classroom.get().getClassProgram());
+        }
+
+        return Optional.empty();
+    }
 
 }
