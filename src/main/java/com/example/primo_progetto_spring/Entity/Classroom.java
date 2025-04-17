@@ -17,6 +17,9 @@ public class Classroom {
     //MappedBy indica chi è il proprietario della relazione
     //CascadeType fa in modo che tutte le operazioni vengono propagate all'interno dell'entità associata / .ALL
     //FetchType fa in modo che Classroom non venga recuperata finché l'altra entità non la recuperi -- fetch = FetchType.LAZY
+
+    //nelle many to one il parametro mappedBy va inserito nella relazione inversa, cioè nella classe dove viene effettuata la
+    //OneToMany, in modo da non creare duplicati (righe, o addirittura tabelle).
     @ManyToOne(cascade = CascadeType.ALL)
     private Coordinator coordinator;
 

@@ -19,7 +19,7 @@ public class ClassProgram {
     private String type;
     private LocalDate duration;
 
-    @OneToMany
+    @OneToMany(mappedBy = "classProgram", cascade = CascadeType.ALL)
     private List<Classroom> classrooms;
 
     private ClassProgram(){}

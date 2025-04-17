@@ -1,6 +1,5 @@
 package com.example.primo_progetto_spring.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,9 +11,9 @@ public class Coordinator {
     private Long id;
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "coordinator", cascade = CascadeType.ALL)
     //JoinColumn specifica che c'è una relazione nel DB tramite una colonna, presente nella colonna ID di Classroom
-//  @JoinColumn(name = "classroomId")
+    //@JoinColumn(name = "classroomId")
     //JsonIgnore blocca la serializzazione quando un oggetto viene convertito in JSON
     //@JsonIgnore
     //questo campo rappresenta il riferimento all'istanza Classroom
