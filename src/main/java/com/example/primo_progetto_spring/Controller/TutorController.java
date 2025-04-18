@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Tutor;
 import com.example.primo_progetto_spring.Service.TutorService;
+import com.example.primo_progetto_spring.dto.AddTutorToClassroom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +27,14 @@ public class TutorController {
         return tutorService.addTutor(tutor);
     }
 
-    @PutMapping("/{tutorId}/add-tutor-to-classroom/{classroomId}")
-    public ResponseEntity<Tutor> getTutorToClassroom (@PathVariable Long tutorId, @PathVariable Long classroomId) {
+    @PutMapping("/{tutorId}/classrooms")
+    public ResponseEntity<Tutor> getTutorToClassroom (@PathVariable Long tutorId, @RequestBody AddTutorToClassroom data) {
 
-        return tutorService.getTutorToClassroom(tutorId, classroomId)
+        return tutorService.getTutorToClassroom(tutorId, data)
                 .map(ResponseEntity::ok)
                 .orElseGet(()-> ResponseEntity.badRequest().build());
     }
+
+//    @DeleteMapping("/{tutorId}/classrooms")
+//    public ResponseEntity<Tutor>
 }

@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Classroom;
 import com.example.primo_progetto_spring.Entity.Tutor;
+import com.example.primo_progetto_spring.dto.AddTutorToClassroom;
 import com.example.primo_progetto_spring.repository.ClassroomRepository;
 import com.example.primo_progetto_spring.repository.StudenteRepository;
 import com.example.primo_progetto_spring.repository.TutorRepository;
@@ -41,9 +42,9 @@ public class TutorService {
     }
 
     // Assegnare un tutor ad una classe
-    public Optional<Tutor> getTutorToClassroom (Long tutorId, Long classroomId) {
+    public Optional<Tutor> getTutorToClassroom (Long tutorId, AddTutorToClassroom classroomId) {
         Optional<Tutor> tutorOptional = tutorRepository.findById(tutorId);
-        Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
+        Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId.getClassroomId());
 
         if (tutorOptional.isPresent() && classroomOptional.isPresent()) {
             Tutor tutor = tutorOptional.get();
@@ -56,4 +57,25 @@ public class TutorService {
 
         return Optional.empty();
     }
+
+    // Rimuovere un tutor da una classe
+    public Optional<Tutor> removeTutorFromClassroom (Long tutorId, AddTutorToClassroom data) {
+        Optional<Tutor> tutorOptional = tutorRepository.findById(tutorId);
+        Optional<Classroom> classroomOptional = classroomRepository.findById(data.getClassroomId());
+
+        if (tutorOptional.isPresent() && classroomOptional.isPresent()) {
+            Tutor tutor = tutorOptional.get();
+            Classroom classroom = classroomOptional.get();
+
+            tutor.getClassrooms().remove(classroom);
+
+            return Optional.of(tutorRepository.save(tutor));
+        }
+        return Optional.empty();
+    }
+
+//    // Elencare i tutor assegnati ad una classe
+//    public List<Tutor> getTutorByClassroom (Long classroomId) {
+//        return tutorRepository.findByClassroomTutorId(classroomId);
+//    }
 }
