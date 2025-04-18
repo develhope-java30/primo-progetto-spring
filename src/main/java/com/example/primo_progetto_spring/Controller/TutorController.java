@@ -35,6 +35,10 @@ public class TutorController {
                 .orElseGet(()-> ResponseEntity.badRequest().build());
     }
 
-//    @DeleteMapping("/{tutorId}/classrooms")
-//    public ResponseEntity<Tutor>
+    @DeleteMapping("/{tutorId}/classrooms")
+    public ResponseEntity<Tutor> removeTutorFromClassroom (@PathVariable Long tutorId, @RequestBody AddTutorToClassroom data) {
+        return tutorService.removeTutorFromClassroom(tutorId, data)
+                .map(ResponseEntity::ok)
+                .orElseGet(()-> ResponseEntity.badRequest().build());
+    }
 }
