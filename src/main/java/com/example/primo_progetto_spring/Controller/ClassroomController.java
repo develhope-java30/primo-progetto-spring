@@ -21,10 +21,15 @@ public class ClassroomController {
     }
 
     @PutMapping("/{classroomId}/add-student/{studentId}")
-    public ResponseEntity<Classroom> addStudentToClassroom(@PathVariable Long classroomId, @PathVariable Long studentId){
-        return classroomService.addStudentToClassroom(classroomId, studentId)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    //wildcard generica di Java, Il punto interrogativo rappresenta un tipo generico sconosciuto e accetta più tipi di oggetti.
+    public ResponseEntity<?> addStudentToClassroom(@PathVariable Long classroomId, @PathVariable Long studentId){
+        try {
+            return classroomService.addStudentToClassroom(classroomId, studentId)
+                    .map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/{classroomId}")
