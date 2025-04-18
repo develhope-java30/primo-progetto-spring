@@ -42,8 +42,8 @@ public class TopicController {
     }
 
     @PostMapping("/{topicId}/program/{programId}")
-    public ResponseEntity<TopicEntity> assignTopicToProgram(@PathVariable Long topicId, @PathVariable Long programId){
-        Optional<TopicEntity> assignedTopic = topicService.assignTopicToProgram(topicId, programId);
+    public ResponseEntity<ClassProgram> assignTopicToProgram(@PathVariable Long topicId, @PathVariable Long programId){
+        Optional<ClassProgram> assignedTopic = topicService.assignTopicToProgram(topicId, programId);
 
         if(assignedTopic.isEmpty()){
             ResponseEntity.badRequest().build();

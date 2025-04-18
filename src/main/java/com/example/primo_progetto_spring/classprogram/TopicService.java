@@ -36,13 +36,18 @@ public class TopicService {
     }
 
     //assegnazione topic al programma
-    public Optional<TopicEntity> assignTopicToProgram(Long topicId, Long programId){
+    public Optional<ClassProgram> assignTopicToProgram(Long topicId, Long programId){
         Optional<TopicEntity> topic = topicRepository.findById(topicId);
         Optional<ClassProgram> program = classProgramRepository.findById(programId);
 
         if(topic.isPresent() && program.isPresent()){
-            topic.get().setClassProgram(program.get());
-            return Optional.of(topicRepository.save(topic.get()));
+            TopicEntity topicToAssign = topic.get();
+            ClassProgram programToAssign = program.get();
+
+//            topic.get().setClassProgram(program.get());
+            programToAssign.getTopicEntities().add(topicToAssign);
+
+            return Optional.of(classProgramRepository.save(programToAssign));
         }
 
         return Optional.empty();

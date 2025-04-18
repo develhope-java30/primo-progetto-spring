@@ -12,10 +12,6 @@ public class TopicEntity {
     private String name;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
-    private ClassProgram classProgram;
-
     private TopicEntity(){}
 
     public TopicEntity(String name, String description) {
@@ -45,14 +41,6 @@ public class TopicEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ClassProgram getClassProgram() {
-        return classProgram;
-    }
-
-    public void setClassProgram(ClassProgram classProgram) {
-        this.classProgram = classProgram;
     }
 
 }

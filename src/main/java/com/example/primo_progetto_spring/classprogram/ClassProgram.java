@@ -24,7 +24,7 @@ public class ClassProgram {
     @JsonIgnore
     private List<Classroom> classrooms;
 
-    @OneToMany(mappedBy = "classProgram", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<TopicEntity> topicEntities;
 
     private ClassProgram(){}
