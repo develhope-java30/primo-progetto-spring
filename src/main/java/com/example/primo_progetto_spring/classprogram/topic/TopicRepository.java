@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.classprogram;
+package com.example.primo_progetto_spring.classprogram.topic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,5 +1,6 @@
-package com.example.primo_progetto_spring.classprogram;
+package com.example.primo_progetto_spring.classprogram.topic;
 
+import com.example.primo_progetto_spring.classprogram.ClassProgram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

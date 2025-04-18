@@ -1,5 +1,7 @@
-package com.example.primo_progetto_spring.classprogram;
+package com.example.primo_progetto_spring.classprogram.topic;
 
+import com.example.primo_progetto_spring.classprogram.ClassProgram;
+import com.example.primo_progetto_spring.classprogram.ClassProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,8 @@ import java.util.Optional;
 @Service
 public class TopicService {
     @Autowired TopicRepository topicRepository;
-    @Autowired ClassProgramRepository classProgramRepository;
+    @Autowired
+    ClassProgramRepository classProgramRepository;
 
     public List<TopicEntity> allTopics(){
         return topicRepository.findAll();
