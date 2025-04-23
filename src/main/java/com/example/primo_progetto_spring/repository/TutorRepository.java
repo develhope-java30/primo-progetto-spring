@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface TutorRepository extends JpaRepository<Tutor, Long> {
     List<Tutor> findByName (String name);
-
 }

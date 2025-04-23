@@ -40,7 +40,9 @@ public class StudenteService {
     }
 
     public Optional<Studente> addStudente(Studente studente) {
-        if (studente.getNome() == null || studente.getCognome() == null) {
+        if (studente.getNome() == null ||
+                studente.getCognome() == null ||
+                studente.getData() == null) {
             return Optional.empty();
         }
 

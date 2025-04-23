@@ -2,9 +2,10 @@ package com.example.primo_progetto_spring.Controller;
 
 import com.example.primo_progetto_spring.Entity.Studente;
 import com.example.primo_progetto_spring.Service.StudenteService;
-import com.example.primo_progetto_spring.repository.StudenteRepository;
+import com.example.primo_progetto_spring.component.StudentiTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,9 @@ public class StudentController {
 
     @Autowired
     StudenteService studenteService;
+
+    @Autowired
+    private StudentiTestPopulator studentiTestPopulator;
 
     public StudentController(StudenteService studenteService) {
         this.studenteService = studenteService;
@@ -117,4 +121,9 @@ public class StudentController {
         return ResponseEntity.ok(studenteService.prefissoNome());
     }
 
+    @PostMapping("/sample")
+    @ResponseStatus(HttpStatus.OK)
+    public void addSampleStudents() {
+        studentiTestPopulator.addSampleStudents();
+    }
 }
