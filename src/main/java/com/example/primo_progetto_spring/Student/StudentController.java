@@ -127,16 +127,17 @@ public class StudentController {
     }
 
     @GetMapping("/paginated")
-    public ResponseEntity<Page<Studente>> allStudentsPaginated(@RequestParam String search,
-                                               @RequestParam int page,
-                                               @RequestParam int length,
-                                               @RequestParam boolean sort){
+    public ResponseEntity<Page<Studente>> allStudentsPaginated(
+                                               @RequestParam(required = false, defaultValue = "nome") String search,
+                                               @RequestParam(required = false, defaultValue = "0") int page,
+                                               @RequestParam(required = false, defaultValue = "30") int length,
+                                               @RequestParam(required = false, defaultValue = "true") boolean sort){
 
         if(search.equals("nome") || search.equals("cognome") || search.equals("data") || search.equals("codiceFiscale")){
             return ResponseEntity.ok(studenteService.studentePaginated(search, page, length, sort));
         }
-        return ResponseEntity.badRequest().build();
 
+        return ResponseEntity.badRequest().build();
     }
 
 }
