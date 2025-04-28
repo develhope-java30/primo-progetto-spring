@@ -1,6 +1,7 @@
 package com.example.primo_progetto_spring.Entity;
 
 import com.example.primo_progetto_spring.classprogram.ClassProgram;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,6 +29,12 @@ public class Classroom {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private ClassProgram classProgram;
+
+    // relazione inversa, proprietà di classrooms definisce la relazione principale
+    @ManyToMany(mappedBy = "classrooms")
+    @JsonIgnore
+    // lista vuota per i tutor associati ad una classroom
+    private List<Tutor> tutors = new ArrayList<>();
 
     private Classroom(){}
 
@@ -75,4 +82,11 @@ public class Classroom {
         return students;
     }
 
+    public List<Tutor> getTutors() {
+        return tutors;
+    }
+
+    public void setTutors(List<Tutor> tutors) {
+        this.tutors = tutors;
+    }
 }
