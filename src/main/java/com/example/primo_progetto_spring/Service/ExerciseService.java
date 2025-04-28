@@ -1,12 +1,11 @@
 package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
-import com.example.primo_progetto_spring.Entity.Studente;
+import com.example.primo_progetto_spring.Student.Studente;
 import com.example.primo_progetto_spring.repository.ExerciseRepository;
-import com.example.primo_progetto_spring.repository.StudenteRepository;
+import com.example.primo_progetto_spring.Student.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 

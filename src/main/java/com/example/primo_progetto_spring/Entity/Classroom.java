@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.Entity;
 
+import com.example.primo_progetto_spring.Student.Studente;
 import com.example.primo_progetto_spring.classprogram.ClassProgram;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -34,7 +35,7 @@ public class Classroom {
     @ManyToMany(mappedBy = "classrooms")
     @JsonIgnore
     // lista vuota per i tutor associati ad una classroom
-    private List<Tutor> tutors = new ArrayList<>();
+    private List<Tutor> tutors;
 
     private Classroom(){}
 

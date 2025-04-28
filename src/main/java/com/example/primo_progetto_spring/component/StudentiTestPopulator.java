@@ -1,7 +1,7 @@
 package com.example.primo_progetto_spring.component;
 
-import com.example.primo_progetto_spring.Entity.Studente;
-import com.example.primo_progetto_spring.Service.StudenteService;
+import com.example.primo_progetto_spring.Student.Studente;
+import com.example.primo_progetto_spring.Student.StudenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

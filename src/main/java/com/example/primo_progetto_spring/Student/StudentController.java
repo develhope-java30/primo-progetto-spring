@@ -1,7 +1,5 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.Student;
 
-import com.example.primo_progetto_spring.Entity.Studente;
-import com.example.primo_progetto_spring.Service.StudenteService;
 import com.example.primo_progetto_spring.component.StudentiTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;

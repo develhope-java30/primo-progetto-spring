@@ -1,9 +1,9 @@
 package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Classroom;
-import com.example.primo_progetto_spring.Entity.Studente;
+import com.example.primo_progetto_spring.Student.Studente;
 import com.example.primo_progetto_spring.repository.ClassroomRepository;
-import com.example.primo_progetto_spring.repository.StudenteRepository;
+import com.example.primo_progetto_spring.Student.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

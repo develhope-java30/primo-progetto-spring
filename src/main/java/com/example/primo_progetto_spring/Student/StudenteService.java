@@ -1,12 +1,9 @@
-package com.example.primo_progetto_spring.Service;
+package com.example.primo_progetto_spring.Student;
 
-import com.example.primo_progetto_spring.Entity.Studente;
-import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
