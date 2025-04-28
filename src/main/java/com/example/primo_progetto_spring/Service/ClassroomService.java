@@ -24,11 +24,15 @@ public class ClassroomService {
         return classroomRepository.save(classroom);
     }
 
-    public Optional<Classroom> addStudentToClassroom(Long classroomId, Long studentId) {
+    public Optional<Classroom> addStudentToClassroom(Long classroomId, Long studentId) throws Exception {
         Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
         Optional<Studente> studenteOptional = studenteRepository.findById(studentId);
 
         if (studenteOptional.isPresent() && classroomOptional.isPresent()) {
+            if(classroomOptional.get().getClassProgram() == null){
+                throw new Exception("Nessun corso assegnato a questa classe! Impossibile aggiungere lo studente!");
+            }
+
             Studente studente = studenteOptional.get();
             studente.setClassroom(classroomOptional.get());
             studenteRepository.save(studente);
