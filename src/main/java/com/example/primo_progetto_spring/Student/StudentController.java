@@ -3,6 +3,7 @@ package com.example.primo_progetto_spring.Student;
 import com.example.primo_progetto_spring.component.StudentiTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -124,4 +125,18 @@ public class StudentController {
     public void addSampleStudents() {
         studentiTestPopulator.addSampleStudents();
     }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<Studente>> allStudentsPaginated(@RequestParam String search,
+                                               @RequestParam int page,
+                                               @RequestParam int length,
+                                               @RequestParam boolean sort){
+
+        if(search.equals("nome") || search.equals("cognome") || search.equals("data") || search.equals("codiceFiscale")){
+            return ResponseEntity.ok(studenteService.studentePaginated(search, page, length, sort));
+        }
+        return ResponseEntity.badRequest().build();
+
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.example.primo_progetto_spring.Student;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +16,7 @@ public interface StudenteRepository extends JpaRepository<Studente, Long>{
     List<Studente> findByNomeStartingWith(String prefisso);
 
     List<Studente> findByDataLessThanEqual(LocalDate dataMinima);
+
+    Page<Studente> findAll(Pageable pageable);
+
 }

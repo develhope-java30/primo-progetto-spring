@@ -1,6 +1,10 @@
 package com.example.primo_progetto_spring.Student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -155,6 +159,21 @@ public class StudenteService {
             }
         }
         return studentiAll;
+    }
+
+    //
+    public Page<Studente> studentePaginated(String search, int page, int length, boolean sort){
+        Sort sorted;
+
+        if(sort){
+            sorted = Sort.by(search).ascending();
+        }else{
+            sorted = Sort.by(search).descending();
+        }
+
+        Pageable pagination = PageRequest.of(page, length, sorted);
+
+        return studenteRepository.findAll(pagination);
     }
 
 }
