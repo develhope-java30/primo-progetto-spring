@@ -60,9 +60,9 @@ public class TopicController {
 
     @GetMapping("/pageable-sorting")
     public ResponseEntity<List<TopicEntity>> getAllTopics(@RequestParam(required = false) String name,
-                                          @RequestParam int page,
-                                          @RequestParam int size,
-                                          @RequestParam(defaultValue = "asc") boolean ascending) {
+                                                          @RequestParam(required = false) Integer page,
+                                                          @RequestParam(required = false) Integer size,
+                                                          @RequestParam(defaultValue = "true", required = false) boolean ascending) {
 
         Sort sort;
         if (ascending) {
@@ -71,9 +71,14 @@ public class TopicController {
             sort = Sort.by("name").descending();
         }
 
-        Pageable pageable = PageRequest.of(page, size, sort);
+        List<TopicEntity> topics;
+        if (page != null && size != null) {
+            Pageable pageable = PageRequest.of(page, size, sort);
+            topics = topicService.getAllTopics(pageable);
+        } else {
+            topics = topicService.allTopics();
+        }
 
-        List<TopicEntity> topics = topicService.getAllTopics(pageable);
         return ResponseEntity.ok(topics);
     }
 

@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface TopicRepository extends JpaRepository<TopicEntity, Long> {
-//    List<TopicEntity> findAllTopics (Pageable pageable);
+//    List<TopicEntity> findAll (Pageable pageable);
 }
