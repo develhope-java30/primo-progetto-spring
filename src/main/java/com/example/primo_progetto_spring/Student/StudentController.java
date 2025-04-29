@@ -4,6 +4,8 @@ import com.example.primo_progetto_spring.component.StudentiTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -128,16 +130,22 @@ public class StudentController {
 
     @GetMapping("/paginated")
     public ResponseEntity<Page<Studente>> allStudentsPaginated(
-                                               @RequestParam(required = false, defaultValue = "nome") String search,
+                                               @RequestParam(required = false) Optional<String> sortKey,
                                                @RequestParam(required = false, defaultValue = "0") int page,
                                                @RequestParam(required = false, defaultValue = "30") int length,
-                                               @RequestParam(required = false, defaultValue = "true") boolean sort){
+                                               @RequestParam(required = false, defaultValue = "true") boolean ascending){
 
-        if(search.equals("nome") || search.equals("cognome") || search.equals("data") || search.equals("codiceFiscale")){
-            return ResponseEntity.ok(studenteService.studentePaginated(search, page, length, sort));
+        Sort sorted = sortKey
+                .map(Sort::by)
+                .map((config) -> ascending ? config.ascending() : config.descending())
+                .orElse(Sort.unsorted());
+
+        try{
+            return ResponseEntity.ok(studenteService.studentePaginated(sorted, page, length));
+        }catch (PropertyReferenceException e){
+            return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.badRequest().build();
     }
 
 }

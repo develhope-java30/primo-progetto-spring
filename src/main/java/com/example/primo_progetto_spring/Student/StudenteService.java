@@ -162,15 +162,7 @@ public class StudenteService {
     }
 
     //
-    public Page<Studente> studentePaginated(String search, int page, int length, boolean sort){
-        Sort sorted;
-
-        if(sort){
-            sorted = Sort.by(search).ascending();
-        }else{
-            sorted = Sort.by(search).descending();
-        }
-
+    public Page<Studente> studentePaginated(Sort sorted, int page, int length){
         Pageable pagination = PageRequest.of(page, length, sorted);
 
         return studenteRepository.findAll(pagination);

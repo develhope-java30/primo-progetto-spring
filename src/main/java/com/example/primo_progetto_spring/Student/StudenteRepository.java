@@ -17,6 +17,4 @@ public interface StudenteRepository extends JpaRepository<Studente, Long>{
 
     List<Studente> findByDataLessThanEqual(LocalDate dataMinima);
 
-    Page<Studente> findAll(Pageable pageable);
-
 }
