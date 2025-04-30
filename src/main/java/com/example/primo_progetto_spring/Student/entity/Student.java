@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.Student;
+package com.example.primo_progetto_spring.Student.entity;
 
 
-import com.example.primo_progetto_spring.Entity.Classroom;
+import com.example.primo_progetto_spring.Classroom.entity.Classroom;
 import com.example.primo_progetto_spring.Entity.Exercise;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Studente {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,15 +28,15 @@ public class Studente {
     // relazione uno a molti, uno studente può avere più esercizi assegnati,
     // "student" si riferisce esattamente al nome del campo nella classe Exercise, non la colonna nel database.
     // cascade = quando si elimina uno studente vengono eliminati anche tutti gli esercizi a lui assegnati
-    @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     // evita cicli infiniti
     @JsonIgnore
     private List<Exercise> exercises;
 
-    public Studente() {
+    public Student() {
     }
 
-    public Studente(Long id, String nome, String cognome, LocalDate data, String codiceFiscale) {
+    public Student(Long id, String nome, String cognome, LocalDate data, String codiceFiscale) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;

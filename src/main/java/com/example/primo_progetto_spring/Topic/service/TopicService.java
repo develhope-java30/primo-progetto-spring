@@ -1,7 +1,9 @@
-package com.example.primo_progetto_spring.classprogram.topic;
+package com.example.primo_progetto_spring.Topic.service;
 
-import com.example.primo_progetto_spring.classprogram.ClassProgram;
-import com.example.primo_progetto_spring.classprogram.ClassProgramRepository;
+import com.example.primo_progetto_spring.Classprogram.entity.ClassProgram;
+import com.example.primo_progetto_spring.Classprogram.repository.ClassProgramRepository;
+import com.example.primo_progetto_spring.Topic.entity.TopicEntity;
+import com.example.primo_progetto_spring.Topic.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,8 @@ import java.util.Optional;
 
 @Service
 public class TopicService {
-    @Autowired TopicRepository topicRepository;
+    @Autowired
+    TopicRepository topicRepository;
     @Autowired
     ClassProgramRepository classProgramRepository;
 

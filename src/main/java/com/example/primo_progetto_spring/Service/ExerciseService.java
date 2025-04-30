@@ -1,9 +1,9 @@
 package com.example.primo_progetto_spring.Service;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
-import com.example.primo_progetto_spring.Student.Studente;
+import com.example.primo_progetto_spring.Student.entity.Student;
 import com.example.primo_progetto_spring.repository.ExerciseRepository;
-import com.example.primo_progetto_spring.Student.StudenteRepository;
+import com.example.primo_progetto_spring.Student.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,21 +29,21 @@ public class ExerciseService {
 
     public Optional<Exercise> addExerciseToStudent(Long exerciseId, Long studentId, Integer voto){
         Optional<Exercise> exerciseOptional = exerciseRepository.findById(exerciseId);
-        Optional<Studente> studenteOptional = studenteRepository.findById(studentId);
+        Optional<Student> studenteOptional = studenteRepository.findById(studentId);
 
         if (exerciseOptional.isPresent() && studenteOptional.isPresent()) {
-            Studente studente = studenteOptional.get();
+            Student student = studenteOptional.get();
             Exercise exercise = exerciseOptional.get();
 
-            exercise.setStudente(studente);
+            exercise.setStudente(student);
 
             // imposta il voto
             if (voto != null) {
                 exercise.setVoto(voto);
             }
 
-            studente.getExercises().add(exerciseRepository.save(exercise));
-            studenteRepository.save(studente);
+            student.getExercises().add(exerciseRepository.save(exercise));
+            studenteRepository.save(student);
 
             return Optional.of(exerciseRepository.save(exercise));
         }
@@ -57,28 +57,28 @@ public class ExerciseService {
 
     //Esercizi consegnati da un determinato studente
     public Optional<List<Exercise>> findByStudente(Long id){
-       Optional<Studente> idFound = studenteRepository.findById(id);
+       Optional<Student> idFound = studenteRepository.findById(id);
 
        if(idFound.isEmpty()){
            return Optional.empty();
        }
 
-        return Optional.of(exerciseRepository.findByStudente(idFound.get()));
+        return Optional.of(exerciseRepository.findByStudent(idFound.get()));
     }
 
     //Esercizi il cui voto è superiore a quello preso in media dallo studente.
     public List<Exercise> votoAboveAverage(Long id){
         //cerco lo studente con quell'id e lo associo ad idFound
-        Optional<Studente> idFound = studenteRepository.findById(id);
+        Optional<Student> idFound = studenteRepository.findById(id);
         //nel caso non dovessi trovare lo studente ritorno una lista vuota
         if(idFound.isEmpty()){
             return Collections.emptyList();
         }
 
         //assegno tutti gli esercizi dello studente con ID ad una lista
-        List<Exercise> listOfExerciseByStudentID = exerciseRepository.findByStudente(idFound.get());
+        List<Exercise> listOfExerciseByStudentID = exerciseRepository.findByStudent(idFound.get());
         //conto quanti esercizi ha effettuato lo studente
-        Long totalExercise = exerciseRepository.countByStudente_Id(id);
+        Long totalExercise = exerciseRepository.countByStudent_Id(id);
         Long sumOfVoti = 0L;
 
         //ciclo tutti gli esercizi in modo da prendere tutti i voti e sommarli per fare la media

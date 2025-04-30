@@ -1,6 +1,6 @@
 package com.example.primo_progetto_spring.Entity;
 
-import com.example.primo_progetto_spring.Student.Studente;
+import com.example.primo_progetto_spring.Student.entity.Student;
 import jakarta.persistence.*;
 
 //Aggiungere una nuova entità "Exercise", definita da id, id dello studente, consegna (stringa) e voto (intero).
@@ -14,7 +14,7 @@ public class Exercise {
     @ManyToOne
     //Join sull'Id dello studente
     @JoinColumn(name = "student_Id")
-    private Studente studente;
+    private Student student;
 
     private String consegna;
     private Integer voto;
@@ -22,9 +22,9 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(Long id, Studente studente, String consegna, Integer voto) {
+    public Exercise(Long id, Student student, String consegna, Integer voto) {
         this.id = id;
-        this.studente = studente;
+        this.student = student;
         this.consegna = consegna;
         this.voto = voto;
     }
@@ -37,12 +37,12 @@ public class Exercise {
         this.id = id;
     }
 
-    public Studente getStudente() {
-        return studente;
+    public Student getStudente() {
+        return student;
     }
 
-    public void setStudente(Studente studente) {
-        this.studente = studente;
+    public void setStudente(Student student) {
+        this.student = student;
     }
 
     public String getConsegna() {

@@ -1,7 +1,7 @@
 package com.example.primo_progetto_spring.component;
 
-import com.example.primo_progetto_spring.Student.Studente;
-import com.example.primo_progetto_spring.Student.StudenteService;
+import com.example.primo_progetto_spring.Student.entity.Student;
+import com.example.primo_progetto_spring.Student.service.StudenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ public class StudentiTestPopulator {
     StudenteService studenteService;
 
     public void addSampleStudents () {
-        List<Studente> studenti = new ArrayList<>();
+        List<Student> studenti = new ArrayList<>();
 
         // Array di esempi per generare dati realistici
         String[] nomi = {"Mario", "Luigi", "Giulia", "Francesca", "Carlo", "Anna", "Marco", "Sara", "Giorgio", "Luca", "Gino", "Vincent", "Fabiana", "Ciro", "Assunta", "Elvira"};
@@ -35,14 +35,14 @@ public class StudentiTestPopulator {
             );
 
             // Creazione dello studente
-            Studente studente = new Studente(
+            Student student = new Student(
                     null, // l'ID sarà generato automaticamente
                     nome,
                     cognome,
                     dataDiNascita,
                     null // codiceFiscale è opzionale e quindi lasciato null
             );
-            studenteService.addStudente(studente);
+            studenteService.addStudente(student);
         }
     }
 }

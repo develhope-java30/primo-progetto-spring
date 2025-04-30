@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.classprogram.topic;
+package com.example.primo_progetto_spring.Topic.entity;
 
 import jakarta.persistence.*;
 

@@ -1,5 +1,6 @@
-package com.example.primo_progetto_spring.Entity;
+package com.example.primo_progetto_spring.Coordinator;
 
+import com.example.primo_progetto_spring.Classroom.entity.Classroom;
 import jakarta.persistence.*;
 
 import java.util.List;

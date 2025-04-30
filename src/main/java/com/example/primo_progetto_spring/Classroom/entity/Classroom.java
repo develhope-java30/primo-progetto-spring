@@ -1,7 +1,9 @@
-package com.example.primo_progetto_spring.Entity;
+package com.example.primo_progetto_spring.Classroom.entity;
 
-import com.example.primo_progetto_spring.Student.Studente;
-import com.example.primo_progetto_spring.classprogram.ClassProgram;
+import com.example.primo_progetto_spring.Coordinator.Coordinator;
+import com.example.primo_progetto_spring.Entity.Tutor;
+import com.example.primo_progetto_spring.Student.entity.Student;
+import com.example.primo_progetto_spring.Classprogram.entity.ClassProgram;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -26,7 +28,7 @@ public class Classroom {
 
     //Relazione One to many
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    private List<Studente> students;
+    private List<Student> students;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private ClassProgram classProgram;
@@ -75,11 +77,11 @@ public class Classroom {
         this.name = name;
     }
 
-    public void setStudents(List<Studente> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public List<Studente> getStudente() {
+    public List<Student> getStudente() {
         return students;
     }
 

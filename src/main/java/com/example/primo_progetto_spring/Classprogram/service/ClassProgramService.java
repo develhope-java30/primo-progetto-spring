@@ -1,7 +1,9 @@
-package com.example.primo_progetto_spring.classprogram;
+package com.example.primo_progetto_spring.Classprogram.service;
 
-import com.example.primo_progetto_spring.Entity.Classroom;
-import com.example.primo_progetto_spring.repository.ClassroomRepository;
+import com.example.primo_progetto_spring.Classprogram.entity.ClassProgram;
+import com.example.primo_progetto_spring.Classprogram.repository.ClassProgramRepository;
+import com.example.primo_progetto_spring.Classroom.entity.Classroom;
+import com.example.primo_progetto_spring.Classroom.repository.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,8 @@ import java.util.Optional;
 
 @Service
 public class ClassProgramService {
-    @Autowired ClassProgramRepository classProgramRepository;
+    @Autowired
+    ClassProgramRepository classProgramRepository;
     @Autowired ClassroomRepository classroomRepository;
 
     public List<ClassProgram> allPrograms(){

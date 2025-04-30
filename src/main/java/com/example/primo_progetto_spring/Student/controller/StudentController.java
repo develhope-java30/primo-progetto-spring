@@ -1,5 +1,7 @@
-package com.example.primo_progetto_spring.Student;
+package com.example.primo_progetto_spring.Student.controller;
 
+import com.example.primo_progetto_spring.Student.service.StudenteService;
+import com.example.primo_progetto_spring.Student.entity.Student;
 import com.example.primo_progetto_spring.component.StudentiTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,28 +30,28 @@ public class StudentController {
     }
 
     @GetMapping("/all")
-    public List<Studente> findAll () {
+    public List<Student> findAll () {
        return studenteService.findAll();
     }
 
     @GetMapping
-    public List<Studente> getStudenti(@Nullable @RequestParam String nome) {
+    public List<Student> getStudenti(@Nullable @RequestParam String nome) {
             return studenteService.getStudenti(nome);
     }
 
     @GetMapping("/prefisso")
-    public List<Studente> getNomeStartingWith (@Nullable @RequestParam String prefisso) {
+    public List<Student> getNomeStartingWith (@Nullable @RequestParam String prefisso) {
         return studenteService.getNomeStartingWith(prefisso);
     }
 
     @GetMapping("/filter")
-    public List<Studente> getEtaLessThanEqual (@Nullable @RequestParam Integer etaMinima) {
+    public List<Student> getEtaLessThanEqual (@Nullable @RequestParam Integer etaMinima) {
         return studenteService.getEtaGreaterThanEqual(etaMinima);
     }
 
     @PostMapping
-    public ResponseEntity<Studente> addStudente(@RequestBody Studente studente) {
-        Optional<Studente> studentSaved = studenteService.addStudente(studente);
+    public ResponseEntity<Student> addStudente(@RequestBody Student student) {
+        Optional<Student> studentSaved = studenteService.addStudente(student);
 
         return studentSaved.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -57,12 +59,12 @@ public class StudentController {
     }
 
     @GetMapping("/codiceFiscale")
-    public ResponseEntity<Studente> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale) {
+    public ResponseEntity<Student> getStudentePerCodiceFiscale(@RequestParam String codiceFiscale) {
         if (codiceFiscale == null || codiceFiscale.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
-        Optional<Studente> studenteTrovato = studenteService.findStudenteByTaxCode(codiceFiscale);
+        Optional<Student> studenteTrovato = studenteService.findStudenteByTaxCode(codiceFiscale);
 
         if (studenteTrovato.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -72,7 +74,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Studente> findById(@PathVariable Long id) {
+    public ResponseEntity<Student> findById(@PathVariable Long id) {
 
         return studenteService.findById(id)
                 .map(ResponseEntity::ok)
@@ -90,12 +92,12 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Studente> updateStudente(@PathVariable Long id, @RequestBody Studente updateStudente){
+    public ResponseEntity<Student> updateStudente(@PathVariable Long id, @RequestBody Student updateStudent){
         if(id < 0){
             return ResponseEntity.badRequest().build();
         }
 
-        Optional<Studente> studentUpdate = studenteService.updateStudent(id, updateStudente);
+        Optional<Student> studentUpdate = studenteService.updateStudent(id, updateStudent);
         if (studentUpdate.isPresent()) {
             return ResponseEntity.ok(studentUpdate.get());
         } else {
@@ -104,7 +106,7 @@ public class StudentController {
     }
 
     @GetMapping("/con-prefisso")
-    public ResponseEntity<Studente> trovaStudenteConPrefisso() {
+    public ResponseEntity<Student> trovaStudenteConPrefisso() {
 
         return studenteService.trovaStudenteConPrefisso()
                 .map(ResponseEntity::ok)
@@ -112,13 +114,13 @@ public class StudentController {
     }
 
     @GetMapping("/con-suffisso")
-    public ResponseEntity<List<Studente>> trovaStudenteConSuffisso(){
-        List<Studente> studenti = studenteService.trovaStudenteConSuffisso();
+    public ResponseEntity<List<Student>> trovaStudenteConSuffisso(){
+        List<Student> studenti = studenteService.trovaStudenteConSuffisso();
         return ResponseEntity.ok(studenti);
     }
 
     @GetMapping("/suffisso-nome")
-    public ResponseEntity<List<Studente>> suffissoNome(){
+    public ResponseEntity<List<Student>> suffissoNome(){
         return ResponseEntity.ok(studenteService.prefissoNome());
     }
 
@@ -129,7 +131,7 @@ public class StudentController {
     }
 
     @GetMapping("/paginated")
-    public ResponseEntity<Page<Studente>> allStudentsPaginated(
+    public ResponseEntity<Page<Student>> allStudentsPaginated(
                                                @RequestParam(required = false) Optional<String> sortKey,
                                                @RequestParam(required = false, defaultValue = "0") int page,
                                                @RequestParam(required = false, defaultValue = "30") int length,

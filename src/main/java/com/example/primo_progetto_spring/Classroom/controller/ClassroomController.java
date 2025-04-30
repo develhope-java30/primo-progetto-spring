@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.Classroom.controller;
 
-import com.example.primo_progetto_spring.Entity.Classroom;
-import com.example.primo_progetto_spring.Service.ClassroomService;
+import com.example.primo_progetto_spring.Classroom.service.ClassroomService;
+import com.example.primo_progetto_spring.Classroom.entity.Classroom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

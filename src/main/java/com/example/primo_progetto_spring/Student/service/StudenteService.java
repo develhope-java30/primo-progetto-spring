@@ -1,5 +1,7 @@
-package com.example.primo_progetto_spring.Student;
+package com.example.primo_progetto_spring.Student.service;
 
+import com.example.primo_progetto_spring.Student.repository.StudenteRepository;
+import com.example.primo_progetto_spring.Student.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,22 +19,22 @@ public class StudenteService {
     @Autowired
     private StudenteRepository studenteRepository;
 
-    private List<Studente> studenti = new ArrayList<>();
+    private List<Student> studenti = new ArrayList<>();
 
-    public List<Studente> findAll () {
+    public List<Student> findAll () {
        return studenteRepository.findAll();
     }
 
-    public List<Studente> getStudenti(String nome) {
+    public List<Student> getStudenti(String nome) {
         return studenteRepository.findByNome(nome);
     }
 
-    public List<Studente> getNomeStartingWith (String prefisso) {
+    public List<Student> getNomeStartingWith (String prefisso) {
 
         return studenteRepository.findByNomeStartingWith(prefisso);
     }
 
-    public List<Studente> getEtaGreaterThanEqual (Integer etaMinima) {
+    public List<Student> getEtaGreaterThanEqual (Integer etaMinima) {
         LocalDate now = LocalDate.now();
         LocalDate dataMax = now.minusYears(etaMinima);
 
@@ -40,22 +42,22 @@ public class StudenteService {
 
     }
 
-    public Optional<Studente> addStudente(Studente studente) {
-        if (studente.getNome() == null ||
-                studente.getCognome() == null ||
-                studente.getData() == null) {
+    public Optional<Student> addStudente(Student student) {
+        if (student.getNome() == null ||
+                student.getCognome() == null ||
+                student.getData() == null) {
             return Optional.empty();
         }
 
-        return Optional.of(studenteRepository.save(studente));
+        return Optional.of(studenteRepository.save(student));
     }
 
-    public Optional<Studente> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
-        for (Studente studente : studenti) {
-            String cFStudente = studente.getCodiceFiscale();
+    public Optional<Student> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
+        for (Student student : studenti) {
+            String cFStudente = student.getCodiceFiscale();
             if (cFStudente.equals(codiceFiscaleDaRicercare)) {
 
-                return Optional.of(studente);
+                return Optional.of(student);
             }
         }
         return Optional.empty();
@@ -70,31 +72,31 @@ public class StudenteService {
         }
     }
 
-    public Optional<Studente> findById(Long id) {
+    public Optional<Student> findById(Long id) {
 
         return studenteRepository.findById(id);
     }
 
-    public Optional<Studente> updateStudent(Long id, Studente studente){
+    public Optional<Student> updateStudent(Long id, Student student){
       if(!studenteRepository.existsById(id)){
           return Optional.empty();
       }
 
-      studente.setId(id);
-      return Optional.of(studenteRepository.save(studente));
+      student.setId(id);
+      return Optional.of(studenteRepository.save(student));
     }
 
-    public Optional<Studente> trovaStudenteConPrefisso(){
-        List<Studente> allStudents = studenteRepository.findAll();
+    public Optional<Student> trovaStudenteConPrefisso(){
+        List<Student> allStudents = studenteRepository.findAll();
 
         //confronta gli studenti
         for (int i = 0; i < allStudents.size(); i++) {
-            Studente studente1 = allStudents.get(i);
-            String nome1 = studente1.getNome();
+            Student student1 = allStudents.get(i);
+            String nome1 = student1.getNome();
 
             for (int j = 0; j < allStudents.size(); j++) {
 
-                Studente studente2 = allStudents.get(j);
+                Student student2 = allStudents.get(j);
                 if (i == j) {
                     continue;
                 }
@@ -103,7 +105,7 @@ public class StudenteService {
 
                 //nome 2 è prefisso di nome1
                 if (nome2.startsWith(nome1)){
-                    return Optional.of(studente2);
+                    return Optional.of(student2);
                 }
 
             }
@@ -112,24 +114,24 @@ public class StudenteService {
     }
 
     // Implementare un endpoint che ritorni gli studenti il cui nome è suffisso del cognome di un altro studente
-    public List<Studente> trovaStudenteConSuffisso(){
-        List<Studente> allStudent = studenteRepository.findAll();
-        List<Studente> studentiTrovati = new ArrayList<>();
+    public List<Student> trovaStudenteConSuffisso(){
+        List<Student> allStudent = studenteRepository.findAll();
+        List<Student> studentiTrovati = new ArrayList<>();
 
         for (int i = 0; i < allStudent.size() ; i++) {
-            Studente studente1 = allStudent.get(i);
-            String nome1 = studente1.getNome().toLowerCase();
+            Student student1 = allStudent.get(i);
+            String nome1 = student1.getNome().toLowerCase();
 
             for (int j = 0; j < allStudent.size() ; j++) {
-                Studente studente2 = allStudent.get(j);
-                String cognome2 = studente2.getCognome().toLowerCase();
+                Student student2 = allStudent.get(j);
+                String cognome2 = student2.getCognome().toLowerCase();
 
                 if (i == j){
                     continue;
                 }
 
                 if (cognome2.endsWith(nome1)){
-                    studentiTrovati.add(studente2);
+                    studentiTrovati.add(student2);
                 }
             }
         }
@@ -137,24 +139,24 @@ public class StudenteService {
     }
 
     //Implementare un endpoint che ritorni gli studenti il cui cognome è prefisso del nome di un altro studente
-    public List<Studente> prefissoNome(){
-        List<Studente> prefissoList = studenteRepository.findAll();
-        List<Studente> studentiAll = new ArrayList<>();
+    public List<Student> prefissoNome(){
+        List<Student> prefissoList = studenteRepository.findAll();
+        List<Student> studentiAll = new ArrayList<>();
 
         for(int i = 0; i < prefissoList.size(); i++){
-            Studente studente1 = prefissoList.get(i);
-            String cognome1 = studente1.getCognome().toLowerCase();
+            Student student1 = prefissoList.get(i);
+            String cognome1 = student1.getCognome().toLowerCase();
 
             for(int y = 0; y < prefissoList.size(); y++){
-                Studente studente2 = prefissoList.get(y);
-                String nome2 = studente2.getNome().toLowerCase();
+                Student student2 = prefissoList.get(y);
+                String nome2 = student2.getNome().toLowerCase();
 
                 if(i == y){
                     continue;
                 }
 
                 if(nome2.startsWith(cognome1)){
-                    studentiAll.add(studente1);
+                    studentiAll.add(student1);
                 }
             }
         }
@@ -162,7 +164,7 @@ public class StudenteService {
     }
 
     //
-    public Page<Studente> studentePaginated(Sort sorted, int page, int length){
+    public Page<Student> studentePaginated(Sort sorted, int page, int length){
         Pageable pagination = PageRequest.of(page, length, sorted);
 
         return studenteRepository.findAll(pagination);

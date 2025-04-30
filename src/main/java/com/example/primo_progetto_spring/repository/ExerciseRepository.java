@@ -1,7 +1,7 @@
 package com.example.primo_progetto_spring.repository;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
-import com.example.primo_progetto_spring.Student.Studente;
+import com.example.primo_progetto_spring.Student.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +12,8 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     List<Exercise> findByVoto(Integer voto);
 
-    List<Exercise> findByStudente(Studente studente);
+    List<Exercise> findByStudent(Student student);
 
-    Long countByStudente_Id(Long id);
+    Long countByStudent_Id(Long id);
 
 }

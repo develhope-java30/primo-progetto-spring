@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.classprogram;
+package com.example.primo_progetto_spring.Classprogram.entity;
 
-import com.example.primo_progetto_spring.Entity.Classroom;
-import com.example.primo_progetto_spring.classprogram.topic.TopicEntity;
+import com.example.primo_progetto_spring.Classroom.entity.Classroom;
+import com.example.primo_progetto_spring.Topic.entity.TopicEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 

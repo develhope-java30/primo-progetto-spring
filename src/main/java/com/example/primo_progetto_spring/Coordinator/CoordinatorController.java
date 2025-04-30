@@ -1,7 +1,5 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.Coordinator;
 
-import com.example.primo_progetto_spring.Entity.Coordinator;
-import com.example.primo_progetto_spring.Service.CoordinatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

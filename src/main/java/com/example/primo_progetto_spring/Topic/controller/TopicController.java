@@ -1,6 +1,8 @@
-package com.example.primo_progetto_spring.classprogram.topic;
+package com.example.primo_progetto_spring.Topic.controller;
 
-import com.example.primo_progetto_spring.classprogram.ClassProgram;
+import com.example.primo_progetto_spring.Classprogram.entity.ClassProgram;
+import com.example.primo_progetto_spring.Topic.service.TopicService;
+import com.example.primo_progetto_spring.Topic.entity.TopicEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 

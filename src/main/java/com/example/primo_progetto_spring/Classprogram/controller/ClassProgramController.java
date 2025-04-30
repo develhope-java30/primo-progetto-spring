@@ -1,5 +1,7 @@
-package com.example.primo_progetto_spring.classprogram;
+package com.example.primo_progetto_spring.Classprogram.controller;
 
+import com.example.primo_progetto_spring.Classprogram.service.ClassProgramService;
+import com.example.primo_progetto_spring.Classprogram.entity.ClassProgram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +12,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/program")
 public class ClassProgramController {
-    @Autowired ClassProgramService classProgramService;
+    @Autowired
+    ClassProgramService classProgramService;
 
     @GetMapping
     public List<ClassProgram> allPrograms(){
