@@ -1,7 +1,7 @@
 package com.example.primo_progetto_spring.repository;
 
 import com.example.primo_progetto_spring.Entity.Exercise;
-import com.example.primo_progetto_spring.Entity.Studente;
+import com.example.primo_progetto_spring.Student.Studente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

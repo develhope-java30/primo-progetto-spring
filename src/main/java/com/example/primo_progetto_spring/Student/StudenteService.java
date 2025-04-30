@@ -1,12 +1,13 @@
-package com.example.primo_progetto_spring.Service;
+package com.example.primo_progetto_spring.Student;
 
-import com.example.primo_progetto_spring.Entity.Studente;
-import com.example.primo_progetto_spring.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -158,6 +159,13 @@ public class StudenteService {
             }
         }
         return studentiAll;
+    }
+
+    //
+    public Page<Studente> studentePaginated(Sort sorted, int page, int length){
+        Pageable pagination = PageRequest.of(page, length, sorted);
+
+        return studenteRepository.findAll(pagination);
     }
 
 }
