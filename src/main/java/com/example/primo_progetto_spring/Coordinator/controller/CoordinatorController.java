@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.Coordinator.controller;
 
-import com.example.primo_progetto_spring.Entity.Coordinator;
-import com.example.primo_progetto_spring.Service.CoordinatorService;
+import com.example.primo_progetto_spring.Coordinator.entity.Coordinator;
+import com.example.primo_progetto_spring.Coordinator.service.CoordinatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/coordinator")
 public class CoordinatorController {
-    @Autowired CoordinatorService coordinatorService;
+    @Autowired
+    CoordinatorService coordinatorService;
 
     @GetMapping
     public List<Coordinator> allCoordinator(){
