@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.Entity;
 
+import com.example.primo_progetto_spring.Coordinator.entity.Coordinator;
 import com.example.primo_progetto_spring.Student.Studente;
 import com.example.primo_progetto_spring.classprogram.ClassProgram;
 import com.example.primo_progetto_spring.Tutor.entity.Tutor;

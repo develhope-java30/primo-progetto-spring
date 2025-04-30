@@ -1,9 +1,9 @@
-package com.example.primo_progetto_spring.Service;
+package com.example.primo_progetto_spring.Coordinator.service;
 
+import com.example.primo_progetto_spring.Coordinator.entity.Coordinator;
+import com.example.primo_progetto_spring.Coordinator.repository.CoordinatorRepository;
 import com.example.primo_progetto_spring.Entity.Classroom;
-import com.example.primo_progetto_spring.Entity.Coordinator;
 import com.example.primo_progetto_spring.repository.ClassroomRepository;
-import com.example.primo_progetto_spring.repository.CoordinatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
