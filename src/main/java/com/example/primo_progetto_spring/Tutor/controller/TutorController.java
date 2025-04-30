@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.Tutor.controller;
 
-import com.example.primo_progetto_spring.Entity.Tutor;
-import com.example.primo_progetto_spring.Service.TutorService;
+import com.example.primo_progetto_spring.Tutor.service.TutorService;
+import com.example.primo_progetto_spring.Tutor.entity.Tutor;
 import com.example.primo_progetto_spring.dto.AddTutorToClassroom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

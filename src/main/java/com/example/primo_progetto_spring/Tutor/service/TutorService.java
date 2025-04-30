@@ -1,11 +1,11 @@
-package com.example.primo_progetto_spring.Service;
+package com.example.primo_progetto_spring.Tutor.service;
 
 import com.example.primo_progetto_spring.Entity.Classroom;
-import com.example.primo_progetto_spring.Entity.Tutor;
+import com.example.primo_progetto_spring.Tutor.entity.Tutor;
+import com.example.primo_progetto_spring.Tutor.repository.TutorRepository;
 import com.example.primo_progetto_spring.dto.AddTutorToClassroom;
 import com.example.primo_progetto_spring.repository.ClassroomRepository;
 import com.example.primo_progetto_spring.Student.StudenteRepository;
-import com.example.primo_progetto_spring.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
