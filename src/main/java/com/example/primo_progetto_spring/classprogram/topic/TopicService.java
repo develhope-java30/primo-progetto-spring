@@ -3,6 +3,7 @@ package com.example.primo_progetto_spring.classprogram.topic;
 import com.example.primo_progetto_spring.classprogram.ClassProgram;
 import com.example.primo_progetto_spring.classprogram.ClassProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,6 +55,10 @@ public class TopicService {
         }
 
         return Optional.empty();
+    }
+
+    public List<TopicEntity> getAllTopics (Pageable pageable) {
+        return topicRepository.findAll(pageable).getContent();
     }
 
 }
