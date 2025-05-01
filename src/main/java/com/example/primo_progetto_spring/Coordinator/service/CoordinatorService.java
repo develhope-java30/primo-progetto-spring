@@ -1,7 +1,12 @@
-package com.example.primo_progetto_spring.Coordinator;
+package com.example.primo_progetto_spring.Coordinator.service;
 
 import com.example.primo_progetto_spring.Classroom.entity.Classroom;
 import com.example.primo_progetto_spring.Classroom.repository.ClassroomRepository;
+
+
+import com.example.primo_progetto_spring.Coordinator.entity.Coordinator;
+
+import com.example.primo_progetto_spring.Coordinator.repository.CoordinatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

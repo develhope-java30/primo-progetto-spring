@@ -1,8 +1,8 @@
-package com.example.primo_progetto_spring.Service;
+package com.example.primo_progetto_spring.Exercise.service;
 
-import com.example.primo_progetto_spring.Entity.Exercise;
+import com.example.primo_progetto_spring.Exercise.entity.Exercise;
+import com.example.primo_progetto_spring.Exercise.repository.ExerciseRepository;
 import com.example.primo_progetto_spring.Student.entity.Student;
-import com.example.primo_progetto_spring.repository.ExerciseRepository;
 import com.example.primo_progetto_spring.Student.repository.StudenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

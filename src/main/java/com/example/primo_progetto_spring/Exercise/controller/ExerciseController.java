@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.Controller;
+package com.example.primo_progetto_spring.Exercise.controller;
 
-import com.example.primo_progetto_spring.Entity.Exercise;
-import com.example.primo_progetto_spring.Service.ExerciseService;
+import com.example.primo_progetto_spring.Exercise.service.ExerciseService;
+import com.example.primo_progetto_spring.Exercise.entity.Exercise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

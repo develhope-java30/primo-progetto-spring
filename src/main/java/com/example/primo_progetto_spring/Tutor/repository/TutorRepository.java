@@ -1,6 +1,6 @@
-package com.example.primo_progetto_spring.repository;
+package com.example.primo_progetto_spring.Tutor.repository;
 
-import com.example.primo_progetto_spring.Entity.Tutor;
+import com.example.primo_progetto_spring.Tutor.entity.Tutor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

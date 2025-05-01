@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.Entity;
+package com.example.primo_progetto_spring.Exercise.entity;
 
 import com.example.primo_progetto_spring.Student.entity.Student;
 import jakarta.persistence.*;

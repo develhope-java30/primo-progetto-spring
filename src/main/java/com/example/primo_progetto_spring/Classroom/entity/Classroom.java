@@ -1,9 +1,10 @@
 package com.example.primo_progetto_spring.Classroom.entity;
 
-import com.example.primo_progetto_spring.Coordinator.Coordinator;
-import com.example.primo_progetto_spring.Entity.Tutor;
-import com.example.primo_progetto_spring.Student.entity.Student;
+import com.example.primo_progetto_spring.Coordinator.entity.Coordinator;
+
 import com.example.primo_progetto_spring.Classprogram.entity.ClassProgram;
+import com.example.primo_progetto_spring.Student.entity.Student;
+import com.example.primo_progetto_spring.Tutor.entity.Tutor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 

@@ -2,7 +2,7 @@ package com.example.primo_progetto_spring.Student.entity;
 
 
 import com.example.primo_progetto_spring.Classroom.entity.Classroom;
-import com.example.primo_progetto_spring.Entity.Exercise;
+import com.example.primo_progetto_spring.Exercise.entity.Exercise;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
