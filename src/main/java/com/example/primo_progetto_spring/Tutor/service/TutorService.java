@@ -1,11 +1,14 @@
 package com.example.primo_progetto_spring.Tutor.service;
 
-import com.example.primo_progetto_spring.Entity.Classroom;
+
+import com.example.primo_progetto_spring.Classroom.entity.Classroom;
+import com.example.primo_progetto_spring.Classroom.repository.ClassroomRepository;
+import com.example.primo_progetto_spring.Student.repository.StudentRepository;
 import com.example.primo_progetto_spring.Tutor.entity.Tutor;
 import com.example.primo_progetto_spring.Tutor.repository.TutorRepository;
 import com.example.primo_progetto_spring.dto.AddTutorToClassroom;
-import com.example.primo_progetto_spring.repository.ClassroomRepository;
-import com.example.primo_progetto_spring.Student.StudenteRepository;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +25,7 @@ public class TutorService {
     ClassroomRepository classroomRepository;
 
     @Autowired
-    StudenteRepository studenteRepository;
+    StudentRepository studentRepository;
 
     public List<Tutor> getAllTutors() {
         return tutorRepository.findAll();
