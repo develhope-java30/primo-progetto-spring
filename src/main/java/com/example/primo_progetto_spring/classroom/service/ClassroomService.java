@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.classroom.service;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.classroom.repository.ClassroomRepository;
+import com.example.primo_progetto_spring.errors.NotAssignedCourseException;
 import com.example.primo_progetto_spring.student.entity.Student;
 import com.example.primo_progetto_spring.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class ClassroomService {
         return classroomRepository.save(classroom);
     }
 
-    public Optional<Classroom> addStudentToClassroom(Long classroomId, Long studentId) throws Exception {
+    public Optional<Classroom> addStudentToClassroom(Long classroomId, Long studentId) {
         Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
         Optional<Student> studenteOptional = studentRepository.findById(studentId);
 
         if (studenteOptional.isPresent() && classroomOptional.isPresent()) {
             if(classroomOptional.get().getClassProgram() == null){
-                throw new Exception("Nessun corso assegnato a questa classe! Impossibile aggiungere lo studente!");
+                throw new NotAssignedCourseException(classroomId);
             }
 
             Student student = studenteOptional.get();
