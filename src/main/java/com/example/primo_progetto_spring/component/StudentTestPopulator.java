@@ -1,7 +1,7 @@
 package com.example.primo_progetto_spring.component;
 
 import com.example.primo_progetto_spring.Student.entity.Student;
-import com.example.primo_progetto_spring.Student.service.StudenteService;
+import com.example.primo_progetto_spring.Student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class StudentiTestPopulator {
+public class StudentTestPopulator {
 
     @Autowired
-    StudenteService studenteService;
+    StudentService studentService;
 
     public void addSampleStudents () {
         List<Student> studenti = new ArrayList<>();
@@ -42,7 +42,7 @@ public class StudentiTestPopulator {
                     dataDiNascita,
                     null // codiceFiscale è opzionale e quindi lasciato null
             );
-            studenteService.addStudente(student);
+            studentService.addStudente(student);
         }
     }
 }

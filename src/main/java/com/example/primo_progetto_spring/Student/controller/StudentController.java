@@ -1,8 +1,8 @@
 package com.example.primo_progetto_spring.Student.controller;
 
-import com.example.primo_progetto_spring.Student.service.StudenteService;
+import com.example.primo_progetto_spring.Student.service.StudentService;
 import com.example.primo_progetto_spring.Student.entity.Student;
-import com.example.primo_progetto_spring.component.StudentiTestPopulator;
+import com.example.primo_progetto_spring.component.StudentTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,38 +20,38 @@ import java.util.*;
 public class StudentController {
 
     @Autowired
-    StudenteService studenteService;
+    StudentService studentService;
 
     @Autowired
-    private StudentiTestPopulator studentiTestPopulator;
+    private StudentTestPopulator studentTestPopulator;
 
-    public StudentController(StudenteService studenteService) {
-        this.studenteService = studenteService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("/all")
     public List<Student> findAll () {
-       return studenteService.findAll();
+       return studentService.findAll();
     }
 
     @GetMapping
     public List<Student> getStudenti(@Nullable @RequestParam String nome) {
-            return studenteService.getStudenti(nome);
+            return studentService.getStudenti(nome);
     }
 
     @GetMapping("/prefisso")
     public List<Student> getNomeStartingWith (@Nullable @RequestParam String prefisso) {
-        return studenteService.getNomeStartingWith(prefisso);
+        return studentService.getNomeStartingWith(prefisso);
     }
 
     @GetMapping("/filter")
     public List<Student> getEtaLessThanEqual (@Nullable @RequestParam Integer etaMinima) {
-        return studenteService.getEtaGreaterThanEqual(etaMinima);
+        return studentService.getEtaGreaterThanEqual(etaMinima);
     }
 
     @PostMapping
     public ResponseEntity<Student> addStudente(@RequestBody Student student) {
-        Optional<Student> studentSaved = studenteService.addStudente(student);
+        Optional<Student> studentSaved = studentService.addStudente(student);
 
         return studentSaved.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -64,7 +64,7 @@ public class StudentController {
             return ResponseEntity.badRequest().build();
         }
 
-        Optional<Student> studenteTrovato = studenteService.findStudenteByTaxCode(codiceFiscale);
+        Optional<Student> studenteTrovato = studentService.findStudenteByTaxCode(codiceFiscale);
 
         if (studenteTrovato.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -76,7 +76,7 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<Student> findById(@PathVariable Long id) {
 
-        return studenteService.findById(id)
+        return studentService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -84,7 +84,7 @@ public class StudentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeByID(@PathVariable Long id) {
         try {
-            studenteService.removeByID(id);
+            studentService.removeByID(id);
             return ResponseEntity.noContent().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -97,7 +97,7 @@ public class StudentController {
             return ResponseEntity.badRequest().build();
         }
 
-        Optional<Student> studentUpdate = studenteService.updateStudent(id, updateStudent);
+        Optional<Student> studentUpdate = studentService.updateStudent(id, updateStudent);
         if (studentUpdate.isPresent()) {
             return ResponseEntity.ok(studentUpdate.get());
         } else {
@@ -108,26 +108,26 @@ public class StudentController {
     @GetMapping("/con-prefisso")
     public ResponseEntity<Student> trovaStudenteConPrefisso() {
 
-        return studenteService.trovaStudenteConPrefisso()
+        return studentService.trovaStudenteConPrefisso()
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/con-suffisso")
     public ResponseEntity<List<Student>> trovaStudenteConSuffisso(){
-        List<Student> studenti = studenteService.trovaStudenteConSuffisso();
+        List<Student> studenti = studentService.trovaStudenteConSuffisso();
         return ResponseEntity.ok(studenti);
     }
 
     @GetMapping("/suffisso-nome")
     public ResponseEntity<List<Student>> suffissoNome(){
-        return ResponseEntity.ok(studenteService.prefissoNome());
+        return ResponseEntity.ok(studentService.prefissoNome());
     }
 
     @PostMapping("/sample")
     @ResponseStatus(HttpStatus.OK)
     public void addSampleStudents() {
-        studentiTestPopulator.addSampleStudents();
+        studentTestPopulator.addSampleStudents();
     }
 
     @GetMapping("/paginated")
@@ -143,7 +143,7 @@ public class StudentController {
                 .orElse(Sort.unsorted());
 
         try{
-            return ResponseEntity.ok(studenteService.studentePaginated(sorted, page, length));
+            return ResponseEntity.ok(studentService.studentePaginated(sorted, page, length));
         }catch (PropertyReferenceException e){
             return ResponseEntity.badRequest().build();
         }

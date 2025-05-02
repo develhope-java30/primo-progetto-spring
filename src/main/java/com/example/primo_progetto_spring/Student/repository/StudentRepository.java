@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface StudenteRepository extends JpaRepository<Student, Long>{
+public interface StudentRepository extends JpaRepository<Student, Long>{
 
     List<Student> findByNome (String nome);
 

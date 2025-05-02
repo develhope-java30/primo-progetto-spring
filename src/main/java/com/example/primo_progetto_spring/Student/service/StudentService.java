@@ -1,6 +1,6 @@
 package com.example.primo_progetto_spring.Student.service;
 
-import com.example.primo_progetto_spring.Student.repository.StudenteRepository;
+import com.example.primo_progetto_spring.Student.repository.StudentRepository;
 import com.example.primo_progetto_spring.Student.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,30 +15,30 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudenteService {
+public class StudentService {
     @Autowired
-    private StudenteRepository studenteRepository;
+    private StudentRepository studentRepository;
 
     private List<Student> studenti = new ArrayList<>();
 
     public List<Student> findAll () {
-       return studenteRepository.findAll();
+       return studentRepository.findAll();
     }
 
     public List<Student> getStudenti(String nome) {
-        return studenteRepository.findByNome(nome);
+        return studentRepository.findByNome(nome);
     }
 
     public List<Student> getNomeStartingWith (String prefisso) {
 
-        return studenteRepository.findByNomeStartingWith(prefisso);
+        return studentRepository.findByNomeStartingWith(prefisso);
     }
 
     public List<Student> getEtaGreaterThanEqual (Integer etaMinima) {
         LocalDate now = LocalDate.now();
         LocalDate dataMax = now.minusYears(etaMinima);
 
-        return studenteRepository.findByDataLessThanEqual(dataMax);
+        return studentRepository.findByDataLessThanEqual(dataMax);
 
     }
 
@@ -49,7 +49,7 @@ public class StudenteService {
             return Optional.empty();
         }
 
-        return Optional.of(studenteRepository.save(student));
+        return Optional.of(studentRepository.save(student));
     }
 
     public Optional<Student> findStudenteByTaxCode(String codiceFiscaleDaRicercare) {
@@ -66,7 +66,7 @@ public class StudenteService {
 
     public void removeByID(Long id) {
         try {
-            studenteRepository.deleteById(id);
+            studentRepository.deleteById(id);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("ID non valido!");
         }
@@ -74,20 +74,20 @@ public class StudenteService {
 
     public Optional<Student> findById(Long id) {
 
-        return studenteRepository.findById(id);
+        return studentRepository.findById(id);
     }
 
     public Optional<Student> updateStudent(Long id, Student student){
-      if(!studenteRepository.existsById(id)){
+      if(!studentRepository.existsById(id)){
           return Optional.empty();
       }
 
       student.setId(id);
-      return Optional.of(studenteRepository.save(student));
+      return Optional.of(studentRepository.save(student));
     }
 
     public Optional<Student> trovaStudenteConPrefisso(){
-        List<Student> allStudents = studenteRepository.findAll();
+        List<Student> allStudents = studentRepository.findAll();
 
         //confronta gli studenti
         for (int i = 0; i < allStudents.size(); i++) {
@@ -115,7 +115,7 @@ public class StudenteService {
 
     // Implementare un endpoint che ritorni gli studenti il cui nome è suffisso del cognome di un altro studente
     public List<Student> trovaStudenteConSuffisso(){
-        List<Student> allStudent = studenteRepository.findAll();
+        List<Student> allStudent = studentRepository.findAll();
         List<Student> studentiTrovati = new ArrayList<>();
 
         for (int i = 0; i < allStudent.size() ; i++) {
@@ -140,7 +140,7 @@ public class StudenteService {
 
     //Implementare un endpoint che ritorni gli studenti il cui cognome è prefisso del nome di un altro studente
     public List<Student> prefissoNome(){
-        List<Student> prefissoList = studenteRepository.findAll();
+        List<Student> prefissoList = studentRepository.findAll();
         List<Student> studentiAll = new ArrayList<>();
 
         for(int i = 0; i < prefissoList.size(); i++){
@@ -167,7 +167,7 @@ public class StudenteService {
     public Page<Student> studentePaginated(Sort sorted, int page, int length){
         Pageable pagination = PageRequest.of(page, length, sorted);
 
-        return studenteRepository.findAll(pagination);
+        return studentRepository.findAll(pagination);
     }
 
 }

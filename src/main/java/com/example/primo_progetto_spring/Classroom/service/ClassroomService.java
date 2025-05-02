@@ -3,7 +3,7 @@ package com.example.primo_progetto_spring.Classroom.service;
 import com.example.primo_progetto_spring.Classroom.entity.Classroom;
 import com.example.primo_progetto_spring.Classroom.repository.ClassroomRepository;
 import com.example.primo_progetto_spring.Student.entity.Student;
-import com.example.primo_progetto_spring.Student.repository.StudenteRepository;
+import com.example.primo_progetto_spring.Student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ClassroomService {
 
     //aggiunto autowired per allocare la classe Studente
     @Autowired
-    private StudenteRepository studenteRepository;
+    private StudentRepository studentRepository;
 
     public Classroom createClassroom(Classroom classroom) {
         return classroomRepository.save(classroom);
@@ -26,7 +26,7 @@ public class ClassroomService {
 
     public Optional<Classroom> addStudentToClassroom(Long classroomId, Long studentId) throws Exception {
         Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
-        Optional<Student> studenteOptional = studenteRepository.findById(studentId);
+        Optional<Student> studenteOptional = studentRepository.findById(studentId);
 
         if (studenteOptional.isPresent() && classroomOptional.isPresent()) {
             if(classroomOptional.get().getClassProgram() == null){
@@ -35,7 +35,7 @@ public class ClassroomService {
 
             Student student = studenteOptional.get();
             student.setClassroom(classroomOptional.get());
-            studenteRepository.save(student);
+            studentRepository.save(student);
             return classroomRepository.findById(classroomId);
         } else {
             return Optional.empty();
