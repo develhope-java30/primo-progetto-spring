@@ -2,7 +2,7 @@ package com.example.primo_progetto_spring.Student.controller;
 
 import com.example.primo_progetto_spring.Student.service.StudentService;
 import com.example.primo_progetto_spring.Student.entity.Student;
-import com.example.primo_progetto_spring.component.StudentTestPopulator;
+import com.example.primo_progetto_spring.Student.component.StudentTestPopulator;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

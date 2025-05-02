@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.dto;
+package com.example.primo_progetto_spring.Tutor.dto;
 
 
 public class AddTutorToClassroom {

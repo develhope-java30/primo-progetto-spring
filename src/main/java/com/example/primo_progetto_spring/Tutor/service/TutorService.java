@@ -6,7 +6,7 @@ import com.example.primo_progetto_spring.Classroom.repository.ClassroomRepositor
 import com.example.primo_progetto_spring.Student.repository.StudentRepository;
 import com.example.primo_progetto_spring.Tutor.entity.Tutor;
 import com.example.primo_progetto_spring.Tutor.repository.TutorRepository;
-import com.example.primo_progetto_spring.dto.AddTutorToClassroom;
+import com.example.primo_progetto_spring.Tutor.dto.AddTutorToClassroom;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.component;
+package com.example.primo_progetto_spring.Student.component;
 
 import com.example.primo_progetto_spring.Student.entity.Student;
 import com.example.primo_progetto_spring.Student.service.StudentService;
