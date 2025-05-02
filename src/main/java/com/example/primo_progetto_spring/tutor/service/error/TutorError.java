@@ -10,11 +10,11 @@ public class TutorError {
     private String message;
     private String field;
 
-    public TutorError(int statusCode, LocalDateTime timestamp, String message, String description) {
+    public TutorError(int statusCode, LocalDateTime timestamp, String message, String field) {
         this.statusCode = statusCode;
         this.timestamp = timestamp;
         this.message = message;
-        this.field = description;
+        this.field = field;
     }
 
     public int getStatusCode() {
