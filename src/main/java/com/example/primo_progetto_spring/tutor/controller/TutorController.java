@@ -22,13 +22,18 @@ public class TutorController {
         return tutorService.getAllTutors();
     }
 
+//    @PostMapping
+//    public ResponseEntity<?> addTutor(@RequestBody Tutor tutor) {
+//        try {
+//            return ResponseEntity.ok(tutorService.addTutor(tutor));
+//        }catch (MissingFieldMandatoryException e){
+//            return ResponseEntity.badRequest().body(e);
+//        }
+//    }
+
     @PostMapping
-    public ResponseEntity<?> addTutor (@RequestBody Tutor tutor) {
-        try {
-            return ResponseEntity.ok(tutorService.addTutor(tutor));
-        }catch (MissingFieldMandatoryException e){
-            return ResponseEntity.badRequest().body(e);
-        }
+    public ResponseEntity<Tutor> addTutor(@RequestBody Tutor tutor) {
+        return ResponseEntity.ok(tutorService.addTutor(tutor).orElseThrow());
     }
 
     @PutMapping("/{tutorId}/classrooms")

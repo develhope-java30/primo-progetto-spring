@@ -38,11 +38,11 @@ public class TutorService {
 
     public Optional<Tutor> addTutor(Tutor tutor) throws MissingFieldMandatoryException {
         if (tutor.getName() == null || tutor.getName().isEmpty()) {
-            throw new MissingFieldMandatoryException(tutor.getName());
+            throw new MissingFieldMandatoryException("name");
         }
 
         if(tutor.getSurname() == null || tutor.getSurname().isEmpty()) {
-            throw new MissingFieldMandatoryException(tutor.getSurname());
+            throw new MissingFieldMandatoryException("surname");
         }
 
         return Optional.of(tutorRepository.save(tutor));
