@@ -13,7 +13,8 @@ public class NotAssignedCourseException extends RuntimeException{
         this.classroomId = classRoomId;
     }
 
-    //@JsonProperty("message"): Indica che il metodo getMessage() deve essere serializzato con il nome message,
+    //@JsonProperty("message"): Indica che il metodo getMessage()
+    // deve essere serializzato con il nome message,
     // sovrascrivendo il comportamento predefinito di RuntimeException.
     @JsonProperty("message")
     @Override

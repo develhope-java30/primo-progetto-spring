@@ -5,6 +5,7 @@ import com.example.primo_progetto_spring.classprogram.repository.ClassProgramRep
 import com.example.primo_progetto_spring.topic.entity.TopicEntity;
 import com.example.primo_progetto_spring.topic.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -60,8 +61,8 @@ public class TopicService {
         return Optional.empty();
     }
 
-    public List<TopicEntity> getAllTopics (Pageable pageable) {
-        return topicRepository.findAll(pageable).getContent();
+    public Page<TopicEntity> getAllTopics (Pageable pageable) {
+        return topicRepository.findAll(pageable);
     }
 
 }
