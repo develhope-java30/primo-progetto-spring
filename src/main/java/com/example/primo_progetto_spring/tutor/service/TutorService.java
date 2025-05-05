@@ -3,6 +3,7 @@ package com.example.primo_progetto_spring.tutor.service;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.classroom.repository.ClassroomRepository;
+import com.example.primo_progetto_spring.tutor.service.error.MissingFieldMandatoryException;
 import com.example.primo_progetto_spring.student.repository.StudentRepository;
 import com.example.primo_progetto_spring.tutor.entity.Tutor;
 import com.example.primo_progetto_spring.tutor.repository.TutorRepository;
@@ -35,10 +36,13 @@ public class TutorService {
         return tutorRepository.findById(id);
     }
 
-    public Optional<Tutor> addTutor(Tutor tutor) {
-        if (tutor.getName() == null ||
-                tutor.getSurname() == null) {
-            return Optional.empty();
+    public Optional<Tutor> addTutor(Tutor tutor) throws MissingFieldMandatoryException {
+        if (tutor.getName() == null || tutor.getName().isEmpty()) {
+            throw new MissingFieldMandatoryException("name");
+        }
+
+        if(tutor.getSurname() == null || tutor.getSurname().isEmpty()) {
+            throw new MissingFieldMandatoryException("surname");
         }
 
         return Optional.of(tutorRepository.save(tutor));

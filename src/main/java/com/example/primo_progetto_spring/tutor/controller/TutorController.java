@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.tutor.controller;
 
+import com.example.primo_progetto_spring.tutor.service.error.MissingFieldMandatoryException;
 import com.example.primo_progetto_spring.tutor.service.TutorService;
 import com.example.primo_progetto_spring.tutor.entity.Tutor;
 import com.example.primo_progetto_spring.tutor.dto.AddTutorToClassroom;
@@ -8,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tutors")
@@ -23,8 +23,8 @@ public class TutorController {
     }
 
     @PostMapping
-    public Optional<Tutor> addTutor (@RequestBody Tutor tutor) {
-        return tutorService.addTutor(tutor);
+    public ResponseEntity<Tutor> addTutor(@RequestBody Tutor tutor) {
+        return ResponseEntity.ok(tutorService.addTutor(tutor).orElseThrow());
     }
 
     @PutMapping("/{tutorId}/classrooms")
