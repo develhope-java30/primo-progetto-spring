@@ -2,6 +2,8 @@ package com.example.primo_progetto_spring.classroom.controller;
 
 import com.example.primo_progetto_spring.classroom.service.ClassroomService;
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
+import com.example.primo_progetto_spring.errors.ErrorResponseDTO;
+import com.example.primo_progetto_spring.errors.NotAssignedCourseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +29,8 @@ public class ClassroomController {
             return classroomService.addStudentToClassroom(classroomId, studentId)
                     .map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.notFound().build());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (NotAssignedCourseException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponseDTO(e.getMessage()));
         }
     }
 
