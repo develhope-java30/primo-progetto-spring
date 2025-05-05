@@ -5,20 +5,14 @@ import java.time.LocalDateTime;
 //https://github.com/bezkoder/spring-boot-restcontrolleradvice/blob/master/src/main/java/com/bezkoder/spring/rest/exhandling/exception/ErrorMessage.java
 
 public class TutorError {
-    private int statusCode;
     private LocalDateTime timestamp;
     private String message;
     private String field;
 
-    public TutorError(int statusCode, LocalDateTime timestamp, String message, String field) {
-        this.statusCode = statusCode;
+    public TutorError(LocalDateTime timestamp, String message, String field) {
         this.timestamp = timestamp;
         this.message = message;
         this.field = field;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
     }
 
     public LocalDateTime getTimestamp() {

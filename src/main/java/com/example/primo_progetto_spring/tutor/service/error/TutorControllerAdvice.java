@@ -18,7 +18,6 @@ public class TutorControllerAdvice {
     @ExceptionHandler(MissingFieldMandatoryException.class)
     public ResponseEntity<TutorError> handleMissingField(MissingFieldMandatoryException e){
         TutorError body = new TutorError(
-                HttpStatus.BAD_REQUEST.value(),
                 LocalDateTime.now(),
                 e.getMessage(),
                 e.getField()
