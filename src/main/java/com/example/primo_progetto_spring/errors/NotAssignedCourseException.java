@@ -1,11 +1,7 @@
 package com.example.primo_progetto_spring.errors;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 //@JsonIgnoreProperties(ignoreUnknown = true): Ignora tutte le proprietà sconosciute.
-@JsonIgnoreProperties(ignoreUnknown = true) //value = {"stackTrace", "cause", "suppressed", "localizedMessage"}
-public class NotAssignedCourseException extends RuntimeException{
+public class NotAssignedCourseException extends ResponseException{
     private final Long classroomId;
 
     public NotAssignedCourseException(Long classRoomId) {
@@ -13,15 +9,12 @@ public class NotAssignedCourseException extends RuntimeException{
         this.classroomId = classRoomId;
     }
 
-    //@JsonProperty("message"): Indica che il metodo getMessage() deve essere serializzato con il nome message,
-    // sovrascrivendo il comportamento predefinito di RuntimeException.
-    @JsonProperty("message")
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
-
     public Long getClassRoomId() {
         return classroomId;
+    }
+
+    @Override
+    public ErrorResponseDTO toErrorDTO() {
+        return new ErrorResponseDTO(super.getMessage());
     }
 }

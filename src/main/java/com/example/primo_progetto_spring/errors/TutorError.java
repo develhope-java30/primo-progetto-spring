@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.tutor.service.error;
+package com.example.primo_progetto_spring.errors;
 
 import java.time.LocalDateTime;
 
