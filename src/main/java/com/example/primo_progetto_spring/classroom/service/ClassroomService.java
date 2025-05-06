@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.classroom.service;
 
+import com.example.primo_progetto_spring.classroom.dto.AddStudentToClassroom;
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.classroom.repository.ClassroomRepository;
 import com.example.primo_progetto_spring.errors.NotAssignedCourseException;
@@ -25,9 +26,9 @@ public class ClassroomService {
         return classroomRepository.save(classroom);
     }
 
-    public Optional<Classroom> addStudentToClassroom(Long classroomId, Long studentId) {
+    public Optional<Classroom> addStudentToClassroom(Long classroomId, AddStudentToClassroom data) {
         Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
-        Optional<Student> studenteOptional = studentRepository.findById(studentId);
+        Optional<Student> studenteOptional = studentRepository.findById(data.getStudentId());
 
         if (studenteOptional.isPresent() && classroomOptional.isPresent()) {
             if(classroomOptional.get().getClassProgram() == null){
