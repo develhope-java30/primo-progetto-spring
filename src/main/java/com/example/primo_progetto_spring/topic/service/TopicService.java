@@ -2,7 +2,7 @@ package com.example.primo_progetto_spring.topic.service;
 
 import com.example.primo_progetto_spring.classprogram.entity.ClassProgram;
 import com.example.primo_progetto_spring.classprogram.repository.ClassProgramRepository;
-import com.example.primo_progetto_spring.topic.entity.TopicEntity;
+import com.example.primo_progetto_spring.topic.entity.Topic;
 import com.example.primo_progetto_spring.topic.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -18,17 +18,17 @@ public class TopicService {
     @Autowired
     ClassProgramRepository classProgramRepository;
 
-    public List<TopicEntity> allTopics(){
+    public List<Topic> allTopics(){
         return topicRepository.findAll();
     }
 
     //aggiunta topic
-    public Optional<TopicEntity> addTopic(TopicEntity newTopic){
+    public Optional<Topic> addTopic(Topic newTopic){
         return Optional.of(topicRepository.save(newTopic));
     }
 
     //modifica di un topic
-    public Optional<TopicEntity> updateTopic(Long id, TopicEntity topicToUpdate){
+    public Optional<Topic> updateTopic(Long id, Topic topicToUpdate){
         if(!topicRepository.existsById(id)){
             Optional.empty();
         }
@@ -44,11 +44,11 @@ public class TopicService {
 
     //assegnazione topic al programma
     public Optional<ClassProgram> assignTopicToProgram(Long topicId, Long programId){
-        Optional<TopicEntity> topic = topicRepository.findById(topicId);
+        Optional<Topic> topic = topicRepository.findById(topicId);
         Optional<ClassProgram> program = classProgramRepository.findById(programId);
 
         if(topic.isPresent() && program.isPresent()){
-            TopicEntity topicToAssign = topic.get();
+            Topic topicToAssign = topic.get();
             ClassProgram programToAssign = program.get();
 
 //            topic.get().setClassProgram(program.get());
@@ -60,7 +60,7 @@ public class TopicService {
         return Optional.empty();
     }
 
-    public List<TopicEntity> getAllTopics (Pageable pageable) {
+    public List<Topic> getAllTopics (Pageable pageable) {
         return topicRepository.findAll(pageable).getContent();
     }
 
