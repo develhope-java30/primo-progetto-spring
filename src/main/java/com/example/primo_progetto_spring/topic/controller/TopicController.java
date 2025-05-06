@@ -2,8 +2,11 @@ package com.example.primo_progetto_spring.topic.controller;
 
 import com.example.primo_progetto_spring.classprogram.entity.ClassProgram;
 import com.example.primo_progetto_spring.topic.service.TopicService;
+
+import com.example.primo_progetto_spring.util.PaginationAndSortingRequest;
 import com.example.primo_progetto_spring.topic.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.data.domain.Pageable;
@@ -61,25 +64,9 @@ public class TopicController {
     }
 
     @GetMapping("/pageable-sorting")
-    public ResponseEntity<List<Topic>> getAllTopics(@RequestParam(required = false) String name,
-                                                    @RequestParam(required = false) Integer page,
-                                                    @RequestParam(required = false) Integer size,
-                                                    @RequestParam(defaultValue = "true", required = false) boolean ascending) {
-
-        Sort sort;
-        if (ascending) {
-            sort = Sort.by("name");
-        } else {
-            sort = Sort.by("name").descending();
-        }
-
-        List<Topic> topics;
-        if (page != null && size != null) {
-            Pageable pageable = PageRequest.of(page, size, sort);
-            topics = topicService.getAllTopics(pageable);
-        } else {
-            topics = topicService.allTopics();
-        }
+    public ResponseEntity<Page<TopicEntity>> getAllTopics(PaginationAndSortingRequest paginationAndSortingRequest) {
+        Pageable pageable = paginationAndSortingRequest.toPageable();
+        Page<TopicEntity> topics = topicService.getAllTopics(pageable);
 
         return ResponseEntity.ok(topics);
     }

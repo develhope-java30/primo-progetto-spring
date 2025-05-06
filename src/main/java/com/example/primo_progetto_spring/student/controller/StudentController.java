@@ -3,9 +3,11 @@ package com.example.primo_progetto_spring.student.controller;
 import com.example.primo_progetto_spring.student.service.StudentService;
 import com.example.primo_progetto_spring.student.entity.Student;
 import com.example.primo_progetto_spring.student.component.StudentTestPopulator;
+import com.example.primo_progetto_spring.util.PaginationAndSortingRequest;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
@@ -130,24 +132,30 @@ public class StudentController {
         studentTestPopulator.addSampleStudents();
     }
 
-    @GetMapping("/paginated")
-    public ResponseEntity<Page<Student>> allStudentsPaginated(
-                                               @RequestParam(required = false) Optional<String> sortKey,
-                                               @RequestParam(required = false, defaultValue = "0") int page,
-                                               @RequestParam(required = false, defaultValue = "30") int length,
-                                               @RequestParam(required = false, defaultValue = "true") boolean ascending){
-
-        Sort sorted = sortKey
-                .map(Sort::by)
-                .map((config) -> ascending ? config.ascending() : config.descending())
-                .orElse(Sort.unsorted());
-
-        try{
-            return ResponseEntity.ok(studentService.studentePaginated(sorted, page, length));
-        }catch (PropertyReferenceException e){
-            return ResponseEntity.badRequest().build();
-        }
-
+    @GetMapping("/pageable-sorting")
+    public ResponseEntity<Page<Student>> getAllStudentPaginated(PaginationAndSortingRequest paginationAndSortingRequest) {
+        Pageable pageable = paginationAndSortingRequest.toPageable();
+        Page<Student> students = studentService.findAllPaginated(pageable);
+        return ResponseEntity.ok(students);
     }
+//    @GetMapping("/paginated")
+//    public ResponseEntity<Page<Student>> allStudentsPaginated(
+//                                               @RequestParam(required = false) Optional<String> sortKey,
+//                                               @RequestParam(required = false, defaultValue = "0") int page,
+//                                               @RequestParam(required = false, defaultValue = "30") int length,
+//                                               @RequestParam(required = false, defaultValue = "true") boolean ascending){
+//
+//        Sort sorted = sortKey
+//                .map(Sort::by)
+//                .map((config) -> ascending ? config.ascending() : config.descending())
+//                .orElse(Sort.unsorted());
+//
+//        try{
+//            return ResponseEntity.ok(studentService.studentePaginated(sorted, page, length));
+//        }catch (PropertyReferenceException e){
+//            return ResponseEntity.badRequest().build();
+//        }
+//
+//    }
 
 }

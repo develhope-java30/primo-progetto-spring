@@ -163,11 +163,13 @@ public class StudentService {
         return studentiAll;
     }
 
-    //
-    public Page<Student> studentePaginated(Sort sorted, int page, int length){
-        Pageable pagination = PageRequest.of(page, length, sorted);
-
-        return studentRepository.findAll(pagination);
+    public Page<Student> findAllPaginated(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
+//    public Page<Student> studentePaginated(Sort sorted, int page, int length){
+//        Pageable pagination = PageRequest.of(page, length, sorted);
+//
+//        return studentRepository.findAll(pagination);
+//    }
 
 }
