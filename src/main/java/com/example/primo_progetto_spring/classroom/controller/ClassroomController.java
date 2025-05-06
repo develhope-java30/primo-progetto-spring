@@ -22,7 +22,7 @@ public class ClassroomController {
         return classroomService.createClassroom(classroom);
     }
 
-    @PutMapping("/{classroomId}/add-student/{studentId}")
+    @PutMapping("/{classroomId}/{studentId}")
     //wildcard generica di Java, Il punto interrogativo rappresenta un tipo generico sconosciuto e accetta più tipi di oggetti.
     public ResponseEntity<?> addStudentToClassroom(@PathVariable Long classroomId, @PathVariable Long studentId){
         try {
