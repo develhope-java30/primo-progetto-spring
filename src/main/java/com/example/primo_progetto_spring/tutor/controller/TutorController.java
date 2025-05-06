@@ -16,7 +16,7 @@ public class TutorController {
     @Autowired
     TutorService tutorService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Tutor> getAllTutors () {
         return tutorService.getAllTutors();
     }
