@@ -1,6 +1,5 @@
 package com.example.primo_progetto_spring.tutor.controller;
 
-import com.example.primo_progetto_spring.tutor.service.error.MissingFieldMandatoryException;
 import com.example.primo_progetto_spring.tutor.service.TutorService;
 import com.example.primo_progetto_spring.tutor.entity.Tutor;
 import com.example.primo_progetto_spring.tutor.dto.AddTutorToClassroom;
