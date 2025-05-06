@@ -1,7 +1,7 @@
 package com.example.primo_progetto_spring.classprogram.entity;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
-import com.example.primo_progetto_spring.topic.entity.TopicEntity;
+import com.example.primo_progetto_spring.topic.entity.Topic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -26,7 +26,7 @@ public class ClassProgram {
     private List<Classroom> classrooms;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<TopicEntity> topicEntities;
+    private List<Topic> topicEntities;
 
     private ClassProgram(){}
 
@@ -76,11 +76,11 @@ public class ClassProgram {
         this.classrooms = classrooms;
     }
 
-    public List<TopicEntity> getTopicEntities() {
+    public List<Topic> getTopicEntities() {
         return topicEntities;
     }
 
-    public void setTopicEntities(List<TopicEntity> topicEntities) {
+    public void setTopicEntities(List<Topic> topicEntities) {
         this.topicEntities = topicEntities;
     }
 

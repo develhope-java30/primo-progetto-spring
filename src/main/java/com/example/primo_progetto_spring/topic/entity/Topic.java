@@ -3,7 +3,7 @@ package com.example.primo_progetto_spring.topic.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class TopicEntity {
+public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -11,9 +11,9 @@ public class TopicEntity {
     private String name;
     private String description;
 
-    private TopicEntity(){}
+    private Topic(){}
 
-    public TopicEntity(String name, String description) {
+    public Topic(String name, String description) {
         this.name = name;
         this.description = description;
     }

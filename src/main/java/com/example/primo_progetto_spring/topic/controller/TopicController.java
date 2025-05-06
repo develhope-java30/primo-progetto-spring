@@ -2,8 +2,9 @@ package com.example.primo_progetto_spring.topic.controller;
 
 import com.example.primo_progetto_spring.classprogram.entity.ClassProgram;
 import com.example.primo_progetto_spring.topic.service.TopicService;
-import com.example.primo_progetto_spring.topic.entity.TopicEntity;
+
 import com.example.primo_progetto_spring.util.PaginationAndSortingRequest;
+import com.example.primo_progetto_spring.topic.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,20 +24,20 @@ public class TopicController {
     TopicService topicService;
 
     @GetMapping
-    public List<TopicEntity> allTopics() {
+    public List<Topic> allTopics() {
         return topicService.allTopics();
     }
 
     @PostMapping
-    public ResponseEntity<TopicEntity> addTopic(@RequestBody TopicEntity newTopic) {
-        Optional<TopicEntity> addedTopic = topicService.addTopic(newTopic);
+    public ResponseEntity<Topic> addTopic(@RequestBody Topic newTopic) {
+        Optional<Topic> addedTopic = topicService.addTopic(newTopic);
 
         return ResponseEntity.ok(addedTopic.get());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TopicEntity> updateTopic(@PathVariable Long id, @RequestBody TopicEntity topicToUpdate) {
-        Optional<TopicEntity> updatedTopic = topicService.updateTopic(id, topicToUpdate);
+    public ResponseEntity<Topic> updateTopic(@PathVariable Long id, @RequestBody Topic topicToUpdate) {
+        Optional<Topic> updatedTopic = topicService.updateTopic(id, topicToUpdate);
 
         if (updatedTopic.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -66,31 +67,8 @@ public class TopicController {
     public ResponseEntity<Page<TopicEntity>> getAllTopics(PaginationAndSortingRequest paginationAndSortingRequest) {
         Pageable pageable = paginationAndSortingRequest.toPageable();
         Page<TopicEntity> topics = topicService.getAllTopics(pageable);
+
         return ResponseEntity.ok(topics);
     }
-
-//    @GetMapping("/pageable-sorting")
-//    public ResponseEntity<List<TopicEntity>> getAllTopics(@RequestParam(required = false) String name,
-//                                                          @RequestParam(required = false) Integer page,
-//                                                          @RequestParam(required = false) Integer size,
-//                                                          @RequestParam(defaultValue = "true", required = false) boolean ascending) {
-//
-//        Sort sort;
-//        if (ascending) {
-//            sort = Sort.by("name");
-//        } else {
-//            sort = Sort.by("name").descending();
-//        }
-//
-//        List<TopicEntity> topics;
-//        if (page != null && size != null) {
-//            Pageable pageable = PageRequest.of(page, size, sort);
-//            topics = topicService.getAllTopics(pageable);
-//        } else {
-//            topics = topicService.allTopics();
-//        }
-//
-//        return ResponseEntity.ok(topics);
-//    }
 
 }
