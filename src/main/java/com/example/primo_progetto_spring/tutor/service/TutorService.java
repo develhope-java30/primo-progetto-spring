@@ -45,6 +45,10 @@ public class TutorService {
             throw new MissingFieldMandatoryException("surname");
         }
 
+        if(tutor.getEmail() == null || tutor.getEmail().isEmpty()) {
+            throw new MissingFieldMandatoryException("email");
+        }
+
         return Optional.of(tutorRepository.save(tutor));
     }
 
