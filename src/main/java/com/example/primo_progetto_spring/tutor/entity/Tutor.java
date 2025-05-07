@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.tutor.entity;
 
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
+import com.example.primo_progetto_spring.project.Project;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class Tutor {
 //    )
     // lista vuota per le aule associate ad un tutor
     private List<Classroom> classrooms = new ArrayList<>();
+
+    @OneToMany
+    private List<Project> projects = new ArrayList<>();
 
     private Tutor() {}
 
@@ -76,5 +80,13 @@ public class Tutor {
 
     public void setClassrooms(List<Classroom> classrooms) {
         this.classrooms = classrooms;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

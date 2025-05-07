@@ -4,10 +4,12 @@ import com.example.primo_progetto_spring.coordinator.entity.Coordinator;
 
 import com.example.primo_progetto_spring.classprogram.entity.ClassProgram;
 import com.example.primo_progetto_spring.student.entity.Student;
+import com.example.primo_progetto_spring.team.Team;
 import com.example.primo_progetto_spring.tutor.entity.Tutor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,6 +41,9 @@ public class Classroom {
     @JsonIgnore
     // lista vuota per i tutor associati ad una classroom
     private List<Tutor> tutors;
+
+    @OneToMany
+    private List<Team> teams = new ArrayList<>();
 
     private Classroom(){}
 
@@ -92,5 +97,13 @@ public class Classroom {
 
     public void setTutors(List<Tutor> tutors) {
         this.tutors = tutors;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }
