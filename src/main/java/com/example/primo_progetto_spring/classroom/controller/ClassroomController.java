@@ -1,5 +1,6 @@
 package com.example.primo_progetto_spring.classroom.controller;
 
+import com.example.primo_progetto_spring.classroom.dto.AddStudentToClassroom;
 import com.example.primo_progetto_spring.classroom.service.ClassroomService;
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.errors.ErrorResponseDTO;
@@ -22,11 +23,11 @@ public class ClassroomController {
         return classroomService.createClassroom(classroom);
     }
 
-    @PutMapping("/{classroomId}/add-student/{studentId}")
+    @PutMapping("/{classroomId}/students")
     //wildcard generica di Java, Il punto interrogativo rappresenta un tipo generico sconosciuto e accetta più tipi di oggetti.
-    public ResponseEntity<?> addStudentToClassroom(@PathVariable Long classroomId, @PathVariable Long studentId){
+    public ResponseEntity<?> addStudentToClassroom(@PathVariable Long classroomId, @RequestBody AddStudentToClassroom data){
         try {
-            return classroomService.addStudentToClassroom(classroomId, studentId)
+            return classroomService.addStudentToClassroom(classroomId, data)
                     .map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } catch (NotAssignedCourseException e) {
