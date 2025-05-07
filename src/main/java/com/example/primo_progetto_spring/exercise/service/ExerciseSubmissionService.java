@@ -1,6 +1,8 @@
 package com.example.primo_progetto_spring.exercise.service;
 
+import com.example.primo_progetto_spring.exercise.entity.ExerciseDefinition;
 import com.example.primo_progetto_spring.exercise.entity.ExerciseSubmission;
+import com.example.primo_progetto_spring.exercise.repository.ExerciseDefinitionRepository;
 import com.example.primo_progetto_spring.exercise.repository.ExerciseSubmissionRepository;
 import com.example.primo_progetto_spring.student.entity.Student;
 import com.example.primo_progetto_spring.student.repository.StudentRepository;
@@ -12,10 +14,14 @@ import java.util.*;
 //Implementare inserimento di un elemento e lettura di tutti gli elementi presenti
 @Service
 public class ExerciseSubmissionService {
-    @Autowired private ExerciseSubmissionRepository exerciseRepository;
+    @Autowired
+    private ExerciseSubmissionRepository exerciseRepository;
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private ExerciseDefinitionRepository exerciseDefinitionRepository;
 
     public List<ExerciseSubmission> allExercise(){
         return exerciseRepository.findAll();
@@ -27,13 +33,15 @@ public class ExerciseSubmissionService {
         return Optional.of(exerciseRepository.save(newExercise));
     }
 
-    public Optional<ExerciseSubmission> addExerciseToStudent(Long exerciseId, Long studentId, Integer voto){
+    public Optional<ExerciseSubmission> addExerciseToStudent(Long exerciseId, Long studentId, Long exsubmissionId, Integer voto){
         Optional<ExerciseSubmission> exerciseOptional = exerciseRepository.findById(exerciseId);
         Optional<Student> studenteOptional = studentRepository.findById(studentId);
+        Optional<ExerciseDefinition> exerciseDefinition = exerciseDefinitionRepository.findById(exsubmissionId);
 
-        if (exerciseOptional.isPresent() && studenteOptional.isPresent()) {
+        if (exerciseOptional.isPresent() && exerciseDefinition.isPresent() && studenteOptional.isPresent()) {
             Student student = studenteOptional.get();
             ExerciseSubmission exercise = exerciseOptional.get();
+            ExerciseDefinition exerciseDef = exerciseDefinition.get();
 
             exercise.setStudente(student);
 
@@ -44,6 +52,8 @@ public class ExerciseSubmissionService {
 
             student.getExercises().add(exerciseRepository.save(exercise));
             studentRepository.save(student);
+
+            exerciseDefinitionRepository.save(exerciseDef);
 
             return Optional.of(exerciseRepository.save(exercise));
         }

@@ -33,8 +33,9 @@ public class ExerciseSubmissionController {
     @PutMapping("/{studentId}/add-exercise/{exerciseId}")
     public ResponseEntity<ExerciseSubmission> addExerciseToStudent(@PathVariable Long exerciseId,
                                                                    @PathVariable Long studentId,
+                                                                   @PathVariable Long exDefinitionId,
                                                                    @RequestParam (required = false) Integer voto){
-        return exerciseService.addExerciseToStudent(exerciseId, studentId, voto)
+        return exerciseService.addExerciseToStudent(exerciseId, studentId, exDefinitionId, voto)
                 .map(ResponseEntity::ok)
                 .orElseGet(()-> ResponseEntity.badRequest().build());
     }
