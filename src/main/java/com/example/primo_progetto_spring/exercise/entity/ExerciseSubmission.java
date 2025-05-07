@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 //Aggiungere una nuova entità "Exercise", definita da id, id dello studente, consegna (stringa) e voto (intero).
 @Entity
-public class Exercise {
+public class ExerciseSubmission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,10 +19,10 @@ public class Exercise {
     private String consegna;
     private Integer voto;
 
-    public Exercise() {
+    public ExerciseSubmission() {
     }
 
-    public Exercise(Long id, Student student, String consegna, Integer voto) {
+    public ExerciseSubmission(Long id, Student student, String consegna, Integer voto) {
         this.id = id;
         this.student = student;
         this.consegna = consegna;
