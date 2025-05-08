@@ -3,9 +3,7 @@ package com.example.primo_progetto_spring.exercise.entity;
 import com.example.primo_progetto_spring.topic.entity.Topic;
 import jakarta.persistence.*;
 
-import java.util.List;
-
-//Ogni Topic deve avere un set di esercizi da consegnare (ExerciseDefinition);
+//Ogni Topic deve avere un set di esercizi da consegnare (ExerciseDefinition); DA RIVEDERE
 
 //Rinominare l'entity Exercise in ExerciseSubmission; X
 
@@ -13,7 +11,7 @@ import java.util.List;
 
 //Aggiungere gli endpoint necessari o aggiornare quelli esistenti per eseguire le seguenti operazioni:
 
-//Aggiungere una nuova ExerciseDefinition e assegnarla a un topic;
+//Aggiungere una nuova ExerciseDefinition e assegnarla a un topic; DA RIVEDERE
 
 //Consegnare l'esercizio associandolo a una definizione;
 
@@ -31,15 +29,15 @@ public class ExerciseDefinition {
     private String description;
     private String type;
 
-    @ManyToMany
-    private List<Topic> topics;
+    @ManyToOne
+    private Topic topic;
 
     private ExerciseDefinition(){}
 
-    public ExerciseDefinition(String description, String type, List<Topic> topics){
+    public ExerciseDefinition(String description, String type, Topic topic){
         this.description = description;
         this.type = type;
-        this.topics = topics;
+        this.topic = topic;
     }
 
     public Long getId() {
@@ -66,12 +64,11 @@ public class ExerciseDefinition {
         this.type = type;
     }
 
-    public List<Topic> getTopic() {
-        return topics;
+    public Topic getTopics() {
+        return topic;
     }
 
-    public void setTopic(List<Topic> topic) {
-        this.topics = topics;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
-
 }

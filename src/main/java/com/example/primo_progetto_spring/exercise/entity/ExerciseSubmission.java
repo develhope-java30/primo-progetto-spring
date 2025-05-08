@@ -19,14 +19,17 @@ public class ExerciseSubmission {
     private String consegna;
     private Integer voto;
 
-    public ExerciseSubmission() {
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    private ExerciseDefinition definition;
 
-    public ExerciseSubmission(Long id, Student student, String consegna, Integer voto) {
+    public ExerciseSubmission() {}
+
+    public ExerciseSubmission(Long id, Student student, String consegna, Integer voto, ExerciseDefinition definition) {
         this.id = id;
         this.student = student;
         this.consegna = consegna;
         this.voto = voto;
+        this.definition = definition;
     }
 
     public Long getId() {
@@ -59,5 +62,13 @@ public class ExerciseSubmission {
 
     public void setVoto(Integer voto) {
         this.voto = voto;
+    }
+
+    public ExerciseDefinition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(ExerciseDefinition definition) {
+        this.definition = definition;
     }
 }

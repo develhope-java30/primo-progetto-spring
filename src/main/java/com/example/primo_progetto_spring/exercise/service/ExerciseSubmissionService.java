@@ -33,10 +33,11 @@ public class ExerciseSubmissionService {
         return Optional.of(exerciseRepository.save(newExercise));
     }
 
-    public Optional<ExerciseSubmission> addExerciseToStudent(Long exerciseId, Long studentId, Long exsubmissionId, Integer voto){
+    // Ogni submission dev'essere legata non solo all'utente che ha consegnato l'esercizio, ma anche all'ExerciseDefinition seguente;
+    public Optional<ExerciseSubmission> addExerciseToStudent(Long exerciseId, Long studentId, Long exDefinitionId, Integer voto){
         Optional<ExerciseSubmission> exerciseOptional = exerciseRepository.findById(exerciseId);
         Optional<Student> studenteOptional = studentRepository.findById(studentId);
-        Optional<ExerciseDefinition> exerciseDefinition = exerciseDefinitionRepository.findById(exsubmissionId);
+        Optional<ExerciseDefinition> exerciseDefinition = exerciseDefinitionRepository.findById(exDefinitionId);
 
         if (exerciseOptional.isPresent() && exerciseDefinition.isPresent() && studenteOptional.isPresent()) {
             Student student = studenteOptional.get();
