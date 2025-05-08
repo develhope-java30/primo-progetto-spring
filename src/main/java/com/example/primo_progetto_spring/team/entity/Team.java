@@ -1,7 +1,7 @@
-package com.example.primo_progetto_spring.team;
+package com.example.primo_progetto_spring.team.entity;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
-import com.example.primo_progetto_spring.project.Project;
+import com.example.primo_progetto_spring.project.entity.Project;
 import com.example.primo_progetto_spring.student.entity.Student;
 import jakarta.persistence.*;
 
@@ -15,11 +15,6 @@ public class Team {
     private Long id;
 
     @ManyToMany
-//    @JoinTable(
-//            name = "team_student",
-//            joinColumns = @JoinColumn(name = "team_id"),
-//            inverseJoinColumns = @JoinColumn(name = "student_id")
-//    )
     private List<Student> members = new ArrayList<>();
 
     @ManyToOne

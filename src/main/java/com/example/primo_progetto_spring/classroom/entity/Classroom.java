@@ -4,7 +4,7 @@ import com.example.primo_progetto_spring.coordinator.entity.Coordinator;
 
 import com.example.primo_progetto_spring.classprogram.entity.ClassProgram;
 import com.example.primo_progetto_spring.student.entity.Student;
-import com.example.primo_progetto_spring.team.Team;
+import com.example.primo_progetto_spring.team.entity.Team;
 import com.example.primo_progetto_spring.tutor.entity.Tutor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

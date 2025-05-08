@@ -3,7 +3,7 @@ package com.example.primo_progetto_spring.student.entity;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.exercise.entity.Exercise;
-import com.example.primo_progetto_spring.team.Team;
+import com.example.primo_progetto_spring.team.entity.Team;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 

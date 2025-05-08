@@ -2,7 +2,7 @@ package com.example.primo_progetto_spring.tutor.entity;
 
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
-import com.example.primo_progetto_spring.project.Project;
+import com.example.primo_progetto_spring.project.entity.Project;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

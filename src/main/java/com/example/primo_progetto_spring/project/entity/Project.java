@@ -1,4 +1,4 @@
-package com.example.primo_progetto_spring.project;
+package com.example.primo_progetto_spring.project.entity;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.tutor.entity.Tutor;
