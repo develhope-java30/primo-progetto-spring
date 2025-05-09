@@ -64,7 +64,7 @@ public class ExerciseDefinition {
         this.type = type;
     }
 
-    public Topic getTopics() {
+    public Topic getTopic() {
         return topic;
     }
 

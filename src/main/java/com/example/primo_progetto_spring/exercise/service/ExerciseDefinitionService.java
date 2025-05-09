@@ -1,6 +1,7 @@
 package com.example.primo_progetto_spring.exercise.service;
 
 import com.example.primo_progetto_spring.exercise.entity.ExerciseDefinition;
+import com.example.primo_progetto_spring.exercise.entity.ExerciseSubmission;
 import com.example.primo_progetto_spring.exercise.repository.ExerciseDefinitionRepository;
 import com.example.primo_progetto_spring.topic.entity.Topic;
 import com.example.primo_progetto_spring.topic.repository.TopicRepository;
@@ -36,7 +37,7 @@ public class ExerciseDefinitionService {
 
             foundDefinition.setTopic(foundTopic);
 
-            exerciseDefinitionRepository.save(foundDefinition);
+            return Optional.of(exerciseDefinitionRepository.save(foundDefinition));
         }
 
         return Optional.empty();

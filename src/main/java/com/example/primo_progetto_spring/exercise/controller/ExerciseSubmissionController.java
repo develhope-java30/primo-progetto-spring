@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.exercise.controller;
 
 import com.example.primo_progetto_spring.exercise.service.ExerciseSubmissionService;
 import com.example.primo_progetto_spring.exercise.entity.ExerciseSubmission;
+import com.example.primo_progetto_spring.topic.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ExerciseSubmissionController {
         return ResponseEntity.ok(exerciseSaved.get());
     }
 
-    @PutMapping("/{studentId}/add-exercise/{exerciseId}")
+    @PutMapping("/{studentId}/exercise/{exerciseId}/definition/{exDefinitionId}")
     public ResponseEntity<ExerciseSubmission> addExerciseToStudent(@PathVariable Long exerciseId,
                                                                    @PathVariable Long studentId,
                                                                    @PathVariable Long exDefinitionId,
@@ -72,4 +73,14 @@ public class ExerciseSubmissionController {
         return exerciseService.votoMinorAverage();
     }
 
+    @GetMapping("/topic/{id}")
+    public ResponseEntity<?> findAllTopicNotDeliveredByStudentId(@PathVariable Long id){
+        Optional<?> topic = exerciseService.findAllTopicNotDeliveredByStudentId(id);
+
+        if(topic.isPresent()){
+            return ResponseEntity.ok(topic.get());
+        }
+        return ResponseEntity.notFound().build();
+
+    }
 }

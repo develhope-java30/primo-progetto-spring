@@ -6,6 +6,7 @@ import com.example.primo_progetto_spring.exercise.repository.ExerciseDefinitionR
 import com.example.primo_progetto_spring.exercise.repository.ExerciseSubmissionRepository;
 import com.example.primo_progetto_spring.student.entity.Student;
 import com.example.primo_progetto_spring.student.repository.StudentRepository;
+import com.example.primo_progetto_spring.topic.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,7 @@ public class ExerciseSubmissionService {
             ExerciseDefinition exerciseDef = exerciseDefinition.get();
 
             exercise.setStudente(student);
+            exercise.setDefinition(exerciseDef);
 
             // imposta il voto
             if (voto != null) {
@@ -130,5 +132,21 @@ public class ExerciseSubmissionService {
        }
        return exercisesOverAverage;
     }
+
+    //Recuperare, per ID studente, quali sono i topic per i quali deve ancora consegnare esercizi;
+    public Optional<?> findAllTopicNotDeliveredByStudentId(Long id){
+        Optional<Student> foundStudent = studentRepository.findById(id);
+
+        if(foundStudent.isPresent()){
+            for(ExerciseSubmission ex : exerciseRepository.findAll()){
+                if(!ex.getConsegna()){
+                   return Optional.of(ex.getDefinition());
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    //Recuperare, per ID studente, quali sono i topic per cui ha consegnato tutti gli esercizi;
 
 }
