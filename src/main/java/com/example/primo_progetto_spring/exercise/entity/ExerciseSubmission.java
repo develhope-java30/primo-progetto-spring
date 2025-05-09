@@ -17,7 +17,7 @@ public class ExerciseSubmission {
     @JoinColumn(name = "student_Id")
     private Student student;
 
-    private String consegna;
+    private boolean consegna;
     private Integer voto;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
@@ -26,7 +26,7 @@ public class ExerciseSubmission {
 
     public ExerciseSubmission() {}
 
-    public ExerciseSubmission(Long id, Student student, String consegna, Integer voto, ExerciseDefinition definition) {
+    public ExerciseSubmission(Long id, Student student, boolean consegna, Integer voto, ExerciseDefinition definition) {
         this.id = id;
         this.student = student;
         this.consegna = consegna;
@@ -50,11 +50,11 @@ public class ExerciseSubmission {
         this.student = student;
     }
 
-    public String getConsegna() {
+    public boolean getConsegna() {
         return consegna;
     }
 
-    public void setConsegna(String consegna) {
+    public void setConsegna(boolean consegna) {
         this.consegna = consegna;
     }
 
