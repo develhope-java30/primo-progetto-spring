@@ -26,8 +26,8 @@ public class ExerciseDefinitionController {
     }
 
     @PutMapping("/{id}/{topicId}")
-    public ResponseEntity<ExerciseDefinition> assignTopic(@PathVariable Long id, @PathVariable Long topicId){
-        Optional<ExerciseDefinition> assignedTopicToDefinition = exerciseDefinitionService.assignTopicToDefinition(id, topicId);
+    public ResponseEntity<ExerciseDefinition> assignDefinitionToTopic(@PathVariable Long id, @PathVariable Long topicId){
+        Optional<ExerciseDefinition> assignedTopicToDefinition = exerciseDefinitionService.assignDefinitionToTopic(id, topicId);
 
         return assignedTopicToDefinition
                 .map(ResponseEntity::ok)

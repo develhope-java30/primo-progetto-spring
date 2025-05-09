@@ -2,6 +2,7 @@ package com.example.primo_progetto_spring.exercise.entity;
 
 import com.example.primo_progetto_spring.student.entity.Student;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 //Aggiungere una nuova entità "Exercise", definita da id, id dello studente, consegna (stringa) e voto (intero).
 @Entity
@@ -19,7 +20,8 @@ public class ExerciseSubmission {
     private String consegna;
     private Integer voto;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @NotNull
     private ExerciseDefinition definition;
 
     public ExerciseSubmission() {}

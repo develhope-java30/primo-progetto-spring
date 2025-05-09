@@ -26,7 +26,7 @@ public class ExerciseDefinitionService {
         return exerciseDefinitionRepository.save(newExerciseDefinition);
     }
 
-    public Optional<ExerciseDefinition> assignTopicToDefinition(Long definitionId, Long topicId){
+    public Optional<ExerciseDefinition> assignDefinitionToTopic(Long definitionId, Long topicId){
         Optional<ExerciseDefinition> definition = exerciseDefinitionRepository.findById(definitionId);
         Optional<Topic> topic = topicRepository.findById(topicId);
 
