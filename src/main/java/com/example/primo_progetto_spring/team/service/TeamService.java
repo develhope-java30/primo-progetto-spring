@@ -25,10 +25,6 @@ public class TeamService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    // create Team, Ogni team dev'essere associato ad un progetto,
-    // Ogni team dev'essere associato ad una classe,
-//    I membri del team devono appartenere tutti alla stessa classe
-
     public Team createTeam(List<Student> members, Long classroomId, Long projectId) {
         Optional<Classroom> classroomOptional = classroomRepository.findById(classroomId);
         Optional<Project> projectOptional = projectRepository.findById(projectId);
@@ -43,35 +39,29 @@ public class TeamService {
             }
         }
 
-        // verifica che nel team ci siano dalle 2 alle 5 persone.
         boolean isValid = members.size() >= 2 && members.size() <= 5;
 
         Team team = new Team(members, classroomOptional.get(), projectOptional.get(), isValid);
         return teamRepository.save(team);
     }
 
-    //È possibile avere un team in database che non è ancora valido, ma va mantenuto
-    // un campo che indica se il team è valido o meno,
-    // aggiornandolo man mano che cambiano i membri, apporta anche queste modifiche
-    public Optional<Team> updateTeamMembers(Long teamId, List<Student> newMembers) {
-        Optional<Team> teamOptional = teamRepository.findById(teamId);
+    public Team updateTeamMembers(Long teamId, List<Student> newMembers) {
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new RuntimeException("Team non trovato!"));
 
-        if (teamOptional.isEmpty()) {
-            return Optional.empty();
-        }
 
         for (Student member : newMembers) {
-            if (!member.getClassroom().equals(teamOptional.get().getClassroom())) {
+            if (!member.getClassroom().equals(team.getClassroom())) {
                 throw new RuntimeException("Tutti i membri devono appartenere alla stessa classe!");
             }
         }
 
         boolean isValid = newMembers.size() >= 2 && newMembers.size() <= 5;
 
-        teamOptional.get().setMembers(newMembers);
-        teamOptional.get().setValid(isValid);
+        team.setMembers(newMembers);
+        team.setValid(isValid);
 
-        return Optional.of(teamRepository.save(teamOptional.get()));
+        return teamRepository.save(team);
     }
 
 }
