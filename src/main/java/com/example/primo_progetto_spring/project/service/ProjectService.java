@@ -18,15 +18,10 @@ public class ProjectService {
     @Autowired
     private TutorRepository tutorRepository;
 
-    public Optional<Project> updateProjectTutor(Long projectId, Long tutorId) {
-        Optional<Project> projectOptional = projectRepository.findById(projectId);
-        Optional<Tutor> tutorOptional = tutorRepository.findById(tutorId);
+    public Project updateProjectTutor(Long projectId, Tutor tutor) {
+        Project projectOptional = projectRepository.findById(projectId).orElseThrow(()-> new RuntimeException("Progetto non trovato!"));
 
-        if (projectOptional.isEmpty() || tutorOptional.isEmpty()) {
-            return Optional.empty();
-        }
-
-        projectOptional.get().setTutor(tutorOptional.get());
-        return Optional.of(projectRepository.save(projectOptional.get()));
+        projectOptional.setTutor(tutor);
+        return projectRepository.save(projectOptional);
     }
 }
