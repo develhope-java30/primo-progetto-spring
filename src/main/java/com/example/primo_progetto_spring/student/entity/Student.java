@@ -2,7 +2,7 @@ package com.example.primo_progetto_spring.student.entity;
 
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
-import com.example.primo_progetto_spring.exercise.entity.Exercise;
+import com.example.primo_progetto_spring.exercise.entity.ExerciseSubmission;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -31,7 +31,7 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     // evita cicli infiniti
     @JsonIgnore
-    private List<Exercise> exercises;
+    private List<ExerciseSubmission> exercises;
 
     public Student() {
     }
@@ -45,11 +45,11 @@ public class Student {
     }
 
     //getter e setter Exercise
-    public List<Exercise> getExercises() {
+    public List<ExerciseSubmission> getExercises() {
         return exercises;
     }
 
-    public void setExercise(List<Exercise> exercise) {
+    public void setExercise(List<ExerciseSubmission> exercise) {
         this.exercises = exercise;
     }
 

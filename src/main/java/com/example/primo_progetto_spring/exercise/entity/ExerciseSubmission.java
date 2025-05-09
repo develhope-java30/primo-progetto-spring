@@ -2,10 +2,11 @@ package com.example.primo_progetto_spring.exercise.entity;
 
 import com.example.primo_progetto_spring.student.entity.Student;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 //Aggiungere una nuova entità "Exercise", definita da id, id dello studente, consegna (stringa) e voto (intero).
 @Entity
-public class Exercise {
+public class ExerciseSubmission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,17 +17,21 @@ public class Exercise {
     @JoinColumn(name = "student_Id")
     private Student student;
 
-    private String consegna;
+    private boolean consegna;
     private Integer voto;
 
-    public Exercise() {
-    }
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @NotNull
+    private ExerciseDefinition definition;
 
-    public Exercise(Long id, Student student, String consegna, Integer voto) {
+    public ExerciseSubmission() {}
+
+    public ExerciseSubmission(Long id, Student student, boolean consegna, Integer voto, ExerciseDefinition definition) {
         this.id = id;
         this.student = student;
         this.consegna = consegna;
         this.voto = voto;
+        this.definition = definition;
     }
 
     public Long getId() {
@@ -45,11 +50,11 @@ public class Exercise {
         this.student = student;
     }
 
-    public String getConsegna() {
+    public boolean getConsegna() {
         return consegna;
     }
 
-    public void setConsegna(String consegna) {
+    public void setConsegna(boolean consegna) {
         this.consegna = consegna;
     }
 
@@ -59,5 +64,13 @@ public class Exercise {
 
     public void setVoto(Integer voto) {
         this.voto = voto;
+    }
+
+    public ExerciseDefinition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(ExerciseDefinition definition) {
+        this.definition = definition;
     }
 }
