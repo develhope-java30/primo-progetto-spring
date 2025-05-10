@@ -61,7 +61,7 @@ public class TopicService {
         return Optional.empty();
     }
 
-    public Page<TopicEntity> getAllTopics (Pageable pageable) {
+    public Page<Topic> getAllTopics (Pageable pageable) {
         return topicRepository.findAll(pageable);
 
     }

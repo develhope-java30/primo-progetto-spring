@@ -3,10 +3,12 @@ package com.example.primo_progetto_spring.student.entity;
 
 import com.example.primo_progetto_spring.classroom.entity.Classroom;
 import com.example.primo_progetto_spring.exercise.entity.Exercise;
+import com.example.primo_progetto_spring.team.entity.Team;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,6 +34,9 @@ public class Student {
     // evita cicli infiniti
     @JsonIgnore
     private List<Exercise> exercises;
+
+    @ManyToMany(mappedBy = "members")
+    private List<Team> teams = new ArrayList<>();
 
     public Student() {
     }
@@ -100,6 +105,14 @@ public class Student {
 
     public void setCodiceFiscale(String codiceFiscale) {
         this.codiceFiscale = codiceFiscale;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public String studentInfo() {

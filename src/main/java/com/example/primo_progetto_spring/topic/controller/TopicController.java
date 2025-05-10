@@ -64,9 +64,9 @@ public class TopicController {
     }
 
     @GetMapping("/pageable-sorting")
-    public ResponseEntity<Page<TopicEntity>> getAllTopics(PaginationAndSortingRequest paginationAndSortingRequest) {
+    public ResponseEntity<Page<Topic>> getAllTopics(PaginationAndSortingRequest paginationAndSortingRequest) {
         Pageable pageable = paginationAndSortingRequest.toPageable();
-        Page<TopicEntity> topics = topicService.getAllTopics(pageable);
+        Page<Topic> topics = topicService.getAllTopics(pageable);
 
         return ResponseEntity.ok(topics);
     }
